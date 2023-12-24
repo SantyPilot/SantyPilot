@@ -108,6 +108,7 @@ $(foreach var, $(SANITIZE_DEPRECATED_VARS), $(eval $(call SANITIZE_VAR,$(var),de
 
 # Decide on a verbosity level based on the V= parameter
 export AT := @
+# V := 1
 ifndef V
     export V0    :=
     export V1    := $(AT)
@@ -152,7 +153,8 @@ endif
 export UAVOBJGENERATOR
 
 # Set up default build configurations (debug | release)
-GCS_BUILD_CONF := release
+# GCS_BUILD_CONF := release
+GCS_BUILD_CONF := debug
 
 # Set extra configuration
 ifeq ($(GCS_WITH_OSG), 1)
