@@ -22,8 +22,8 @@ project.
 The SantyPilot source code is released under the OSI approved GPLv3 license.
 Integral text of the license can be found at [www.gnu.org](http://www.gnu.org/licenses/gpl-3.0.en.html)
 
-If you are interested in LibrePilot, in the Repository
-there is some useful link.
+If you are interested in LibrePilot,
+here is some useful link in the repository
 - [LibrePilot](https://github.com/librepilot)
 
 
