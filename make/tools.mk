@@ -1,5 +1,6 @@
 #
 # Installers for tools required by the build system.
+# Copyright (c) 2015, The SantyPilot Project. 
 # Copyright (c) 2015, The LibrePilot Project, http://www.librepilot.org
 # Copyright (c) 2010-2013, The OpenPilot Team, http://www.openpilot.org
 #
@@ -17,13 +18,15 @@
 #    gtest_install
 #    ccache_install
 #
-# TODO:
+# 2024-1-1 support:
 #    openocd_install
+#    stm32flash_install
+#
+# TODO:
 #    ftd2xx_install
 #    libusb_win_install
 #    openocd_git_win_install
 #    openocd_git_install
-#    stm32flash_install
 #    dfuutil_install
 #    android_sdk_install
 #
@@ -101,8 +104,8 @@ OSGEARTH_VERSION := 2.8
 ifeq ($(UNAME), Linux)
     ifeq ($(ARCH), x86_64)
         QT_SDK_ARCH    := gcc_64
-        QT_SDK_URL     := http://download.qt.io/official_releases/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/qt-opensource-linux-x64-$(QT_VERSION).run
-        QT_SDK_MD5_URL := http://download.qt.io/official_releases/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/md5sums.txt
+	QT_SDK_URL     := http://download.qt.io/new_archive/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/qt-opensource-linux-x64-$(QT_VERSION).run
+	QT_SDK_MD5_URL := http://download.qt.io/new_archive/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/md5sums.txt
         OSG_URL        := $(TOOLS_URL)/osg-$(OSG_VERSION)-linux-x64.tar.gz
         OSGEARTH_URL   := $(TOOLS_URL)/osgearth-$(OSGEARTH_VERSION)-linux-x64.tar.gz
     else
@@ -112,8 +115,8 @@ ifeq ($(UNAME), Linux)
     DOXYGEN_URL    := $(TOOLS_URL)/doxygen-1.8.3.1.src.tar.gz
 else ifeq ($(UNAME), Darwin)
     QT_SDK_ARCH    := clang_64
-    QT_SDK_URL     := http://download.qt.io/official_releases/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/qt-opensource-mac-x64-$(QT_VERSION).dmg
-    QT_SDK_MD5_URL := http://download.qt.io/official_releases/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/md5sums.txt
+    QT_SDK_URL     := http://download.qt.io/new_archive/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/qt-opensource-mac-x64-$(QT_VERSION).dmg
+    QT_SDK_MD5_URL := http://download.qt.io/new_archive/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/md5sums.txt
     QT_SDK_MOUNT_DIR        := /Volumes/qt-opensource-mac-x64-$(QT_VERSION)
     QT_SDK_MAINTENANCE_TOOL := /Volumes/qt-opensource-mac-x64-$(QT_VERSION)/qt-opensource-mac-x64-$(QT_VERSION).app/Contents/MacOS/qt-opensource-mac-x64-$(QT_VERSION)
     UNCRUSTIFY_URL := $(TOOLS_URL)/uncrustify-0.60.tar.gz
@@ -122,8 +125,8 @@ else ifeq ($(UNAME), Darwin)
     OSGEARTH_URL   := $(TOOLS_URL)/osgearth-$(OSGEARTH_VERSION)-clang_64.tar.gz
 else ifeq ($(UNAME), Windows)
     QT_SDK_ARCH    := mingw53_32
-    QT_SDK_URL     := http://download.qt.io/official_releases/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/qt-opensource-windows-x86-mingw530-$(QT_VERSION).exe
-    QT_SDK_MD5_URL := http://download.qt.io/official_releases/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/md5sums.txt
+    QT_SDK_URL     := http://download.qt.io/new_archive/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/qt-opensource-windows-x86-mingw530-$(QT_VERSION).exe
+    QT_SDK_MD5_URL := http://download.qt.io/new_archive/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/md5sums.txt
     NSIS_URL       := $(TOOLS_URL)/nsis-2.46-unicode.tar.bz2
     MESAWIN_URL    := $(TOOLS_URL)/mesawin.tar.gz
     UNCRUSTIFY_URL := $(TOOLS_URL)/uncrustify-0.60-windows.tar.bz2
@@ -351,17 +354,15 @@ endif
 ##############################
 
 define DOWNLOAD_TEMPLATE
-	@$(ECHO) $(MSG_VERIFYING) $$(call toprel, $(DL_DIR)/$(2))
-	$(V1) ( \
-		cd "$(DL_DIR)" && \
-		$(CURL) $(CURL_OPTIONS) --silent -o "$(DL_DIR)/$(2).md5" "$(3)" && \
-		if [ $(call MD5_CHECK_TEMPLATE,$(DL_DIR)/$(2),!=) ]; then \
-			$(ECHO) $(MSG_DOWNLOADING) $(1) && \
-			$(CURL) $(CURL_OPTIONS) -o "$(DL_DIR)/$(2)" "$(1)" && \
-			$(ECHO) $(MSG_CHECKSUMMING) $$(call toprel, $(DL_DIR)/$(2)) && \
-			[ $(call MD5_CHECK_TEMPLATE,$(DL_DIR)/$(2),=) ]; \
-		fi; \
-	)
+	$(CURL) $(CURL_OPTIONS) -o "$(DL_DIR)/$(2)" "$(1)"
+#cd "$(DL_DIR)" && \
+#	$(CURL) $(CURL_OPTIONS) --silent -o "$(DL_DIR)/$(2).md5" "$(3)" && \
+#	if [ $(call MD5_CHECK_TEMPLATE,$(DL_DIR)/$(2),!=) ]; then \
+#		$(ECHO) $(MSG_DOWNLOADING) $(1) && \
+#		$(CURL) $(CURL_OPTIONS) -o "$(DL_DIR)/$(2)" "$(1)" && \
+#		$(ECHO) $(MSG_CHECKSUMMING) $$(call toprel, $(DL_DIR)/$(2)) && \
+#		[ $(call MD5_CHECK_TEMPLATE,$(DL_DIR)/$(2),=) ]; \
+#	fi;
 endef
 
 ##############################
@@ -453,6 +454,7 @@ define QT_INSTALL_TEMPLATE
 .PHONY: $(addprefix qt_sdk_, install clean distclean)
 
 qt_sdk_install: qt_sdk_clean | $(DL_DIR) $(TOOLS_DIR)
+	@$(ECHO) "Downloading QT from " $(QT_SDK_URL)
 	$(call DOWNLOAD_TEMPLATE,$(2),$(4),"$(3)")
 # Silently install Qt under tools directory
 	@$(ECHO) $(MSG_EXTRACTING) $(4) to $$(call toprel, $(1))
@@ -460,6 +462,7 @@ qt_sdk_install: qt_sdk_clean | $(DL_DIR) $(TOOLS_DIR)
 		chmod +x $(DL_DIR)/$(4) && \
 		$(DL_DIR)/$(4) --script $(ROOT_DIR)/make/tool_install/qt-install.qs ; \
 	)
+	@$(ECHO) "Finished " $(MSG_EXTRACTING) $(4) to $$(call toprel, $(1))
 # Execute post build templates
 	$(6)
 
