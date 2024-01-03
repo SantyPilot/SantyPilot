@@ -1,4 +1,4 @@
-The LibrePilot code is licensed under the GPLv3. There are a few minor exceptions to this so please see
+The SantyPilot code is licensed under the GPLv3. There are a few minor exceptions to this so please see
 the headers of all source code for copyright and license information. The full text of the GPLv3 can be
 read here: http://www.gnu.org/licenses/gpl-3.0.txt
 
