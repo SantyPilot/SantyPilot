@@ -38,6 +38,17 @@
         #define configUSE_PREEMPTION    0
         #define configIDLE_SHOULD_YIELD 1
 #endif
+#ifdef __MINGW32__
+        #define COND_SIGNALING
+        #define CHECK_TASK_RESUMES
+// #define RUNNING_THREAD_MUTEX
+// #define TICK_SIGNAL
+        #define TICK_SIGWAIT
+        #define IDLE_SLEEPS
+
+        #define configUSE_PREEMPTION    0
+        #define configIDLE_SHOULD_YIELD 1
+#endif
 #ifdef __linux__
         #define COND_SIGNALING
         #define CHECK_TASK_RESUMES
