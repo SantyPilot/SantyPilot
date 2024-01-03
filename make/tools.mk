@@ -256,6 +256,10 @@ endif
 
 # Command to extract version info data from the repository and source tree
 export VERSION_INFO = $(PYTHON) $(ROOT_DIR)/make/scripts/version-info.py --path=$(ROOT_DIR)
+ifeq ($(UNAME), Windows) # for mingw build pass handle slash @santypilot team 2024-1-2
+	slashfix = $(subst \,/,$(1))
+	override VERSION_INFO := $(call slashfix,$(VERSION_INFO))
+endif
 
 export CCACHE
 
