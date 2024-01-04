@@ -125,7 +125,7 @@ else ifeq ($(UNAME), Darwin)
     OSGEARTH_URL   := $(TOOLS_URL)/osgearth-$(OSGEARTH_VERSION)-clang_64.tar.gz
 else ifeq ($(UNAME), Windows)
     QT_SDK_ARCH    := mingw53_32
-    QT_SDK_URL     := http://download.qt.io/new_archive/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/qt-opensource-windows-x86-mingw530-$(QT_VERSION).exe
+    QT_SDK_URL     := http://download.qt.io/new_archive/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/qt-opensource-windows-x86-$(QT_VERSION).exe
     QT_SDK_MD5_URL := http://download.qt.io/new_archive/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/md5sums.txt
     NSIS_URL       := $(TOOLS_URL)/nsis-2.46-unicode.tar.bz2
     MESAWIN_URL    := $(TOOLS_URL)/mesawin.tar.gz
