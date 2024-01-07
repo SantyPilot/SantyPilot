@@ -1,5 +1,6 @@
 #
 # Installers for tools required by the build system.
+# Copyright (c) 2015, The SantyPilot Project. 
 # Copyright (c) 2015, The LibrePilot Project, http://www.librepilot.org
 # Copyright (c) 2010-2013, The OpenPilot Team, http://www.openpilot.org
 #
@@ -17,13 +18,15 @@
 #    gtest_install
 #    ccache_install
 #
-# TODO:
+# 2024-1-1 support:
 #    openocd_install
+#    stm32flash_install
+#
+# TODO:
 #    ftd2xx_install
 #    libusb_win_install
 #    openocd_git_win_install
 #    openocd_git_install
-#    stm32flash_install
 #    dfuutil_install
 #    android_sdk_install
 #
@@ -44,6 +47,8 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
+
+# export V1 := @
 
 ifndef TOP_LEVEL_MAKEFILE
     $(error $(notdir $(lastword $(MAKEFILE_LIST))) should be included by the top level Makefile)
@@ -99,8 +104,8 @@ OSGEARTH_VERSION := 2.8
 ifeq ($(UNAME), Linux)
     ifeq ($(ARCH), x86_64)
         QT_SDK_ARCH    := gcc_64
-        QT_SDK_URL     := http://download.qt.io/official_releases/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/qt-opensource-linux-x64-$(QT_VERSION).run
-        QT_SDK_MD5_URL := http://download.qt.io/official_releases/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/md5sums.txt
+	QT_SDK_URL     := http://download.qt.io/new_archive/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/qt-opensource-linux-x64-$(QT_VERSION).run
+	QT_SDK_MD5_URL := http://download.qt.io/new_archive/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/md5sums.txt
         OSG_URL        := $(TOOLS_URL)/osg-$(OSG_VERSION)-linux-x64.tar.gz
         OSGEARTH_URL   := $(TOOLS_URL)/osgearth-$(OSGEARTH_VERSION)-linux-x64.tar.gz
     else
@@ -110,8 +115,8 @@ ifeq ($(UNAME), Linux)
     DOXYGEN_URL    := $(TOOLS_URL)/doxygen-1.8.3.1.src.tar.gz
 else ifeq ($(UNAME), Darwin)
     QT_SDK_ARCH    := clang_64
-    QT_SDK_URL     := http://download.qt.io/official_releases/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/qt-opensource-mac-x64-$(QT_VERSION).dmg
-    QT_SDK_MD5_URL := http://download.qt.io/official_releases/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/md5sums.txt
+    QT_SDK_URL     := http://download.qt.io/new_archive/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/qt-opensource-mac-x64-$(QT_VERSION).dmg
+    QT_SDK_MD5_URL := http://download.qt.io/new_archive/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/md5sums.txt
     QT_SDK_MOUNT_DIR        := /Volumes/qt-opensource-mac-x64-$(QT_VERSION)
     QT_SDK_MAINTENANCE_TOOL := /Volumes/qt-opensource-mac-x64-$(QT_VERSION)/qt-opensource-mac-x64-$(QT_VERSION).app/Contents/MacOS/qt-opensource-mac-x64-$(QT_VERSION)
     UNCRUSTIFY_URL := $(TOOLS_URL)/uncrustify-0.60.tar.gz
@@ -120,8 +125,8 @@ else ifeq ($(UNAME), Darwin)
     OSGEARTH_URL   := $(TOOLS_URL)/osgearth-$(OSGEARTH_VERSION)-clang_64.tar.gz
 else ifeq ($(UNAME), Windows)
     QT_SDK_ARCH    := mingw53_32
-    QT_SDK_URL     := http://download.qt.io/official_releases/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/qt-opensource-windows-x86-mingw530-$(QT_VERSION).exe
-    QT_SDK_MD5_URL := http://download.qt.io/official_releases/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/md5sums.txt
+    QT_SDK_URL     := http://download.qt.io/new_archive/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/qt-opensource-windows-x86-$(QT_VERSION).exe
+    QT_SDK_MD5_URL := http://download.qt.io/new_archive/qt/$(QT_SHORT_VERSION)/$(QT_VERSION)/md5sums.txt
     NSIS_URL       := $(TOOLS_URL)/nsis-2.46-unicode.tar.bz2
     MESAWIN_URL    := $(TOOLS_URL)/mesawin.tar.gz
     UNCRUSTIFY_URL := $(TOOLS_URL)/uncrustify-0.60-windows.tar.bz2
@@ -251,6 +256,10 @@ endif
 
 # Command to extract version info data from the repository and source tree
 export VERSION_INFO = $(PYTHON) $(ROOT_DIR)/make/scripts/version-info.py --path=$(ROOT_DIR)
+ifeq ($(UNAME), Windows) # for mingw build pass handle slash @santypilot team 2024-1-2
+	slashfix = $(subst \,/,$(1))
+	override VERSION_INFO := $(call slashfix,$(VERSION_INFO))
+endif
 
 export CCACHE
 
@@ -349,17 +358,15 @@ endif
 ##############################
 
 define DOWNLOAD_TEMPLATE
-	@$(ECHO) $(MSG_VERIFYING) $$(call toprel, $(DL_DIR)/$(2))
-	$(V1) ( \
-		cd "$(DL_DIR)" && \
-		$(CURL) $(CURL_OPTIONS) --silent -o "$(DL_DIR)/$(2).md5" "$(3)" && \
-		if [ $(call MD5_CHECK_TEMPLATE,$(DL_DIR)/$(2),!=) ]; then \
-			$(ECHO) $(MSG_DOWNLOADING) $(1) && \
-			$(CURL) $(CURL_OPTIONS) -o "$(DL_DIR)/$(2)" "$(1)" && \
-			$(ECHO) $(MSG_CHECKSUMMING) $$(call toprel, $(DL_DIR)/$(2)) && \
-			[ $(call MD5_CHECK_TEMPLATE,$(DL_DIR)/$(2),=) ]; \
-		fi; \
-	)
+	$(CURL) $(CURL_OPTIONS) -o "$(DL_DIR)/$(2)" "$(1)"
+#cd "$(DL_DIR)" && \
+#	$(CURL) $(CURL_OPTIONS) --silent -o "$(DL_DIR)/$(2).md5" "$(3)" && \
+#	if [ $(call MD5_CHECK_TEMPLATE,$(DL_DIR)/$(2),!=) ]; then \
+#		$(ECHO) $(MSG_DOWNLOADING) $(1) && \
+#		$(CURL) $(CURL_OPTIONS) -o "$(DL_DIR)/$(2)" "$(1)" && \
+#		$(ECHO) $(MSG_CHECKSUMMING) $$(call toprel, $(DL_DIR)/$(2)) && \
+#		[ $(call MD5_CHECK_TEMPLATE,$(DL_DIR)/$(2),=) ]; \
+#	fi;
 endef
 
 ##############################
@@ -451,6 +458,7 @@ define QT_INSTALL_TEMPLATE
 .PHONY: $(addprefix qt_sdk_, install clean distclean)
 
 qt_sdk_install: qt_sdk_clean | $(DL_DIR) $(TOOLS_DIR)
+	@$(ECHO) "Downloading QT from " $(QT_SDK_URL)
 	$(call DOWNLOAD_TEMPLATE,$(2),$(4),"$(3)")
 # Silently install Qt under tools directory
 	@$(ECHO) $(MSG_EXTRACTING) $(4) to $$(call toprel, $(1))
@@ -458,6 +466,7 @@ qt_sdk_install: qt_sdk_clean | $(DL_DIR) $(TOOLS_DIR)
 		chmod +x $(DL_DIR)/$(4) && \
 		$(DL_DIR)/$(4) --script $(ROOT_DIR)/make/tool_install/qt-install.qs ; \
 	)
+	@$(ECHO) "Finished " $(MSG_EXTRACTING) $(4) to $$(call toprel, $(1))
 # Execute post build templates
 	$(6)
 
@@ -870,50 +879,85 @@ osgearth_version:
 
 ##############################
 #
-# TODO: code below is not revised yet
+# last update: 2023-1-1
+# @santypilot team
 #
 ##############################
 
 # Set up openocd tools
+
+#
+# @santypilot team
+# openocd 
+#
 OPENOCD_DIR       := $(TOOLS_DIR)/openocd
 OPENOCD_WIN_DIR   := $(TOOLS_DIR)/openocd_win
 OPENOCD_BUILD_DIR := $(DL_DIR)/openocd-build
+OPENOCD_VER       := 0.10.0-13
 
 .PHONY: openocd_install
 openocd_install: | $(DL_DIR) $(TOOLS_DIR)
-openocd_install: OPENOCD_URL  := http://sourceforge.net/projects/openocd/files/openocd/0.6.1/openocd-0.6.1.tar.bz2/download
-openocd_install: OPENOCD_FILE := openocd-0.6.1.tar.bz2
+# openocd_install: OPENOCD_URL  := http://sourceforge.net/projects/openocd/files/openocd/0.6.1/openocd-0.6.1.tar.bz2/download
+# openocd_install: OPENOCD_FILE := openocd-0.6.1.tar.bz2
+
+# openocd_install: OPENOCD_FILE := openocd-$(OPENOCD_VER)-linux-x64.tar.bz2
 openocd_install: openocd_clean
-        # download the source only if it's newer than what we already have
-	$(V1) $(WGET) -N -P "$(DL_DIR)" --trust-server-name "$(OPENOCD_URL)"
+    ifeq ($(UNAME), Windows)
+        export OPENOCD_URL := https://sourceforge.net/projects/openocd-xpack/files/v$(OPENOCD_VER)/xpack-openocd-$(OPENOCD_VER)-win32-x64.zip/download
+        export OPENOCD_SUFFIX := zip
+    else # LINUX
+        export OPENOCD_URL := https://sourceforge.net/projects/openocd-xpack/files/v$(OPENOCD_VER)/xpack-openocd-$(OPENOCD_VER)-linux-x64.tgz/download
+        export OPENOCD_SUFFIX := tgz
+    endif
+openocd_install: openocd_clean
+    ifeq ($(UNAME), Windows)
+        export EXTRACT_OPENOCD_CMD := $(V1) $(UNZIP) $(OPENOCD_DIR)-$(OPENOCD_VER).$(OPENOCD_SUFFIX) -d $(OPENOCD_DIR)-$(OPENOCD_VER)
+    else # LINUX
+        export EXTRACT_OPENOCD_CMD := $(V1) $(TAR) -zxvf $(OPENOCD_DIR)-$(OPENOCD_VER).$(OPENOCD_SUFFIX) -C $(OPENOCD_DIR)-$(OPENOCD_VER)
+    endif
+openocd_install: openocd_clean
+	# download the source only if it's newer than what we already have
+	$(V1) wget --no-check-certificate $(OPENOCD_URL) -O $(OPENOCD_DIR)-$(OPENOCD_VER).$(OPENOCD_SUFFIX)
+	$(V1) $(MKDIR) -p $(OPENOCD_DIR)-$(OPENOCD_VER)
+	$(EXTRACT_OPENOCD_CMD)
+
+    ifeq ($(shell [ -d "$(OPENOCD_DIR)-$(OPENOCD_VER)" ] && $(ECHO) "exists"), exists)
+		$(V1) $(ECHO) "OPENOCD successfully installed!"
+		#export OPENOCD := $(OPENOCD_DIR)-$(OPENOCD_VER)/xPacks/openocd/$(OPENOCD_VER)/bin/openocd
+    endif
+
+	#$(V1) $(WGET) -N -P "$(DL_DIR)" --trust-server-name "$(OPENOCD_URL)"
 
         # extract the source
-	$(V1) [ ! -d "$(OPENOCD_BUILD_DIR)" ] || $(RM) -r "$(OPENOCD_BUILD_DIR)"
-	$(V1) mkdir -p "$(OPENOCD_BUILD_DIR)"
-	$(V1) tar -C $(OPENOCD_BUILD_DIR) -xjf "$(DL_DIR)/$(OPENOCD_FILE)"
+	#$(V1) [ ! -d "$(OPENOCD_BUILD_DIR)" ] || $(RM) -r "$(OPENOCD_BUILD_DIR)"
+	#$(V1) mkdir -p "$(OPENOCD_BUILD_DIR)"
+	#$(V1) tar -C $(OPENOCD_BUILD_DIR) -xjf "$(DL_DIR)/$(OPENOCD_FILE)"
 
         # apply patches
-	$(V0) @echo " PATCH        $(OPENOCD_DIR)"
-	$(V1) ( \
-	  cd $(OPENOCD_BUILD_DIR)/openocd-0.6.1 ; \
-	  patch -p1 < $(ROOT_DIR)/flight/Project/OpenOCD/0001-armv7m-remove-dummy-FP-regs-for-new-gdb.patch ; \
-	  patch -p1 < $(ROOT_DIR)/flight/Project/OpenOCD/0002-rtos-add-stm32_stlink-to-FreeRTOS-targets.patch ; \
-	)
+	#$(V0) @echo " PATCH        $(OPENOCD_DIR)"
+	#$(V1) ( \
+#	  cd $(OPENOCD_BUILD_DIR)/openocd-0.6.1 ; \
+#	  patch -p1 < $(ROOT_DIR)/flight/Project/OpenOCD/0001-armv7m-remove-dummy-FP-regs-for-new-gdb.patch ; \
+#	  patch -p1 < $(ROOT_DIR)/flight/Project/OpenOCD/0002-rtos-add-stm32_stlink-to-FreeRTOS-targets.patch ; \
+#	)
 
         # build and install
-	$(V1) mkdir -p "$(OPENOCD_DIR)"
-	$(V1) ( \
-	  cd $(OPENOCD_BUILD_DIR)/openocd-0.6.1 ; \
-	  ./configure --prefix="$(OPENOCD_DIR)" --enable-ft2232_libftdi --enable-stlink ; \
-	  $(MAKE) --silent ; \
-	  $(MAKE) --silent install ; \
-	)
+	#$(V1) mkdir -p "$(OPENOCD_DIR)"
+	#$(V1) ( \
+#	  cd $(OPENOCD_BUILD_DIR)/openocd-0.6.1 ; \
+#	  ./configure --prefix="$(OPENOCD_DIR)" --enable-ft2232_libftdi --enable-stlink ; \
+#	  $(MAKE) --silent ; \
+#	  $(MAKE) --silent install ; \
+#	)
 
         # delete the extracted source when we're done
-	$(V1) [ ! -d "$(OPENOCD_BUILD_DIR)" ] || $(RM) -rf "$(OPENOCD_BUILD_DIR)"
+	#$(V1) [ ! -d "$(OPENOCD_BUILD_DIR)" ] || $(RM) -rf "$(OPENOCD_BUILD_DIR)"
 
 .PHONY: ftd2xx_install
 
+#
+# ftdi driver
+#
 FTD2XX_DIR := $(DL_DIR)/ftd2xx
 
 ftd2xx_install: | $(DL_DIR)
@@ -936,6 +980,9 @@ ftd2xx_clean:
 
 .PHONY: ftd2xx_install
 
+#
+# libusb library
+#
 LIBUSB_WIN_DIR := $(DL_DIR)/libusb-win32-bin-1.2.6.0
 
 libusb_win_install: | $(DL_DIR)
@@ -960,6 +1007,9 @@ libusb_win_clean:
 	$(V0) @echo " CLEAN        $(LIBUSB_WIN_DIR)"
 	$(V1) [ ! -d "$(LIBUSB_WIN_DIR)" ] || $(RM) -r "$(LIBUSB_WIN_DIR)"
 
+#
+# openocd
+#
 .PHONY: openocd_git_win_install
 
 openocd_git_win_install: | $(DL_DIR) $(TOOLS_DIR)
@@ -1052,15 +1102,21 @@ openocd_clean:
 	$(V0) @echo " CLEAN        $(OPENOCD_DIR)"
 	$(V1) [ ! -d "$(OPENOCD_DIR)" ] || $(RM) -r "$(OPENOCD_DIR)"
 
+#
+# stm32flash v1.2.0
+# @santypilot team
+#
 STM32FLASH_DIR := $(TOOLS_DIR)/stm32flash
 ifeq ($(UNAME), Windows)
 	STM32FLASH_BUILD_OPTIONS := "CC=GCC"
 endif
 .PHONY: stm32flash_install
-stm32flash_install: STM32FLASH_URL := https://code.google.com/p/stm32flash/
-stm32flash_install: STM32FLASH_REV := a358bd1f025d
-stm32flash_install: stm32flash_clean
-        # download the source
+# stm32flash_install: STM32FLASH_URL := https://code.google.com/p/stm32flash/
+# stm32flash_install: STM32FLASH_REV := a358bd1f025d
+stm32flash_install: STM32FLASH_URL := https://github.com/texane/stlink.git
+stm32flash_install: STM32FLASH_REV := v1.2.0
+stm32flash_install: # stm32flash_clean
+    # download the source
 	$(V0) @$(ECHO) " DOWNLOAD     $(STM32FLASH_URL) @ r$(STM32FLASH_REV)"
 	$(V1) [ ! -d "$(STM32FLASH_DIR)" ] || $(RM) -rf "$(STM32FLASH_DIR)"
 	$(V1) $(MKDIR) -p "$(STM32FLASH_DIR)"
@@ -1069,15 +1125,22 @@ stm32flash_install: stm32flash_clean
 	  $(CD) $(STM32FLASH_DIR) ; \
 	  $(GIT) checkout -q $(STM32FLASH_REV) ; \
 	)
-        # build
+    # generate makefile
+	$(CD) $(STM32FLASH_DIR) && $(MKDIR) $(STM32FLASH_DIR)/build -p
+	$(CD) $(STM32FLASH_DIR)/build && $(CMAKE) ../
+    # build
 	$(V0) @$(ECHO) " BUILD        $(STM32FLASH_DIR)"
-	$(V1) $(MAKE) --silent -C $(STM32FLASH_DIR) all $(STM32FLASH_BUILD_OPTIONS)
+	$(CD) $(STM32FLASH_DIR)/build && $(MAKE) 
 
 .PHONY: stm32flash_clean
 stm32flash_clean:
 	$(V0) @$(ECHO) " CLEAN        $(STM32FLASH_DIR)"
 	$(V1) [ ! -d "$(STM32FLASH_DIR)" ] || $(RM) -rf "$(STM32FLASH_DIR)"
 
+
+#
+# dfu-util
+#
 DFUUTIL_DIR := $(TOOLS_DIR)/dfu-util
 
 .PHONY: dfuutil_install
@@ -1110,6 +1173,9 @@ dfuutil_clean:
 	$(V0) @echo " CLEAN        $(DFUUTIL_DIR)"
 	$(V1) [ ! -d "$(DFUUTIL_DIR)" ] || $(RM) -r "$(DFUUTIL_DIR)"
 
+#
+# android sdk
+#
 # see http://developer.android.com/sdk/ for latest versions
 ANDROID_SDK_DIR := $(TOOLS_DIR)/android-sdk-linux
 .PHONY: android_sdk_install
@@ -1153,15 +1219,9 @@ prepare_clean:
 ##############################
 #
 # TODO: these defines will go to tool install sections
+# set path for lib install
 #
 ##############################
-
-ifeq ($(shell [ -d "$(OPENOCD_DIR)" ] && $(ECHO) "exists"), exists)
-    export OPENOCD := $(OPENOCD_DIR)/bin/openocd
-else
-    # not installed, hope it's in the path...
-    export OPENOCD ?= openocd
-endif
 
 ifeq ($(shell [ -d "$(ANDROID_SDK_DIR)" ] && $(ECHO) "exists"), exists)
     ANDROID    := $(ANDROID_SDK_DIR)/tools/android
@@ -1171,3 +1231,4 @@ else
     ANDROID    ?= android
     ANDROID_DX ?= dx
 endif
+
