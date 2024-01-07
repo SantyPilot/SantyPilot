@@ -29,7 +29,8 @@
 #define PIOS_H
 
 /* PIOS Feature Selection */
-#include "pios_config_posix.h"
+//#include "pios_config_posix.h"
+#include "pios_config.h"
 #include <pios_posix.h>
 
 #if defined(PIOS_INCLUDE_FREERTOS)
@@ -38,6 +39,23 @@
 #include "task.h"
 #include "queue.h"
 #include "semphr.h"
+#endif
+
+#include <pios_mem.h>
+
+#ifdef PIOS_INCLUDE_TASK_MONITOR
+#ifndef PIOS_INCLUDE_FREERTOS
+#error PiOS Task Monitor requires PIOS_INCLUDE_FREERTOS to be defined
+#endif
+#include <pios_task_monitor.h>
+#endif
+
+/* PIOS CallbackScheduler */
+#ifdef PIOS_INCLUDE_CALLBACKSCHEDULER
+#ifndef PIOS_INCLUDE_FREERTOS
+#error PiOS CallbackScheduler requires PIOS_INCLUDE_FREERTOS to be defined
+#endif
+#include <pios_callbackscheduler.h>
 #endif
 
 /* C Lib Includes */
@@ -52,7 +70,9 @@
 #include "pios_initcall.h"
 
 /* PIOS Board Specific Device Configuration */
-#include "pios_board_posix.h"
+//#include "pios_board_posix.h"
+// target/win32
+#include "pios_board.h"
 
 /* PIOS Hardware Includes (win32) */
 #include <pios_sys.h>
@@ -64,6 +84,20 @@
 #include <pios_servo.h>
 #include <pios_wdg.h>
 #include <pios_crc.h>
+
+// from pios_sim_posix
+// same header file name
+// confused to find decl?
+#include <pios_debug.h>
+#include <pios_debuglog.h>
+#include <pios_deltatime.h>
+
+#if defined(PIOS_INCLUDE_IAP)
+#include <pios_iap.h>
+#endif
+#if defined(PIOS_INCLUDE_BL_HELPER)
+#include <pios_bl_helper.h>
+#endif
 
 #define NELEMENTS(x) (sizeof(x) / sizeof(*(x)))
 
