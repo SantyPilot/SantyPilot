@@ -1,9 +1,12 @@
 /**
  ******************************************************************************
- *
- * @file       pios_led.h
+ * @addtogroup OpenPilotSystem OpenPilot System
+ * @{
+ * @addtogroup OpenPilotCore OpenPilot Core
+ * @{
+ * @file       openpilot.h
  * @author     The OpenPilot Team, http://www.openpilot.org Copyright (C) 2010.
- * @brief      LED functions header.
+ * @brief      Main OpenPilot header.
  * @see        The GNU Public License (GPL) Version 3
  *
  *****************************************************************************/
@@ -23,23 +26,27 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef PIOS_LED_H
-#define PIOS_LED_H
 
-/* Type Definitions */
+#ifndef OPENPILOT_H
+#define OPENPILOT_H
 
-#if (PIOS_LED_NUM == 1)
-typedef enum { LED1 = 0 } LedTypeDef;
-#elif (PIOS_LED_NUM == 2)
-typedef enum { LED1 = 0, LED2 = 1 } LedTypeDef;
-#elif (PIOS_LED_NUM == 3)
-typedef enum { LED1 = 0, LED2 = 1, LED3 = 2 } LedTypeDef;
-#endif
+/* PIOS Includes */
+#include <pios.h>
 
-/* Public Functions */
-extern void PIOS_LED_Init(void);
-extern void PIOS_LED_On(LedTypeDef LED);
-extern void PIOS_LED_Off(LedTypeDef LED);
-extern void PIOS_LED_Toggle(LedTypeDef LED);
+/* OpenPilot Libraries */
+#include <utlist.h>
+#include <uavobjectmanager.h>
+#include <eventdispatcher.h>
+#include <uavtalk.h>
 
-#endif /* PIOS_LED_H */
+#include "alarms.h"
+#include <mathmisc.h>
+
+/* Global Functions */
+void OpenPilotInit(void);
+
+#endif /* OPENPILOT_H */
+/**
+ * @}
+ * @}
+ */
