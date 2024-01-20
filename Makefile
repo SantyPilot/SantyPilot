@@ -153,8 +153,8 @@ endif
 export UAVOBJGENERATOR
 
 # Set up default build configurations (debug | release)
-# GCS_BUILD_CONF := release
-GCS_BUILD_CONF := debug
+GCS_BUILD_CONF := release
+# GCS_BUILD_CONF := debug
 
 # Set extra configuration
 ifeq ($(GCS_WITH_OSG), 1)
@@ -350,7 +350,7 @@ uploader_clean:
 #
 ##############################
 # Firmware files to package
-PACKAGE_FW_TARGETS := fw_coptercontrol fw_revolution fw_revonano fw_sparky2
+PACKAGE_FW_TARGETS := fw_coptercontrol fw_revolution fw_revonano fw_sparky2 fw_mist
 PACKAGE_FW_TARGETS += fw_oplinkmini
 PACKAGE_FW_TARGETS += fw_gpsplatinum
 # PACKAGE_FW_TARGETS += fw_osd
