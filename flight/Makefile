@@ -8,7 +8,7 @@ export OPUAVTALK       := $(FLIGHT_ROOT_DIR)/uavtalk
 export FLIGHT_OUT_DIR  ?= $(CURDIR)
 
 # Define supported board lists
-ALL_BOARDS := coptercontrol revolution revonano sparky2
+ALL_BOARDS := coptercontrol revolution revonano sparky mist
 ALL_BOARDS += revoproto
 ALL_BOARDS += oplinkmini
 ALL_BOARDS += gpsplatinum
@@ -27,6 +27,7 @@ ccf3d_short            := 'cf3d'
 coptercontrol_short    := 'cc  '
 oplinkmini_short       := 'oplm'
 revolution_short       := 'revo'
+mist_short             := 'mist'
 osd_short              := 'osd '
 revoproto_short        := 'revp'
 revonano_short         := 'revn'
