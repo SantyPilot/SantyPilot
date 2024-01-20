@@ -44,14 +44,18 @@ GCSSplashScreen::GCSSplashScreen() :
     QFont font("Tahoma", 8);
     m_painter->setFont(font);
 
-    m_painter->drawText(405, 170, QString(CopyrightSymbol) +
-                        QString(" 2015-") + VersionInfo::year() +
+    m_painter->drawText(375, 226, QString(CopyrightSymbol) +
+                        QString(" 2024-2034") +
                         QString(tr(" The %1 Project - All Rights Reserved").arg(ORG_BIG_NAME)));
 
-    m_painter->drawText(405, 182, QString(CopyrightSymbol) +
+    m_painter->drawText(375, 242, QString(CopyrightSymbol) +
+                        QString(" 2015-2024") + 
+                        QString(tr(" The LibrePilot Project - All Rights Reserved")));
+
+    m_painter->drawText(375, 258, QString(CopyrightSymbol) +
                         QString(tr(" 2010-2015 The OpenPilot Project - All Rights Reserved")));
 
-    m_painter->drawText(406, 186, 310, 100, Qt::TextWordWrap | Qt::AlignTop | Qt::AlignLeft,
+    m_painter->drawText(375, 268, 310, 100, Qt::TextWordWrap | Qt::AlignTop | Qt::AlignLeft,
                         QString(tr("GCS Revision - ")) + VersionInfo::revision());
     setPixmap(*m_pixmap);
 }
@@ -67,7 +71,7 @@ void GCSSplashScreen::drawMessageText(const QString &message)
     progressPainter.setPen(Qt::yellow);
     QFont font("Tahoma", 13);
     progressPainter.setFont(font);
-    progressPainter.drawText(300, 380, message);
+    progressPainter.drawText(300, 385, message);
     setPixmap(pix);
 }
 
