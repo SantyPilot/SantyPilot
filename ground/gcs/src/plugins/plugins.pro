@@ -146,10 +146,10 @@ plugin_pathactioneditor.depends += plugin_uavobjects
 SUBDIRS += plugin_pathactioneditor
 
 # Primary Flight Display (PFD) gadget
-#plugin_pfdqml.subdir = pfdqml
-#plugin_pfdqml.depends = plugin_coreplugin
-#plugin_pfdqml.depends += plugin_uavobjects
-#SUBDIRS += plugin_pfdqml
+plugin_pfdqml.subdir = pfdqml
+plugin_pfdqml.depends = plugin_coreplugin
+plugin_pfdqml.depends += plugin_uavobjects
+SUBDIRS += plugin_pfdqml
 
 # IP connection plugin
 plugin_ipconnection.subdir = ipconnection
