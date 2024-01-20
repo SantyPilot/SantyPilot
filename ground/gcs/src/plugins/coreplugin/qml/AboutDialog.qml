@@ -43,7 +43,7 @@ Rectangle {
                 anchors.leftMargin: 10
                 anchors.top: parent.top
                 anchors.topMargin: 10
-                source: "../images/librepilot_logo_128.png"
+                source: "../images/santypilot_logo_128.png"
                 z: 100
                 fillMode: Image.PreserveAspectFit
                 MouseArea {

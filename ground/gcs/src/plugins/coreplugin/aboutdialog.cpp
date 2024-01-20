@@ -44,7 +44,7 @@ using namespace Core::Constants;
 AboutDialog::AboutDialog(QWidget *parent) :
     QDialog(parent)
 {
-    setWindowIcon(QIcon(":/core/images/librepilot_logo_32.png"));
+    setWindowIcon(QIcon(":/core/images/santypilot_logo_32.png"));
     setWindowTitle(tr("About %1").arg(ORG_BIG_NAME));
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setMinimumSize(600, 400);

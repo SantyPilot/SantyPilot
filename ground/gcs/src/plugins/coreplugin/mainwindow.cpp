@@ -132,7 +132,7 @@ MainWindow::MainWindow() :
 {
     setWindowTitle(QLatin1String(GCS_BIG_NAME) + " " + VersionInfo::label());
 #ifndef Q_WS_MAC
-    qApp->setWindowIcon(QIcon(":/core/images/librepilot_logo_128.png"));
+    qApp->setWindowIcon(QIcon(":/core/images/santypilot_logo_128.png"));
 #endif
     qApp->setStyle(QStyleFactory::create("Fusion"));
 
