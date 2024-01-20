@@ -91,7 +91,7 @@ QString WelcomeMode::name() const
 
 QIcon WelcomeMode::icon() const
 {
-    return QIcon(QLatin1String(":/core/images/librepiloticon.png"));
+    return QIcon(QLatin1String(":/core/images/santypiloticon.png"));
 }
 
 int WelcomeMode::priority() const
