@@ -77,6 +77,11 @@ static pios_udp_dev *find_udp_dev_by_id(uint8_t udp)
 void *PIOS_UDP_RxThread(void *udp_dev_n)
 {
     pios_udp_dev *udp_dev = (pios_udp_dev *)udp_dev_n;
+#ifdef __MINGW32__
+    /* use nonblocking IO */
+    u_long argp = 1;
+    ioctlsocket(udp_dev->socket, FIONBIO, &argp);
+#endif // __MINGW32__
 
     /**
      * com devices never get closed except by application "reboot"
@@ -108,6 +113,9 @@ void *PIOS_UDP_RxThread(void *udp_dev_n)
             }
 #endif /* PIOS_INCLUDE_FREERTOS */
         }
+#ifdef __MINGW32__
+        vTaskDelay(10 / portTICK_RATE_MS);
+#endif // __MINGW32__
     }
 }
 
@@ -127,6 +135,11 @@ int32_t PIOS_UDP_Init(uint32_t *udp_id, const struct pios_udp_cfg *cfg)
     udp_dev->tx_out_cb = NULL;
     udp_dev->cfg    = cfg;
 
+#ifdef __MINGW32__
+    WSADATA wsaData;
+    WSAStartup(MAKEWORD(2, 0), &wsaData);
+#endif // __MINGW32__
+
     /* assign socket */
     udp_dev->socket = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP);
     memset(&udp_dev->server, 0, sizeof(udp_dev->server));
@@ -134,7 +147,19 @@ int32_t PIOS_UDP_Init(uint32_t *udp_id, const struct pios_udp_cfg *cfg)
     udp_dev->server.sin_family = AF_INET;
     udp_dev->server.sin_addr.s_addr = inet_addr(udp_dev->cfg->ip);
     udp_dev->server.sin_port   = htons(udp_dev->cfg->port);
+
+#ifdef __MINGW32__
+    BOOL tmp    = TRUE;
+    setsockopt(udp_dev->socket, SOL_SOCKET, SO_BROADCAST, (char *)&tmp, sizeof(tmp));
+#endif // __MINGW32__
+
     int res = bind(udp_dev->socket, (struct sockaddr *)&udp_dev->server, sizeof(udp_dev->server));
+
+#ifdef __MINGW32__
+    /* use nonblocking IO */
+    u_long argp = 1;
+    ioctlsocket(udp_dev->socket, FIONBIO, &argp);
+#endif // __MINGW32__
 
     /* Create transmit thread for this connection */
 #if defined(PIOS_INCLUDE_FREERTOS)
@@ -177,6 +202,11 @@ static void PIOS_UDP_TxStart(uint32_t udp_id, uint16_t tx_bytes_avail)
 
     int32_t length, len, rem;
 
+#ifdef __MINGW32__
+    /* use nonblocking IO */
+    u_long argp = 1;
+    ioctlsocket(udp_dev->socket, FIONBIO, &argp);
+#endif // __MINGW32__
     /**
      * we send everything directly whenever notified of data to send (lazy!)
      */
@@ -226,6 +256,16 @@ static void PIOS_UDP_RegisterTxCallback(uint32_t udp_id, pios_com_callback tx_ou
      */
     udp_dev->tx_out_context = context;
     udp_dev->tx_out_cb = tx_out_cb;
+}
+
+/**
+ * Clean up Winsock
+ */
+void PIOS_UDP_Close(void)
+{
+#ifdef __MINW32__
+    WSACleanup();
+#endif // __MINGW32__
 }
 
 

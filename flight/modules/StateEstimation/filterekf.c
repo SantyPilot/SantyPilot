@@ -123,7 +123,8 @@ int32_t filterEKF13NavOnlyInitialize(stateFilter *handle)
 // XXX
 int32_t filterEKF16iInitialize(stateFilter *handle)
 {
-    return filterEKFi13Initialize(handle);
+    // return filterEKFi13Initialize(handle);
+    return filterEKF13Initialize(handle);
 }
 int32_t filterEKF16Initialize(stateFilter *handle)
 {

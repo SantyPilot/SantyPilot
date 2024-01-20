@@ -96,7 +96,7 @@ CPPSRC += ${foreach MOD, ${MODULES}, ${wildcard ${OPMODULEDIR}/${MOD}/*.cpp}}
 SRC += ${OUTDIR}/InitMods.c
 ## OPENPILOT CORE:
 SRC += ${OPMODULEDIR}/System/systemmod.c
-CPPSRC += $(OPSYSTEM)/simposix.cpp
+CPPSRC += $(OPSYSTEM)/simwin.cpp
 SRC += $(OPSYSTEM)/pios_board.c
 SRC += $(FLIGHTLIB)/alarms.c
 SRC += $(OPUAVTALK)/uavtalk.c

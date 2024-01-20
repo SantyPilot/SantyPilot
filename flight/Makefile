@@ -16,9 +16,11 @@ ALL_BOARDS += gpsplatinum
 ALL_BOARDS += discoveryf4bare
 ALL_BOARDS += ccf3d spracingf3 spracingf3evo nucleof303re pikoblx tinyfish
 # SimPosix only builds on Linux
-ifeq ($(UNAME), Linux)
+#ifeq ($(UNAME), Linux)
     ALL_BOARDS += simposix
-endif
+#else ifeq ($(UNAME), Windows) # MSYS2
+    ALL_BOARDS += simwin
+#endif
 
 # Short names of each board (used to display board name in parallel builds)
 spracingf3_short       := 'srf3'
@@ -33,6 +35,7 @@ revoproto_short        := 'revp'
 revonano_short         := 'revn'
 sparky2_short          := 'spk2'
 simposix_short         := 'posx'
+simwin_short           := 'wism'
 discoveryf4bare_short  := 'df4b'
 gpsplatinum_short      := 'gps9'
 nucleof303re_short     := 'nf3r'
@@ -50,6 +53,12 @@ EF_BOARDS  := $(ALL_BOARDS)
 BL_BOARDS  := $(filter-out simposix, $(BL_BOARDS))
 BU_BOARDS  := $(filter-out simposix gpsplatinum, $(BU_BOARDS))
 EF_BOARDS  := $(filter-out simposix, $(EF_BOARDS))
+
+# SimWin doesn't hava a BL, BU or EF target so we need to
+# filter them out to prevent errors on the all_flight target.
+BL_BOARDS  := $(filter-out simwin, $(BL_BOARDS))
+BU_BOARDS  := $(filter-out simwin gpsplatinum, $(BU_BOARD))
+EF_BOARDS  := $(filter-out simwin, $(EF_BOARDS))
 
 # Generate the targets for whatever boards are left in each list
 FW_TARGETS := $(addprefix fw_, $(FW_BOARDS))
