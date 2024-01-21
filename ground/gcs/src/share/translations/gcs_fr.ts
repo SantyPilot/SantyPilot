@@ -12348,7 +12348,7 @@ Veuillez sélectionner une zone de la carte à télécharger avec &lt;CTRL&gt;+C
     <name>AboutDialog</name>
     <message>
         <location filename="../../plugins/coreplugin/qml/AboutDialog.qml" line="+77"/>
-        <source>LibrePilot Ground Control Station</source>
+        <source>SantyPilot Ground Control Station</source>
         <translation>Station de Contrôle au Sol LibrePilot (GCS)</translation>
     </message>
     <message>

@@ -74,7 +74,7 @@ Rectangle {
                         Layout.fillWidth: true
                         font.pixelSize: 14
                         font.bold: true
-                        text: qsTr("LibrePilot Ground Control Station")
+                        text: qsTr("SantyPilot Ground Control Station")
                     }
                     Text {
                         id: versionLabel

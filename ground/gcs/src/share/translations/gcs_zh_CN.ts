@@ -10109,28 +10109,13 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location line="+1"/>
-        <source>Wiki</source>
-        <translation>Wiki知识库</translation>
+        <source>Code</source>
+        <translation>代码仓</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Store</source>
-        <translation>商店</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Forums</source>
-        <translation>论坛</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Code Reviews</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Progress Tracker</source>
-        <translation></translation>
+        <source>Doc</source>
+        <translation>文档</translation>
     </message>
 </context>
 <context>
