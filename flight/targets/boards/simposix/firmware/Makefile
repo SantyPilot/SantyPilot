@@ -294,9 +294,10 @@ LDFLAGS += -lgcc -lpthread
 #Linker scripts
 LDFLAGS += $(addprefix -T,$(LINKER_SCRIPTS_APP))
 
-#
-LDFLAGS += -lWs2_32 -lWinmm
-
+OS := $(shell uname)
+ifeq ($(OS), MINGW32_NT-10.0-19045)
+    LDFLAGS += -lWs2_32 -lWinmm
+endif
 
 # Define programs and commands.
 REMOVE  = rm -f
