@@ -28,12 +28,6 @@ ARCHFLAGS			+= -DARCH_POSIX
 # PIOS device library source and includes
 #
 SRC					+=	$(sort $(wildcard $(PIOS_DEVLIB)*.c))
-ifeq ($(UNAME), Linux)
-	SRC					-=	$(sort $(wildcard $(PIOS_DEVLIB)pios_udp_win.c))
-else ifeq ($(UNAME), Windows) # MSYS2
-	SRC					-=	$(sort $(wildcard $(PIOS_DEVLIB)pios_udp.c))
-endif
-
 EXTRAINCDIRS		+=	$(PIOS_DEVLIB)/inc
 
 #
@@ -75,18 +69,18 @@ EXTRAINCDIRS		+=	$(PIOS_DEVLIB)/inc
 ifneq ($(FREERTOS_DIR),)
 #FREERTOS_PORTDIR	:=	$(FREERTOS_DIR)
 
-ifeq ($(UNAME), Linux)
-	SRC					+=	$(sort $(wildcard $(FREERTOS_PORTDIR)/portable/GCC/Posix/*.c))
-else ifeq ($(UNAME), Windows) # MSYS2
+OS := $(shell uname)
+ifeq ($(OS), MINGW32_NT-10.0-19045)
 	SRC					+=	$(sort $(wildcard $(FREERTOS_PORTDIR)/portable/MSVC-MingW/*.c))
+    EXTRAINCDIRS		+=	$(FREERTOS_PORTDIR)/portable/MSVC-MingW/
+else
+	SRC					+=	$(sort $(wildcard $(FREERTOS_PORTDIR)/portable/GCC/Posix/*.c))
+    EXTRAINCDIRS		+=	$(FREERTOS_PORTDIR)/portable/GCC/Posix/
 endif
 SRC					+=	$(sort $(wildcard $(FREERTOS_PORTDIR)/portable/MemMang/heap_3.c))
 
 # EXTRAINCDIRS		+=	$(FREERTOS_PORTDIR)/portable/GCC/Posix/
 FREERTOS_PORTDIR	:=	$(FREERTOS_DIR)
-
-SRC					+=	$(sort $(wildcard $(FREERTOS_PORTDIR)/portable/MSVC-MingW/*.c))
-EXTRAINCDIRS		+=	$(FREERTOS_PORTDIR)/portable/MSVC-MingW/
 
 endif
 
