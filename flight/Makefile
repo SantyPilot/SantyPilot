@@ -8,19 +8,16 @@ export OPUAVTALK       := $(FLIGHT_ROOT_DIR)/uavtalk
 export FLIGHT_OUT_DIR  ?= $(CURDIR)
 
 # Define supported board lists
-ALL_BOARDS := coptercontrol revolution revonano sparky mist
-ALL_BOARDS += revoproto
+ALL_BOARDS := mist
+# ALL_BOARDS := coptercontrol revolution revonano sparky mist
+# ALL_BOARDS += revoproto
 ALL_BOARDS += oplinkmini
-ALL_BOARDS += gpsplatinum
-#ALL_BOARDS += osd
-ALL_BOARDS += discoveryf4bare
-ALL_BOARDS += ccf3d spracingf3 spracingf3evo nucleof303re pikoblx tinyfish
+# ALL_BOARDS += gpsplatinum
+# ALL_BOARDS += osd
+# ALL_BOARDS += discoveryf4bare
+# ALL_BOARDS += ccf3d spracingf3 spracingf3evo nucleof303re pikoblx tinyfish
 # SimPosix only builds on Linux
-#ifeq ($(UNAME), Linux)
-    ALL_BOARDS += simposix
-#else ifeq ($(UNAME), Windows) # MSYS2
-    ALL_BOARDS += simwin
-#endif
+ALL_BOARDS += simposix
 
 # Short names of each board (used to display board name in parallel builds)
 spracingf3_short       := 'srf3'
