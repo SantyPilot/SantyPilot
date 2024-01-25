@@ -35,7 +35,7 @@ Item {
 
     XmlListModel {
         id: xmlModel
-        source: "http://forum.librepilot.org/index.php?board=11.0&amp;action=.xml&amp;type=atom&amp;sa=news"
+        source: ""
         query: "/feed/entry"
         namespaceDeclarations: "declare default element namespace 'http://www.w3.org/2005/Atom';"
 
