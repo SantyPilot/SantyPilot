@@ -126,25 +126,6 @@ Rectangle {
                 styleColor: "#00000000"
                 font.pixelSize: 14
             }
-            Text {
-                id: textOpVersionAvailable
-                color: "#feb103"
-                text: welcomePlugin.newVersionText
-                font.bold: true
-                font.underline: true
-                styleColor: "#00000000"
-                font.pixelSize: 14
-                MouseArea{
-                    id: mouseAreaOpVersionAvailable
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    width: parent.width
-                    height: parent.height
-                    onClicked: {
-                        welcomePlugin.openUrl("https://github.com/librepilot/LibrePilot/releases/")
-                    }
-                }
-            }
         }
     }
 }
