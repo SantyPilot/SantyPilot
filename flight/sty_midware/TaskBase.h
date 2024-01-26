@@ -11,16 +11,16 @@
 namespace sty_midware {
 class TaskBase {
 public:
-    TaskBase() : _name("") {}
-    TaskBase(const std::string & name) : _name(name) {}
+    TaskBase(): _name("") {}
+    TaskBase(const std::string& name): _name(name) {}
     virtual ~TaskBase() {}
     /* do uavobject init */
-    virtual bool init()        = 0;
-    virtual void run()         = 0;
+    virtual bool init() = 0;
+    virtual void run() = 0;
 private:
-    TaskBase(const TaskBase &) = delete;
-    TaskBase & operator=()     = delete;
+    TaskBase(const TaskBase&) = delete;
+    TaskBase& operator=() = delete;
     std::string _name;
 };
 } // sty_midware
-#endif // _STY_TASKBASE_H
+#endif //_STY_TASKBASE_H
