@@ -131,6 +131,7 @@
 
 #define REVOLUTION
 #define SIMPOSIX
+#define ENABLE_ACTCTRL_OUT // use gazebo 
 
 #endif /* PIOS_CONFIG_H */
 /**
