@@ -30,45 +30,45 @@
 // #include <openpilot.h>
 
 /*
-#include <magsensor.h>
-#include <accelsensor.h>
-#include <gyrosensor.h>
-#include <barosensor.h>
+   #include <magsensor.h>
+   #include <accelsensor.h>
+   #include <gyrosensor.h>
+   #include <barosensor.h>
 
-#include <ctime>
-#include <cstdlib>
+   #include <ctime>
+   #include <cstdlib>
 
-namespace sty {
-namespace flight {
-namespace tests {
+   namespace sty {
+   namespace flight {
+   namespace tests {
 
-//  magsensor.xml
-typedef struct {
+   //  magsensor.xml
+   typedef struct {
     float x; //mGa
     float y;
     float z;
     float temperature; // deg C
-} __attribute__((packed)) MagSensorDataPacked;
+   } __attribute__((packed)) MagSensorDataPacked;
 
-MagSensor MagSensorGen(void) {
-	MagSensor ins;
-	std::srand(std::time(NULL));
-	ins.x = 200 + rand() / RAND_MAX;
-	ins.y = 220 + rand() / RAND_MAX;
-	ins.z = 400 + rand() / RAND_MAX;
-	// amptitude around 500mGauss
-	ins.temperature = 25 + rand() / RAND_MAX;
-	return std::move(ins);
-}
- // accelsensor.xml
-typedef struct {
+   MagSensor MagSensorGen(void) {
+        MagSensor ins;
+        std::srand(std::time(NULL));
+        ins.x = 200 + rand() / RAND_MAX;
+        ins.y = 220 + rand() / RAND_MAX;
+        ins.z = 400 + rand() / RAND_MAX;
+        // amptitude around 500mGauss
+        ins.temperature = 25 + rand() / RAND_MAX;
+        return std::move(ins);
+   }
+   // accelsensor.xml
+   typedef struct {
     float x;
     float y;
     float z;
     float temperature;
-} __attribute__((packed)) AccelSensorDataPacked;
+   } __attribute__((packed)) AccelSensorDataPacked;
 
-} // tests 
-} // flight
-} // sty
+   } // tests
+   } // flight
+   } // sty
  */

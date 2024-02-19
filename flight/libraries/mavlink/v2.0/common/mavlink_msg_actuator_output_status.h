@@ -5,41 +5,45 @@
 
 
 typedef struct __mavlink_actuator_output_status_t {
- uint64_t time_usec; /*< [us] Timestamp (since system boot).*/
- uint32_t active; /*<  Active outputs*/
- float actuator[32]; /*<  Servo / motor output array values. Zero values indicate unused channels.*/
+    uint64_t time_usec; /*< [us] Timestamp (since system boot).*/
+    uint32_t active; /*<  Active outputs*/
+    float    actuator[32]; /*<  Servo / motor output array values. Zero values indicate unused channels.*/
 } mavlink_actuator_output_status_t;
 
-#define MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN 140
-#define MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_MIN_LEN 140
-#define MAVLINK_MSG_ID_375_LEN 140
-#define MAVLINK_MSG_ID_375_MIN_LEN 140
+#define MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN             140
+#define MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_MIN_LEN         140
+#define MAVLINK_MSG_ID_375_LEN                                140
+#define MAVLINK_MSG_ID_375_MIN_LEN                            140
 
-#define MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_CRC 251
-#define MAVLINK_MSG_ID_375_CRC 251
+#define MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_CRC             251
+#define MAVLINK_MSG_ID_375_CRC                                251
 
 #define MAVLINK_MSG_ACTUATOR_OUTPUT_STATUS_FIELD_ACTUATOR_LEN 32
 
 #if MAVLINK_COMMAND_24BIT
-#define MAVLINK_MESSAGE_INFO_ACTUATOR_OUTPUT_STATUS { \
-    375, \
-    "ACTUATOR_OUTPUT_STATUS", \
-    3, \
-    {  { "time_usec", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_actuator_output_status_t, time_usec) }, \
-         { "active", NULL, MAVLINK_TYPE_UINT32_T, 0, 8, offsetof(mavlink_actuator_output_status_t, active) }, \
-         { "actuator", NULL, MAVLINK_TYPE_FLOAT, 32, 12, offsetof(mavlink_actuator_output_status_t, actuator) }, \
-         } \
-}
+#define MAVLINK_MESSAGE_INFO_ACTUATOR_OUTPUT_STATUS \
+    { \
+        375, \
+        "ACTUATOR_OUTPUT_STATUS", \
+        3, \
+        { \
+            { "time_usec", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_actuator_output_status_t, time_usec) }, \
+            { "active", NULL, MAVLINK_TYPE_UINT32_T, 0, 8, offsetof(mavlink_actuator_output_status_t, active) }, \
+            { "actuator", NULL, MAVLINK_TYPE_FLOAT, 32, 12, offsetof(mavlink_actuator_output_status_t, actuator) }, \
+        } \
+    }
 #else
-#define MAVLINK_MESSAGE_INFO_ACTUATOR_OUTPUT_STATUS { \
-    "ACTUATOR_OUTPUT_STATUS", \
-    3, \
-    {  { "time_usec", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_actuator_output_status_t, time_usec) }, \
-         { "active", NULL, MAVLINK_TYPE_UINT32_T, 0, 8, offsetof(mavlink_actuator_output_status_t, active) }, \
-         { "actuator", NULL, MAVLINK_TYPE_FLOAT, 32, 12, offsetof(mavlink_actuator_output_status_t, actuator) }, \
-         } \
-}
-#endif
+#define MAVLINK_MESSAGE_INFO_ACTUATOR_OUTPUT_STATUS \
+    { \
+        "ACTUATOR_OUTPUT_STATUS", \
+        3, \
+        { \
+            { "time_usec", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_actuator_output_status_t, time_usec) }, \
+            { "active", NULL, MAVLINK_TYPE_UINT32_T, 0, 8, offsetof(mavlink_actuator_output_status_t, active) }, \
+            { "actuator", NULL, MAVLINK_TYPE_FLOAT, 32, 12, offsetof(mavlink_actuator_output_status_t, actuator) }, \
+        } \
+    }
+#endif // if MAVLINK_COMMAND_24BIT
 
 /**
  * @brief Pack a actuator_output_status message
@@ -52,21 +56,21 @@ typedef struct __mavlink_actuator_output_status_t {
  * @param actuator  Servo / motor output array values. Zero values indicate unused channels.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_actuator_output_status_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-                               uint64_t time_usec, uint32_t active, const float *actuator)
+static inline uint16_t mavlink_msg_actuator_output_status_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t *msg,
+                                                               uint64_t time_usec, uint32_t active, const float *actuator)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN];
     _mav_put_uint64_t(buf, 0, time_usec);
     _mav_put_uint32_t(buf, 8, active);
     _mav_put_float_array(buf, 12, actuator, 32);
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN);
 #else
     mavlink_actuator_output_status_t packet;
     packet.time_usec = time_usec;
-    packet.active = active;
-    mav_array_memcpy(packet.actuator, actuator, sizeof(float)*32);
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN);
+    packet.active    = active;
+    mav_array_memcpy(packet.actuator, actuator, sizeof(float) * 32);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN);
 #endif
 
     msg->msgid = MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS;
@@ -85,21 +89,21 @@ static inline uint16_t mavlink_msg_actuator_output_status_pack(uint8_t system_id
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_actuator_output_status_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
-                               mavlink_message_t* msg,
-                                   uint64_t time_usec,uint32_t active,const float *actuator)
+                                                                    mavlink_message_t *msg,
+                                                                    uint64_t time_usec, uint32_t active, const float *actuator)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN];
     _mav_put_uint64_t(buf, 0, time_usec);
     _mav_put_uint32_t(buf, 8, active);
     _mav_put_float_array(buf, 12, actuator, 32);
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN);
 #else
     mavlink_actuator_output_status_t packet;
     packet.time_usec = time_usec;
-    packet.active = active;
-    mav_array_memcpy(packet.actuator, actuator, sizeof(float)*32);
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN);
+    packet.active    = active;
+    mav_array_memcpy(packet.actuator, actuator, sizeof(float) * 32);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN);
 #endif
 
     msg->msgid = MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS;
@@ -114,7 +118,7 @@ static inline uint16_t mavlink_msg_actuator_output_status_pack_chan(uint8_t syst
  * @param msg The MAVLink message to compress the data into
  * @param actuator_output_status C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_actuator_output_status_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_actuator_output_status_t* actuator_output_status)
+static inline uint16_t mavlink_msg_actuator_output_status_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t *msg, const mavlink_actuator_output_status_t *actuator_output_status)
 {
     return mavlink_msg_actuator_output_status_pack(system_id, component_id, msg, actuator_output_status->time_usec, actuator_output_status->active, actuator_output_status->actuator);
 }
@@ -128,7 +132,7 @@ static inline uint16_t mavlink_msg_actuator_output_status_encode(uint8_t system_
  * @param msg The MAVLink message to compress the data into
  * @param actuator_output_status C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_actuator_output_status_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_actuator_output_status_t* actuator_output_status)
+static inline uint16_t mavlink_msg_actuator_output_status_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t *msg, const mavlink_actuator_output_status_t *actuator_output_status)
 {
     return mavlink_msg_actuator_output_status_pack_chan(system_id, component_id, chan, msg, actuator_output_status->time_usec, actuator_output_status->active, actuator_output_status->actuator);
 }
@@ -154,8 +158,8 @@ static inline void mavlink_msg_actuator_output_status_send(mavlink_channel_t cha
 #else
     mavlink_actuator_output_status_t packet;
     packet.time_usec = time_usec;
-    packet.active = active;
-    mav_array_memcpy(packet.actuator, actuator, sizeof(float)*32);
+    packet.active    = active;
+    mav_array_memcpy(packet.actuator, actuator, sizeof(float) * 32);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS, (const char *)&packet, MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_MIN_LEN, MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN, MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_CRC);
 #endif
 }
@@ -165,7 +169,7 @@ static inline void mavlink_msg_actuator_output_status_send(mavlink_channel_t cha
  * @param chan MAVLink channel to send the message
  * @param struct The MAVLink struct to serialize
  */
-static inline void mavlink_msg_actuator_output_status_send_struct(mavlink_channel_t chan, const mavlink_actuator_output_status_t* actuator_output_status)
+static inline void mavlink_msg_actuator_output_status_send_struct(mavlink_channel_t chan, const mavlink_actuator_output_status_t *actuator_output_status)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mavlink_msg_actuator_output_status_send(chan, actuator_output_status->time_usec, actuator_output_status->active, actuator_output_status->actuator);
@@ -176,13 +180,13 @@ static inline void mavlink_msg_actuator_output_status_send_struct(mavlink_channe
 
 #if MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
-  memory from the receive buffer.  The caller provides a
-  mavlink_message_t which is the size of a full mavlink message. This
-  is usually the receive buffer for the channel, and allows a reply to an
-  incoming message with minimum stack space usage.
+   This variant of _send() can be used to save stack space by re-using
+   memory from the receive buffer.  The caller provides a
+   mavlink_message_t which is the size of a full mavlink message. This
+   is usually the receive buffer for the channel, and allows a reply to an
+   incoming message with minimum stack space usage.
  */
-static inline void mavlink_msg_actuator_output_status_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint64_t time_usec, uint32_t active, const float *actuator)
+static inline void mavlink_msg_actuator_output_status_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan, uint64_t time_usec, uint32_t active, const float *actuator)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char *buf = (char *)msgbuf;
@@ -193,14 +197,14 @@ static inline void mavlink_msg_actuator_output_status_send_buf(mavlink_message_t
 #else
     mavlink_actuator_output_status_t *packet = (mavlink_actuator_output_status_t *)msgbuf;
     packet->time_usec = time_usec;
-    packet->active = active;
-    mav_array_memcpy(packet->actuator, actuator, sizeof(float)*32);
+    packet->active    = active;
+    mav_array_memcpy(packet->actuator, actuator, sizeof(float) * 32);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS, (const char *)packet, MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_MIN_LEN, MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN, MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_CRC);
 #endif
 }
 #endif
 
-#endif
+#endif // ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
 // MESSAGE ACTUATOR_OUTPUT_STATUS UNPACKING
 
@@ -210,9 +214,9 @@ static inline void mavlink_msg_actuator_output_status_send_buf(mavlink_message_t
  *
  * @return [us] Timestamp (since system boot).
  */
-static inline uint64_t mavlink_msg_actuator_output_status_get_time_usec(const mavlink_message_t* msg)
+static inline uint64_t mavlink_msg_actuator_output_status_get_time_usec(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint64_t(msg,  0);
+    return _MAV_RETURN_uint64_t(msg, 0);
 }
 
 /**
@@ -220,9 +224,9 @@ static inline uint64_t mavlink_msg_actuator_output_status_get_time_usec(const ma
  *
  * @return  Active outputs
  */
-static inline uint32_t mavlink_msg_actuator_output_status_get_active(const mavlink_message_t* msg)
+static inline uint32_t mavlink_msg_actuator_output_status_get_active(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint32_t(msg,  8);
+    return _MAV_RETURN_uint32_t(msg, 8);
 }
 
 /**
@@ -230,9 +234,9 @@ static inline uint32_t mavlink_msg_actuator_output_status_get_active(const mavli
  *
  * @return  Servo / motor output array values. Zero values indicate unused channels.
  */
-static inline uint16_t mavlink_msg_actuator_output_status_get_actuator(const mavlink_message_t* msg, float *actuator)
+static inline uint16_t mavlink_msg_actuator_output_status_get_actuator(const mavlink_message_t *msg, float *actuator)
 {
-    return _MAV_RETURN_float_array(msg, actuator, 32,  12);
+    return _MAV_RETURN_float_array(msg, actuator, 32, 12);
 }
 
 /**
@@ -241,15 +245,15 @@ static inline uint16_t mavlink_msg_actuator_output_status_get_actuator(const mav
  * @param msg The message to decode
  * @param actuator_output_status C-struct to decode the message contents into
  */
-static inline void mavlink_msg_actuator_output_status_decode(const mavlink_message_t* msg, mavlink_actuator_output_status_t* actuator_output_status)
+static inline void mavlink_msg_actuator_output_status_decode(const mavlink_message_t *msg, mavlink_actuator_output_status_t *actuator_output_status)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     actuator_output_status->time_usec = mavlink_msg_actuator_output_status_get_time_usec(msg);
-    actuator_output_status->active = mavlink_msg_actuator_output_status_get_active(msg);
+    actuator_output_status->active    = mavlink_msg_actuator_output_status_get_active(msg);
     mavlink_msg_actuator_output_status_get_actuator(msg, actuator_output_status->actuator);
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN? msg->len : MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN;
-        memset(actuator_output_status, 0, MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN ? msg->len : MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN;
+    memset(actuator_output_status, 0, MAVLINK_MSG_ID_ACTUATOR_OUTPUT_STATUS_LEN);
     memcpy(actuator_output_status, _MAV_PAYLOAD(msg), len);
 #endif
 }

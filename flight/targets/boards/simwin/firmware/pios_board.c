@@ -132,7 +132,7 @@ void PIOS_Board_Init(void)
     }
     // If linking in yaffs for testing, this will re-use the simposix yaffs /dev0 nor
     // simulation, which does not support being instanced twice.
-	// should implement win version
+    // should implement win version
     pios_user_fs_id = pios_uavo_settings_fs_id;
 
     /* Initialize the task monitor */

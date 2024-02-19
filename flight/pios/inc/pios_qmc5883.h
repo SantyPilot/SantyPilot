@@ -47,22 +47,22 @@
 #define PIOS_QMC5883_DATAOUT_ZLSB_REG   0x04
 #define PIOS_QMC5883_DATAOUT_ZMSB_REG   0x05
 #define PIOS_QMC5883_DATAOUT_STATUS_REG 0x06
-#define PIOS_QMC5883_DATAOUT_TEMP_REG_L   0x07
-#define PIOS_QMC5883_DATAOUT_TEMP_REG_H   0x08
+#define PIOS_QMC5883_DATAOUT_TEMP_REG_L 0x07
+#define PIOS_QMC5883_DATAOUT_TEMP_REG_H 0x08
 
 #define PIOS_QMC5883_CONFIG_REG_A       0x09
 #define PIOS_QMC5883_CONFIG_REG_B       0x0A
 #define PIOS_QMC5883_CONFIG_PERD_REG    0x0B
 #define PIOS_QMC5883_CHIP_ID_REG        0x0D // 0x0C Reserved
 
-#define PIOS_QMC5883_DATAOUT_REG      0x00
-#define PIOS_QMC5883_DATAOUT_X_REG    0x00
-#define PIOS_QMC5883_DATAOUT_Y_REG    0x02
-#define PIOS_QMC5883_DATAOUT_Z_REG    0x04
+#define PIOS_QMC5883_DATAOUT_REG        0x00
+#define PIOS_QMC5883_DATAOUT_X_REG      0x00
+#define PIOS_QMC5883_DATAOUT_Y_REG      0x02
+#define PIOS_QMC5883_DATAOUT_Z_REG      0x04
 
 /* Modes */
 #define PIOS_QMC5883_MODE_STANDBY       0x00
-#define PIOS_QMC5883_MODE_CONTINUOUS     0x01
+#define PIOS_QMC5883_MODE_CONTINUOUS    0x01
 #define PIOS_QMC5883_MODE_RESERVE_1     0x02
 #define PIOS_QMC5883_MODE_RESERVE_2     0x03
 
@@ -134,12 +134,12 @@ struct pios_qmc5883_cfg {
     const struct pios_exti_cfg *exti_cfg; /* Pointer to the EXTI configuration */
 #endif
     uint8_t CTL_ODR; // OUTPUT DATA RATE --> here below the relative define (See datasheet page 11 for more details) */
-	uint8_t CTL_MOD;
-	uint8_t CTL_RNG;
-	uint8_t CTL_OSR;
-	uint8_t soft_rst;
-	uint8_t ptr_en;
-	uint8_t irt_en;
+    uint8_t CTL_MOD;
+    uint8_t CTL_RNG;
+    uint8_t CTL_OSR;
+    uint8_t soft_rst;
+    uint8_t ptr_en;
+    uint8_t irt_en;
     enum PIOS_QMC5883_ORIENTATION Orientation;
     const struct pios_qmc5883_io_driver *Driver;
 };

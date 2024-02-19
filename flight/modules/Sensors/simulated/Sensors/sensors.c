@@ -155,24 +155,24 @@ static void SensorsTask(__attribute__((unused)) void *parameters)
 
     AlarmsClear(SYSTEMALARMS_ALARM_SENSORS);
 
-	HomeLocationData homeLocation;
-	HomeLocationGet(&homeLocation);
-	homeLocation.Latitude = INIT_LAT;
-	homeLocation.Longitude = INIT_LNG;
-	homeLocation.Altitude = INIT_ALT;
-	homeLocation.Be[0] = 26000;
-	homeLocation.Be[1] = 400;
-	homeLocation.Be[2] = 40000;
-	homeLocation.Set = HOMELOCATION_SET_TRUE;
-	HomeLocationSet(&homeLocation);
+    HomeLocationData homeLocation;
+    HomeLocationGet(&homeLocation);
+    homeLocation.Latitude  = INIT_LAT;
+    homeLocation.Longitude = INIT_LNG;
+    homeLocation.Altitude  = INIT_ALT;
+    homeLocation.Be[0]     = 26000;
+    homeLocation.Be[1]     = 400;
+    homeLocation.Be[2]     = 40000;
+    homeLocation.Set = HOMELOCATION_SET_TRUE;
+    HomeLocationSet(&homeLocation);
 
 
     // Main task loop
     lastSysTime = xTaskGetTickCount();
     // uint32_t last_time = PIOS_DELAY_GetRaw();
-	PERF_INIT_COUNTER(counterSimSensorPeriod, 0x53000101);
+    PERF_INIT_COUNTER(counterSimSensorPeriod, 0x53000101);
     while (1) {
-		PERF_MEASURE_BETWEEN(counterSimSensorPeriod, true);
+        PERF_MEASURE_BETWEEN(counterSimSensorPeriod, true);
         PIOS_WDG_UpdateFlag(PIOS_WDG_SENSORS);
 
         SystemSettingsData systemSettings;
@@ -212,18 +212,18 @@ static void SensorsTask(__attribute__((unused)) void *parameters)
             simulateModelAirplane();
         }
 
-		PERF_MEASURE_BETWEEN(counterSimSensorPeriod, false); // id = 1392509185 cycle 130us
+        PERF_MEASURE_BETWEEN(counterSimSensorPeriod, false); // id = 1392509185 cycle 130us
         static int i;
         i++;
         // if (i % 5000 == 0) {
-            // float dT = PIOS_DELAY_DiffuS(last_time) / 10.0e6;
-            // fprintf(stderr, "Sensor relative timing: %f\n", dT);
-            //last_time = PIOS_DELAY_GetRaw();
-        //}
-		// if (i % 5000 == 0) {
-			// pios_perf_counter_t *counter = (pios_perf_counter_t *)counterSimSensorPeriod;
-			// fprintf(stderr, "simulation sensors perf counter: %d\n", counter->value);
-		// } 
+        // float dT = PIOS_DELAY_DiffuS(last_time) / 10.0e6;
+        // fprintf(stderr, "Sensor relative timing: %f\n", dT);
+        // last_time = PIOS_DELAY_GetRaw();
+        // }
+        // if (i % 5000 == 0) {
+        // pios_perf_counter_t *counter = (pios_perf_counter_t *)counterSimSensorPeriod;
+        // fprintf(stderr, "simulation sensors perf counter: %d\n", counter->value);
+        // }
         vTaskDelay(2 / portTICK_RATE_MS);
     }
 }
@@ -356,7 +356,7 @@ static void simulateModelQuadcopter()
     const float MAG_PERIOD     = 1.0 / 75.0;
     const float BARO_PERIOD    = 1.0 / 20.0;
 
-	static bool in_flight = false;
+    static bool in_flight      = false;
     static uint32_t last_time;
 
     float dT = (PIOS_DELAY_DiffuS(last_time) / 1e6);
@@ -365,16 +365,16 @@ static void simulateModelQuadcopter()
         dT = 2e-3;
     }
     last_time = PIOS_DELAY_GetRaw();
-	if (dT > 5) { // if interval exceed 5s, something is wrong
-	    return;
-	}
+    if (dT > 5) { // if interval exceed 5s, something is wrong
+        return;
+    }
 
     FlightStatusData flightStatus;
     FlightStatusGet(&flightStatus);
     ActuatorDesiredData actuatorDesired;
     ActuatorDesiredGet(&actuatorDesired);
 
-	in_flight = flightStatus.Armed == FLIGHTSTATUS_ARMED_ARMED;
+    in_flight = flightStatus.Armed == FLIGHTSTATUS_ARMED_ARMED;
     float thrust = (flightStatus.Armed == FLIGHTSTATUS_ARMED_ARMED) ? actuatorDesired.Thrust * MAX_THRUST : 0;
     if (thrust < 0) {
         thrust = 0;
@@ -439,22 +439,22 @@ static void simulateModelQuadcopter()
 
     Quaternion2R(q, Rbe);
     // Make thrust negative as down is positive
-    ned_accel[0]  = -thrust * Rbe[2][0];
-    ned_accel[1]  = -thrust * Rbe[2][1];
+    ned_accel[0] = -thrust * Rbe[2][0];
+    ned_accel[1] = -thrust * Rbe[2][1];
     // Gravity causes acceleration of 9.81 in the down direction
-    ned_accel[2]  = -thrust * Rbe[2][2] + GRAV;
+    ned_accel[2] = -thrust * Rbe[2][2] + GRAV;
 
-	if (in_flight) {
-		static float wind[3] = { 0, 0, 0 };
-		wind[0] = wind[0] * 0.95 + rand_gauss() / 10.0;
-		wind[1] = wind[1] * 0.95 + rand_gauss() / 10.0;
-		wind[2] = wind[2] * 0.95 + rand_gauss() / 10.0;
+    if (in_flight) {
+        static float wind[3] = { 0, 0, 0 };
+        wind[0] = wind[0] * 0.95 + rand_gauss() / 10.0;
+        wind[1] = wind[1] * 0.95 + rand_gauss() / 10.0;
+        wind[2] = wind[2] * 0.95 + rand_gauss() / 10.0;
 
-		// Apply acceleration based on velocity
-		ned_accel[0] -= K_FRICTION * (vel[0] - wind[0]);
-		ned_accel[1] -= K_FRICTION * (vel[1] - wind[1]);
-		ned_accel[2] -= K_FRICTION * (vel[2] - wind[2]);
-	}
+        // Apply acceleration based on velocity
+        ned_accel[0] -= K_FRICTION * (vel[0] - wind[0]);
+        ned_accel[1] -= K_FRICTION * (vel[1] - wind[1]);
+        ned_accel[2] -= K_FRICTION * (vel[2] - wind[2]);
+    }
 
     // Predict the velocity forward in time
     vel[0] = vel[0] + ned_accel[0] * dT;
@@ -531,10 +531,10 @@ static void simulateModelQuadcopter()
         gpsPosition.Groundspeed = sqrt(pow(vel[0] + gps_vel_drift[0], 2) + pow(vel[1] + gps_vel_drift[1], 2));
         gpsPosition.Heading     = 180 / M_PI * atan2(vel[1] + gps_vel_drift[1], vel[0] + gps_vel_drift[0]);
         gpsPosition.Satellites  = 7;
-        gpsPosition.PDOP = 1;
-		gpsPosition.Status = GPSPOSITIONSENSOR_STATUS_FIX3D; 
+        gpsPosition.PDOP   = 1;
+        gpsPosition.Status = GPSPOSITIONSENSOR_STATUS_FIX3D;
         GPSPositionSensorSet(&gpsPosition);
-        last_gps_time    = PIOS_DELAY_GetRaw();
+        last_gps_time = PIOS_DELAY_GetRaw();
     }
 
     // Update GPS Velocity measurements

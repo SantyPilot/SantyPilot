@@ -5,65 +5,68 @@
 
 
 typedef struct __mavlink_water_depth_t {
- uint32_t time_boot_ms; /*< [ms] Timestamp (time since system boot)*/
- int32_t lat; /*< [degE7] Latitude*/
- int32_t lng; /*< [degE7] Longitude*/
- float alt; /*< [m] Altitude (MSL) of vehicle*/
- float roll; /*< [rad] Roll angle*/
- float pitch; /*< [rad] Pitch angle*/
- float yaw; /*< [rad] Yaw angle*/
- float distance; /*< [m] Distance (uncorrected)*/
- float temperature; /*< [degC] Water temperature*/
- uint8_t id; /*<  Onboard ID of the sensor*/
- uint8_t healthy; /*<  Sensor data healthy (0=unhealthy, 1=healthy)*/
+    uint32_t time_boot_ms; /*< [ms] Timestamp (time since system boot)*/
+    int32_t  lat; /*< [degE7] Latitude*/
+    int32_t  lng; /*< [degE7] Longitude*/
+    float    alt; /*< [m] Altitude (MSL) of vehicle*/
+    float    roll; /*< [rad] Roll angle*/
+    float    pitch; /*< [rad] Pitch angle*/
+    float    yaw; /*< [rad] Yaw angle*/
+    float    distance; /*< [m] Distance (uncorrected)*/
+    float    temperature; /*< [degC] Water temperature*/
+    uint8_t  id; /*<  Onboard ID of the sensor*/
+    uint8_t  healthy; /*<  Sensor data healthy (0=unhealthy, 1=healthy)*/
 } mavlink_water_depth_t;
 
-#define MAVLINK_MSG_ID_WATER_DEPTH_LEN 38
+#define MAVLINK_MSG_ID_WATER_DEPTH_LEN     38
 #define MAVLINK_MSG_ID_WATER_DEPTH_MIN_LEN 38
-#define MAVLINK_MSG_ID_11038_LEN 38
-#define MAVLINK_MSG_ID_11038_MIN_LEN 38
+#define MAVLINK_MSG_ID_11038_LEN           38
+#define MAVLINK_MSG_ID_11038_MIN_LEN       38
 
-#define MAVLINK_MSG_ID_WATER_DEPTH_CRC 47
-#define MAVLINK_MSG_ID_11038_CRC 47
-
+#define MAVLINK_MSG_ID_WATER_DEPTH_CRC     47
+#define MAVLINK_MSG_ID_11038_CRC           47
 
 
 #if MAVLINK_COMMAND_24BIT
-#define MAVLINK_MESSAGE_INFO_WATER_DEPTH { \
-    11038, \
-    "WATER_DEPTH", \
-    11, \
-    {  { "time_boot_ms", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_water_depth_t, time_boot_ms) }, \
-         { "id", NULL, MAVLINK_TYPE_UINT8_T, 0, 36, offsetof(mavlink_water_depth_t, id) }, \
-         { "healthy", NULL, MAVLINK_TYPE_UINT8_T, 0, 37, offsetof(mavlink_water_depth_t, healthy) }, \
-         { "lat", NULL, MAVLINK_TYPE_INT32_T, 0, 4, offsetof(mavlink_water_depth_t, lat) }, \
-         { "lng", NULL, MAVLINK_TYPE_INT32_T, 0, 8, offsetof(mavlink_water_depth_t, lng) }, \
-         { "alt", NULL, MAVLINK_TYPE_FLOAT, 0, 12, offsetof(mavlink_water_depth_t, alt) }, \
-         { "roll", NULL, MAVLINK_TYPE_FLOAT, 0, 16, offsetof(mavlink_water_depth_t, roll) }, \
-         { "pitch", NULL, MAVLINK_TYPE_FLOAT, 0, 20, offsetof(mavlink_water_depth_t, pitch) }, \
-         { "yaw", NULL, MAVLINK_TYPE_FLOAT, 0, 24, offsetof(mavlink_water_depth_t, yaw) }, \
-         { "distance", NULL, MAVLINK_TYPE_FLOAT, 0, 28, offsetof(mavlink_water_depth_t, distance) }, \
-         { "temperature", NULL, MAVLINK_TYPE_FLOAT, 0, 32, offsetof(mavlink_water_depth_t, temperature) }, \
-         } \
-}
+#define MAVLINK_MESSAGE_INFO_WATER_DEPTH \
+    { \
+        11038, \
+        "WATER_DEPTH", \
+        11, \
+        { \
+            { "time_boot_ms", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_water_depth_t, time_boot_ms) }, \
+            { "id", NULL, MAVLINK_TYPE_UINT8_T, 0, 36, offsetof(mavlink_water_depth_t, id) }, \
+            { "healthy", NULL, MAVLINK_TYPE_UINT8_T, 0, 37, offsetof(mavlink_water_depth_t, healthy) }, \
+            { "lat", NULL, MAVLINK_TYPE_INT32_T, 0, 4, offsetof(mavlink_water_depth_t, lat) }, \
+            { "lng", NULL, MAVLINK_TYPE_INT32_T, 0, 8, offsetof(mavlink_water_depth_t, lng) }, \
+            { "alt", NULL, MAVLINK_TYPE_FLOAT, 0, 12, offsetof(mavlink_water_depth_t, alt) }, \
+            { "roll", NULL, MAVLINK_TYPE_FLOAT, 0, 16, offsetof(mavlink_water_depth_t, roll) }, \
+            { "pitch", NULL, MAVLINK_TYPE_FLOAT, 0, 20, offsetof(mavlink_water_depth_t, pitch) }, \
+            { "yaw", NULL, MAVLINK_TYPE_FLOAT, 0, 24, offsetof(mavlink_water_depth_t, yaw) }, \
+            { "distance", NULL, MAVLINK_TYPE_FLOAT, 0, 28, offsetof(mavlink_water_depth_t, distance) }, \
+            { "temperature", NULL, MAVLINK_TYPE_FLOAT, 0, 32, offsetof(mavlink_water_depth_t, temperature) }, \
+        } \
+    }
 #else
-#define MAVLINK_MESSAGE_INFO_WATER_DEPTH { \
-    "WATER_DEPTH", \
-    11, \
-    {  { "time_boot_ms", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_water_depth_t, time_boot_ms) }, \
-         { "id", NULL, MAVLINK_TYPE_UINT8_T, 0, 36, offsetof(mavlink_water_depth_t, id) }, \
-         { "healthy", NULL, MAVLINK_TYPE_UINT8_T, 0, 37, offsetof(mavlink_water_depth_t, healthy) }, \
-         { "lat", NULL, MAVLINK_TYPE_INT32_T, 0, 4, offsetof(mavlink_water_depth_t, lat) }, \
-         { "lng", NULL, MAVLINK_TYPE_INT32_T, 0, 8, offsetof(mavlink_water_depth_t, lng) }, \
-         { "alt", NULL, MAVLINK_TYPE_FLOAT, 0, 12, offsetof(mavlink_water_depth_t, alt) }, \
-         { "roll", NULL, MAVLINK_TYPE_FLOAT, 0, 16, offsetof(mavlink_water_depth_t, roll) }, \
-         { "pitch", NULL, MAVLINK_TYPE_FLOAT, 0, 20, offsetof(mavlink_water_depth_t, pitch) }, \
-         { "yaw", NULL, MAVLINK_TYPE_FLOAT, 0, 24, offsetof(mavlink_water_depth_t, yaw) }, \
-         { "distance", NULL, MAVLINK_TYPE_FLOAT, 0, 28, offsetof(mavlink_water_depth_t, distance) }, \
-         { "temperature", NULL, MAVLINK_TYPE_FLOAT, 0, 32, offsetof(mavlink_water_depth_t, temperature) }, \
-         } \
-}
-#endif
+#define MAVLINK_MESSAGE_INFO_WATER_DEPTH \
+    { \
+        "WATER_DEPTH", \
+        11, \
+        { \
+            { "time_boot_ms", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_water_depth_t, time_boot_ms) }, \
+            { "id", NULL, MAVLINK_TYPE_UINT8_T, 0, 36, offsetof(mavlink_water_depth_t, id) }, \
+            { "healthy", NULL, MAVLINK_TYPE_UINT8_T, 0, 37, offsetof(mavlink_water_depth_t, healthy) }, \
+            { "lat", NULL, MAVLINK_TYPE_INT32_T, 0, 4, offsetof(mavlink_water_depth_t, lat) }, \
+            { "lng", NULL, MAVLINK_TYPE_INT32_T, 0, 8, offsetof(mavlink_water_depth_t, lng) }, \
+            { "alt", NULL, MAVLINK_TYPE_FLOAT, 0, 12, offsetof(mavlink_water_depth_t, alt) }, \
+            { "roll", NULL, MAVLINK_TYPE_FLOAT, 0, 16, offsetof(mavlink_water_depth_t, roll) }, \
+            { "pitch", NULL, MAVLINK_TYPE_FLOAT, 0, 20, offsetof(mavlink_water_depth_t, pitch) }, \
+            { "yaw", NULL, MAVLINK_TYPE_FLOAT, 0, 24, offsetof(mavlink_water_depth_t, yaw) }, \
+            { "distance", NULL, MAVLINK_TYPE_FLOAT, 0, 28, offsetof(mavlink_water_depth_t, distance) }, \
+            { "temperature", NULL, MAVLINK_TYPE_FLOAT, 0, 32, offsetof(mavlink_water_depth_t, temperature) }, \
+        } \
+    }
+#endif // if MAVLINK_COMMAND_24BIT
 
 /**
  * @brief Pack a water_depth message
@@ -84,8 +87,8 @@ typedef struct __mavlink_water_depth_t {
  * @param temperature [degC] Water temperature
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_water_depth_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-                               uint32_t time_boot_ms, uint8_t id, uint8_t healthy, int32_t lat, int32_t lng, float alt, float roll, float pitch, float yaw, float distance, float temperature)
+static inline uint16_t mavlink_msg_water_depth_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t *msg,
+                                                    uint32_t time_boot_ms, uint8_t id, uint8_t healthy, int32_t lat, int32_t lng, float alt, float roll, float pitch, float yaw, float distance, float temperature)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_WATER_DEPTH_LEN];
@@ -101,23 +104,23 @@ static inline uint16_t mavlink_msg_water_depth_pack(uint8_t system_id, uint8_t c
     _mav_put_uint8_t(buf, 36, id);
     _mav_put_uint8_t(buf, 37, healthy);
 
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_WATER_DEPTH_LEN);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_WATER_DEPTH_LEN);
 #else
     mavlink_water_depth_t packet;
     packet.time_boot_ms = time_boot_ms;
-    packet.lat = lat;
-    packet.lng = lng;
-    packet.alt = alt;
-    packet.roll = roll;
-    packet.pitch = pitch;
-    packet.yaw = yaw;
-    packet.distance = distance;
+    packet.lat         = lat;
+    packet.lng         = lng;
+    packet.alt         = alt;
+    packet.roll        = roll;
+    packet.pitch       = pitch;
+    packet.yaw         = yaw;
+    packet.distance    = distance;
     packet.temperature = temperature;
     packet.id = id;
-    packet.healthy = healthy;
+    packet.healthy     = healthy;
 
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_WATER_DEPTH_LEN);
-#endif
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_WATER_DEPTH_LEN);
+#endif // if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
 
     msg->msgid = MAVLINK_MSG_ID_WATER_DEPTH;
     return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_WATER_DEPTH_MIN_LEN, MAVLINK_MSG_ID_WATER_DEPTH_LEN, MAVLINK_MSG_ID_WATER_DEPTH_CRC);
@@ -143,8 +146,8 @@ static inline uint16_t mavlink_msg_water_depth_pack(uint8_t system_id, uint8_t c
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_water_depth_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
-                               mavlink_message_t* msg,
-                                   uint32_t time_boot_ms,uint8_t id,uint8_t healthy,int32_t lat,int32_t lng,float alt,float roll,float pitch,float yaw,float distance,float temperature)
+                                                         mavlink_message_t *msg,
+                                                         uint32_t time_boot_ms, uint8_t id, uint8_t healthy, int32_t lat, int32_t lng, float alt, float roll, float pitch, float yaw, float distance, float temperature)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_WATER_DEPTH_LEN];
@@ -160,23 +163,23 @@ static inline uint16_t mavlink_msg_water_depth_pack_chan(uint8_t system_id, uint
     _mav_put_uint8_t(buf, 36, id);
     _mav_put_uint8_t(buf, 37, healthy);
 
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_WATER_DEPTH_LEN);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_WATER_DEPTH_LEN);
 #else
     mavlink_water_depth_t packet;
     packet.time_boot_ms = time_boot_ms;
-    packet.lat = lat;
-    packet.lng = lng;
-    packet.alt = alt;
-    packet.roll = roll;
-    packet.pitch = pitch;
-    packet.yaw = yaw;
-    packet.distance = distance;
+    packet.lat         = lat;
+    packet.lng         = lng;
+    packet.alt         = alt;
+    packet.roll        = roll;
+    packet.pitch       = pitch;
+    packet.yaw         = yaw;
+    packet.distance    = distance;
     packet.temperature = temperature;
     packet.id = id;
-    packet.healthy = healthy;
+    packet.healthy     = healthy;
 
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_WATER_DEPTH_LEN);
-#endif
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_WATER_DEPTH_LEN);
+#endif // if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
 
     msg->msgid = MAVLINK_MSG_ID_WATER_DEPTH;
     return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_WATER_DEPTH_MIN_LEN, MAVLINK_MSG_ID_WATER_DEPTH_LEN, MAVLINK_MSG_ID_WATER_DEPTH_CRC);
@@ -190,7 +193,7 @@ static inline uint16_t mavlink_msg_water_depth_pack_chan(uint8_t system_id, uint
  * @param msg The MAVLink message to compress the data into
  * @param water_depth C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_water_depth_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_water_depth_t* water_depth)
+static inline uint16_t mavlink_msg_water_depth_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t *msg, const mavlink_water_depth_t *water_depth)
 {
     return mavlink_msg_water_depth_pack(system_id, component_id, msg, water_depth->time_boot_ms, water_depth->id, water_depth->healthy, water_depth->lat, water_depth->lng, water_depth->alt, water_depth->roll, water_depth->pitch, water_depth->yaw, water_depth->distance, water_depth->temperature);
 }
@@ -204,7 +207,7 @@ static inline uint16_t mavlink_msg_water_depth_encode(uint8_t system_id, uint8_t
  * @param msg The MAVLink message to compress the data into
  * @param water_depth C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_water_depth_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_water_depth_t* water_depth)
+static inline uint16_t mavlink_msg_water_depth_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t *msg, const mavlink_water_depth_t *water_depth)
 {
     return mavlink_msg_water_depth_pack_chan(system_id, component_id, chan, msg, water_depth->time_boot_ms, water_depth->id, water_depth->healthy, water_depth->lat, water_depth->lng, water_depth->alt, water_depth->roll, water_depth->pitch, water_depth->yaw, water_depth->distance, water_depth->temperature);
 }
@@ -247,19 +250,19 @@ static inline void mavlink_msg_water_depth_send(mavlink_channel_t chan, uint32_t
 #else
     mavlink_water_depth_t packet;
     packet.time_boot_ms = time_boot_ms;
-    packet.lat = lat;
-    packet.lng = lng;
-    packet.alt = alt;
-    packet.roll = roll;
-    packet.pitch = pitch;
-    packet.yaw = yaw;
-    packet.distance = distance;
+    packet.lat         = lat;
+    packet.lng         = lng;
+    packet.alt         = alt;
+    packet.roll        = roll;
+    packet.pitch       = pitch;
+    packet.yaw         = yaw;
+    packet.distance    = distance;
     packet.temperature = temperature;
     packet.id = id;
-    packet.healthy = healthy;
+    packet.healthy     = healthy;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_WATER_DEPTH, (const char *)&packet, MAVLINK_MSG_ID_WATER_DEPTH_MIN_LEN, MAVLINK_MSG_ID_WATER_DEPTH_LEN, MAVLINK_MSG_ID_WATER_DEPTH_CRC);
-#endif
+#endif // if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
 }
 
 /**
@@ -267,7 +270,7 @@ static inline void mavlink_msg_water_depth_send(mavlink_channel_t chan, uint32_t
  * @param chan MAVLink channel to send the message
  * @param struct The MAVLink struct to serialize
  */
-static inline void mavlink_msg_water_depth_send_struct(mavlink_channel_t chan, const mavlink_water_depth_t* water_depth)
+static inline void mavlink_msg_water_depth_send_struct(mavlink_channel_t chan, const mavlink_water_depth_t *water_depth)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mavlink_msg_water_depth_send(chan, water_depth->time_boot_ms, water_depth->id, water_depth->healthy, water_depth->lat, water_depth->lng, water_depth->alt, water_depth->roll, water_depth->pitch, water_depth->yaw, water_depth->distance, water_depth->temperature);
@@ -278,13 +281,13 @@ static inline void mavlink_msg_water_depth_send_struct(mavlink_channel_t chan, c
 
 #if MAVLINK_MSG_ID_WATER_DEPTH_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
-  memory from the receive buffer.  The caller provides a
-  mavlink_message_t which is the size of a full mavlink message. This
-  is usually the receive buffer for the channel, and allows a reply to an
-  incoming message with minimum stack space usage.
+   This variant of _send() can be used to save stack space by re-using
+   memory from the receive buffer.  The caller provides a
+   mavlink_message_t which is the size of a full mavlink message. This
+   is usually the receive buffer for the channel, and allows a reply to an
+   incoming message with minimum stack space usage.
  */
-static inline void mavlink_msg_water_depth_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint32_t time_boot_ms, uint8_t id, uint8_t healthy, int32_t lat, int32_t lng, float alt, float roll, float pitch, float yaw, float distance, float temperature)
+static inline void mavlink_msg_water_depth_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan, uint32_t time_boot_ms, uint8_t id, uint8_t healthy, int32_t lat, int32_t lng, float alt, float roll, float pitch, float yaw, float distance, float temperature)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char *buf = (char *)msgbuf;
@@ -304,23 +307,23 @@ static inline void mavlink_msg_water_depth_send_buf(mavlink_message_t *msgbuf, m
 #else
     mavlink_water_depth_t *packet = (mavlink_water_depth_t *)msgbuf;
     packet->time_boot_ms = time_boot_ms;
-    packet->lat = lat;
-    packet->lng = lng;
-    packet->alt = alt;
-    packet->roll = roll;
-    packet->pitch = pitch;
-    packet->yaw = yaw;
-    packet->distance = distance;
+    packet->lat         = lat;
+    packet->lng         = lng;
+    packet->alt         = alt;
+    packet->roll        = roll;
+    packet->pitch       = pitch;
+    packet->yaw         = yaw;
+    packet->distance    = distance;
     packet->temperature = temperature;
     packet->id = id;
-    packet->healthy = healthy;
+    packet->healthy     = healthy;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_WATER_DEPTH, (const char *)packet, MAVLINK_MSG_ID_WATER_DEPTH_MIN_LEN, MAVLINK_MSG_ID_WATER_DEPTH_LEN, MAVLINK_MSG_ID_WATER_DEPTH_CRC);
-#endif
+#endif // if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
 }
-#endif
+#endif // if MAVLINK_MSG_ID_WATER_DEPTH_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 
-#endif
+#endif // ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
 // MESSAGE WATER_DEPTH UNPACKING
 
@@ -330,9 +333,9 @@ static inline void mavlink_msg_water_depth_send_buf(mavlink_message_t *msgbuf, m
  *
  * @return [ms] Timestamp (time since system boot)
  */
-static inline uint32_t mavlink_msg_water_depth_get_time_boot_ms(const mavlink_message_t* msg)
+static inline uint32_t mavlink_msg_water_depth_get_time_boot_ms(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint32_t(msg,  0);
+    return _MAV_RETURN_uint32_t(msg, 0);
 }
 
 /**
@@ -340,9 +343,9 @@ static inline uint32_t mavlink_msg_water_depth_get_time_boot_ms(const mavlink_me
  *
  * @return  Onboard ID of the sensor
  */
-static inline uint8_t mavlink_msg_water_depth_get_id(const mavlink_message_t* msg)
+static inline uint8_t mavlink_msg_water_depth_get_id(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  36);
+    return _MAV_RETURN_uint8_t(msg, 36);
 }
 
 /**
@@ -350,9 +353,9 @@ static inline uint8_t mavlink_msg_water_depth_get_id(const mavlink_message_t* ms
  *
  * @return  Sensor data healthy (0=unhealthy, 1=healthy)
  */
-static inline uint8_t mavlink_msg_water_depth_get_healthy(const mavlink_message_t* msg)
+static inline uint8_t mavlink_msg_water_depth_get_healthy(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  37);
+    return _MAV_RETURN_uint8_t(msg, 37);
 }
 
 /**
@@ -360,9 +363,9 @@ static inline uint8_t mavlink_msg_water_depth_get_healthy(const mavlink_message_
  *
  * @return [degE7] Latitude
  */
-static inline int32_t mavlink_msg_water_depth_get_lat(const mavlink_message_t* msg)
+static inline int32_t mavlink_msg_water_depth_get_lat(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_int32_t(msg,  4);
+    return _MAV_RETURN_int32_t(msg, 4);
 }
 
 /**
@@ -370,9 +373,9 @@ static inline int32_t mavlink_msg_water_depth_get_lat(const mavlink_message_t* m
  *
  * @return [degE7] Longitude
  */
-static inline int32_t mavlink_msg_water_depth_get_lng(const mavlink_message_t* msg)
+static inline int32_t mavlink_msg_water_depth_get_lng(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_int32_t(msg,  8);
+    return _MAV_RETURN_int32_t(msg, 8);
 }
 
 /**
@@ -380,9 +383,9 @@ static inline int32_t mavlink_msg_water_depth_get_lng(const mavlink_message_t* m
  *
  * @return [m] Altitude (MSL) of vehicle
  */
-static inline float mavlink_msg_water_depth_get_alt(const mavlink_message_t* msg)
+static inline float mavlink_msg_water_depth_get_alt(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_float(msg,  12);
+    return _MAV_RETURN_float(msg, 12);
 }
 
 /**
@@ -390,9 +393,9 @@ static inline float mavlink_msg_water_depth_get_alt(const mavlink_message_t* msg
  *
  * @return [rad] Roll angle
  */
-static inline float mavlink_msg_water_depth_get_roll(const mavlink_message_t* msg)
+static inline float mavlink_msg_water_depth_get_roll(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_float(msg,  16);
+    return _MAV_RETURN_float(msg, 16);
 }
 
 /**
@@ -400,9 +403,9 @@ static inline float mavlink_msg_water_depth_get_roll(const mavlink_message_t* ms
  *
  * @return [rad] Pitch angle
  */
-static inline float mavlink_msg_water_depth_get_pitch(const mavlink_message_t* msg)
+static inline float mavlink_msg_water_depth_get_pitch(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_float(msg,  20);
+    return _MAV_RETURN_float(msg, 20);
 }
 
 /**
@@ -410,9 +413,9 @@ static inline float mavlink_msg_water_depth_get_pitch(const mavlink_message_t* m
  *
  * @return [rad] Yaw angle
  */
-static inline float mavlink_msg_water_depth_get_yaw(const mavlink_message_t* msg)
+static inline float mavlink_msg_water_depth_get_yaw(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_float(msg,  24);
+    return _MAV_RETURN_float(msg, 24);
 }
 
 /**
@@ -420,9 +423,9 @@ static inline float mavlink_msg_water_depth_get_yaw(const mavlink_message_t* msg
  *
  * @return [m] Distance (uncorrected)
  */
-static inline float mavlink_msg_water_depth_get_distance(const mavlink_message_t* msg)
+static inline float mavlink_msg_water_depth_get_distance(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_float(msg,  28);
+    return _MAV_RETURN_float(msg, 28);
 }
 
 /**
@@ -430,9 +433,9 @@ static inline float mavlink_msg_water_depth_get_distance(const mavlink_message_t
  *
  * @return [degC] Water temperature
  */
-static inline float mavlink_msg_water_depth_get_temperature(const mavlink_message_t* msg)
+static inline float mavlink_msg_water_depth_get_temperature(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_float(msg,  32);
+    return _MAV_RETURN_float(msg, 32);
 }
 
 /**
@@ -441,23 +444,23 @@ static inline float mavlink_msg_water_depth_get_temperature(const mavlink_messag
  * @param msg The message to decode
  * @param water_depth C-struct to decode the message contents into
  */
-static inline void mavlink_msg_water_depth_decode(const mavlink_message_t* msg, mavlink_water_depth_t* water_depth)
+static inline void mavlink_msg_water_depth_decode(const mavlink_message_t *msg, mavlink_water_depth_t *water_depth)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     water_depth->time_boot_ms = mavlink_msg_water_depth_get_time_boot_ms(msg);
-    water_depth->lat = mavlink_msg_water_depth_get_lat(msg);
-    water_depth->lng = mavlink_msg_water_depth_get_lng(msg);
-    water_depth->alt = mavlink_msg_water_depth_get_alt(msg);
-    water_depth->roll = mavlink_msg_water_depth_get_roll(msg);
-    water_depth->pitch = mavlink_msg_water_depth_get_pitch(msg);
-    water_depth->yaw = mavlink_msg_water_depth_get_yaw(msg);
-    water_depth->distance = mavlink_msg_water_depth_get_distance(msg);
+    water_depth->lat         = mavlink_msg_water_depth_get_lat(msg);
+    water_depth->lng         = mavlink_msg_water_depth_get_lng(msg);
+    water_depth->alt         = mavlink_msg_water_depth_get_alt(msg);
+    water_depth->roll        = mavlink_msg_water_depth_get_roll(msg);
+    water_depth->pitch       = mavlink_msg_water_depth_get_pitch(msg);
+    water_depth->yaw         = mavlink_msg_water_depth_get_yaw(msg);
+    water_depth->distance    = mavlink_msg_water_depth_get_distance(msg);
     water_depth->temperature = mavlink_msg_water_depth_get_temperature(msg);
     water_depth->id = mavlink_msg_water_depth_get_id(msg);
-    water_depth->healthy = mavlink_msg_water_depth_get_healthy(msg);
+    water_depth->healthy     = mavlink_msg_water_depth_get_healthy(msg);
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_WATER_DEPTH_LEN? msg->len : MAVLINK_MSG_ID_WATER_DEPTH_LEN;
-        memset(water_depth, 0, MAVLINK_MSG_ID_WATER_DEPTH_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_WATER_DEPTH_LEN ? msg->len : MAVLINK_MSG_ID_WATER_DEPTH_LEN;
+    memset(water_depth, 0, MAVLINK_MSG_ID_WATER_DEPTH_LEN);
     memcpy(water_depth, _MAV_PAYLOAD(msg), len);
 #endif
 }

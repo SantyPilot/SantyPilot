@@ -11,9 +11,9 @@
 namespace sty_midware {
 class TaskManager {
 public:
-    static TaskManager* instance() {
-        if (g_instance == nullptr) {
-        }
+    static TaskManager *instance()
+    {
+        if (g_instance == nullptr) {}
     }
 };
 }

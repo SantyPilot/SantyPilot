@@ -117,7 +117,7 @@
 #define PERF_TIMED_SECTION_END(x)
 #define PERF_MEASURE_PERIOD(x)
 #define PERF_MEASURE_BETWEEN(x, y) (void)y
-#define PERF_TRACK_VALUE(x, y) (void)y
+#define PERF_TRACK_VALUE(x, y)     (void)y
 #define PERF_INCREMENT_VALUE(x)
 #define PERF_DECREMENT_VALUE(x)
 #endif /* PIOS_INCLUDE_INSTRUMENTATION */

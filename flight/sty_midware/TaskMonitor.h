@@ -11,8 +11,8 @@
 namespace sty_midware {
 class TaskMonitor {
 public:
-	TaskMonitor() {}
-	~TaskMonitor() {}
+    TaskMonitor() {}
+    ~TaskMonitor() {}
 };
 }
 

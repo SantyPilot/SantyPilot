@@ -12,8 +12,8 @@ extern "C" {
 
 #ifndef MAVLINK_TEST_ALL
 #define MAVLINK_TEST_ALL
-static void mavlink_test_minimal(uint8_t, uint8_t, mavlink_message_t *last_msg);
-static void mavlink_test_standard(uint8_t, uint8_t, mavlink_message_t *last_msg);
+static void mavlink_test_minimal(uint8_t, uint8_t, mavlink_message_t * last_msg);
+static void mavlink_test_standard(uint8_t, uint8_t, mavlink_message_t * last_msg);
 
 static void mavlink_test_all(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
 {
@@ -25,11 +25,8 @@ static void mavlink_test_all(uint8_t system_id, uint8_t component_id, mavlink_me
 #include "../minimal/testsuite.h"
 
 
-
 static void mavlink_test_standard(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
-{
-
-}
+{}
 
 #ifdef __cplusplus
 }

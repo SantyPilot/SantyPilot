@@ -45,11 +45,11 @@ MODULES += Telemetry
 MODULES += Logging
 MODULES += FirmwareIAP # Board Identification
 MODULES += StateEstimation
-#MODULES += Sensors/simulated/Sensors
+MODULES += Sensors/simulated/Sensors
 #MODULES += Airspeed
 #MODULES += AltitudeHold # now integrated in Stabilization
 #MODULES += OveroSync
-MODULES += UAVOMavlinkBridge
+#MODULES += UAVOMavlinkBridge
 
 SRC += $(FLIGHTLIB)/notification.c
 

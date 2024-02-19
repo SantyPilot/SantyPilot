@@ -5,65 +5,68 @@
 
 
 typedef struct __mavlink_serial_udb_extra_f14_t {
- uint32_t sue_TRAP_SOURCE; /*<  Serial UDB Extra Type Program Address of Last Trap*/
- int16_t sue_RCON; /*<  Serial UDB Extra Reboot Register of DSPIC*/
- int16_t sue_TRAP_FLAGS; /*<  Serial UDB Extra  Last dspic Trap Flags*/
- int16_t sue_osc_fail_count; /*<  Serial UDB Extra Number of Ocillator Failures*/
- uint8_t sue_WIND_ESTIMATION; /*<  Serial UDB Extra Wind Estimation Enabled*/
- uint8_t sue_GPS_TYPE; /*<  Serial UDB Extra Type of GPS Unit*/
- uint8_t sue_DR; /*<  Serial UDB Extra Dead Reckoning Enabled*/
- uint8_t sue_BOARD_TYPE; /*<  Serial UDB Extra Type of UDB Hardware*/
- uint8_t sue_AIRFRAME; /*<  Serial UDB Extra Type of Airframe*/
- uint8_t sue_CLOCK_CONFIG; /*<  Serial UDB Extra UDB Internal Clock Configuration*/
- uint8_t sue_FLIGHT_PLAN_TYPE; /*<  Serial UDB Extra Type of Flight Plan*/
+    uint32_t sue_TRAP_SOURCE; /*<  Serial UDB Extra Type Program Address of Last Trap*/
+    int16_t  sue_RCON; /*<  Serial UDB Extra Reboot Register of DSPIC*/
+    int16_t  sue_TRAP_FLAGS; /*<  Serial UDB Extra  Last dspic Trap Flags*/
+    int16_t  sue_osc_fail_count; /*<  Serial UDB Extra Number of Ocillator Failures*/
+    uint8_t  sue_WIND_ESTIMATION; /*<  Serial UDB Extra Wind Estimation Enabled*/
+    uint8_t  sue_GPS_TYPE; /*<  Serial UDB Extra Type of GPS Unit*/
+    uint8_t  sue_DR; /*<  Serial UDB Extra Dead Reckoning Enabled*/
+    uint8_t  sue_BOARD_TYPE; /*<  Serial UDB Extra Type of UDB Hardware*/
+    uint8_t  sue_AIRFRAME; /*<  Serial UDB Extra Type of Airframe*/
+    uint8_t  sue_CLOCK_CONFIG; /*<  Serial UDB Extra UDB Internal Clock Configuration*/
+    uint8_t  sue_FLIGHT_PLAN_TYPE; /*<  Serial UDB Extra Type of Flight Plan*/
 } mavlink_serial_udb_extra_f14_t;
 
-#define MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN 17
+#define MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN     17
 #define MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_MIN_LEN 17
-#define MAVLINK_MSG_ID_178_LEN 17
-#define MAVLINK_MSG_ID_178_MIN_LEN 17
+#define MAVLINK_MSG_ID_178_LEN                      17
+#define MAVLINK_MSG_ID_178_MIN_LEN                  17
 
-#define MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_CRC 123
-#define MAVLINK_MSG_ID_178_CRC 123
-
+#define MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_CRC     123
+#define MAVLINK_MSG_ID_178_CRC                      123
 
 
 #if MAVLINK_COMMAND_24BIT
-#define MAVLINK_MESSAGE_INFO_SERIAL_UDB_EXTRA_F14 { \
-    178, \
-    "SERIAL_UDB_EXTRA_F14", \
-    11, \
-    {  { "sue_WIND_ESTIMATION", NULL, MAVLINK_TYPE_UINT8_T, 0, 10, offsetof(mavlink_serial_udb_extra_f14_t, sue_WIND_ESTIMATION) }, \
-         { "sue_GPS_TYPE", NULL, MAVLINK_TYPE_UINT8_T, 0, 11, offsetof(mavlink_serial_udb_extra_f14_t, sue_GPS_TYPE) }, \
-         { "sue_DR", NULL, MAVLINK_TYPE_UINT8_T, 0, 12, offsetof(mavlink_serial_udb_extra_f14_t, sue_DR) }, \
-         { "sue_BOARD_TYPE", NULL, MAVLINK_TYPE_UINT8_T, 0, 13, offsetof(mavlink_serial_udb_extra_f14_t, sue_BOARD_TYPE) }, \
-         { "sue_AIRFRAME", NULL, MAVLINK_TYPE_UINT8_T, 0, 14, offsetof(mavlink_serial_udb_extra_f14_t, sue_AIRFRAME) }, \
-         { "sue_RCON", NULL, MAVLINK_TYPE_INT16_T, 0, 4, offsetof(mavlink_serial_udb_extra_f14_t, sue_RCON) }, \
-         { "sue_TRAP_FLAGS", NULL, MAVLINK_TYPE_INT16_T, 0, 6, offsetof(mavlink_serial_udb_extra_f14_t, sue_TRAP_FLAGS) }, \
-         { "sue_TRAP_SOURCE", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_serial_udb_extra_f14_t, sue_TRAP_SOURCE) }, \
-         { "sue_osc_fail_count", NULL, MAVLINK_TYPE_INT16_T, 0, 8, offsetof(mavlink_serial_udb_extra_f14_t, sue_osc_fail_count) }, \
-         { "sue_CLOCK_CONFIG", NULL, MAVLINK_TYPE_UINT8_T, 0, 15, offsetof(mavlink_serial_udb_extra_f14_t, sue_CLOCK_CONFIG) }, \
-         { "sue_FLIGHT_PLAN_TYPE", NULL, MAVLINK_TYPE_UINT8_T, 0, 16, offsetof(mavlink_serial_udb_extra_f14_t, sue_FLIGHT_PLAN_TYPE) }, \
-         } \
-}
+#define MAVLINK_MESSAGE_INFO_SERIAL_UDB_EXTRA_F14 \
+    { \
+        178, \
+        "SERIAL_UDB_EXTRA_F14", \
+        11, \
+        { \
+            { "sue_WIND_ESTIMATION", NULL, MAVLINK_TYPE_UINT8_T, 0, 10, offsetof(mavlink_serial_udb_extra_f14_t, sue_WIND_ESTIMATION) }, \
+            { "sue_GPS_TYPE", NULL, MAVLINK_TYPE_UINT8_T, 0, 11, offsetof(mavlink_serial_udb_extra_f14_t, sue_GPS_TYPE) }, \
+            { "sue_DR", NULL, MAVLINK_TYPE_UINT8_T, 0, 12, offsetof(mavlink_serial_udb_extra_f14_t, sue_DR) }, \
+            { "sue_BOARD_TYPE", NULL, MAVLINK_TYPE_UINT8_T, 0, 13, offsetof(mavlink_serial_udb_extra_f14_t, sue_BOARD_TYPE) }, \
+            { "sue_AIRFRAME", NULL, MAVLINK_TYPE_UINT8_T, 0, 14, offsetof(mavlink_serial_udb_extra_f14_t, sue_AIRFRAME) }, \
+            { "sue_RCON", NULL, MAVLINK_TYPE_INT16_T, 0, 4, offsetof(mavlink_serial_udb_extra_f14_t, sue_RCON) }, \
+            { "sue_TRAP_FLAGS", NULL, MAVLINK_TYPE_INT16_T, 0, 6, offsetof(mavlink_serial_udb_extra_f14_t, sue_TRAP_FLAGS) }, \
+            { "sue_TRAP_SOURCE", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_serial_udb_extra_f14_t, sue_TRAP_SOURCE) }, \
+            { "sue_osc_fail_count", NULL, MAVLINK_TYPE_INT16_T, 0, 8, offsetof(mavlink_serial_udb_extra_f14_t, sue_osc_fail_count) }, \
+            { "sue_CLOCK_CONFIG", NULL, MAVLINK_TYPE_UINT8_T, 0, 15, offsetof(mavlink_serial_udb_extra_f14_t, sue_CLOCK_CONFIG) }, \
+            { "sue_FLIGHT_PLAN_TYPE", NULL, MAVLINK_TYPE_UINT8_T, 0, 16, offsetof(mavlink_serial_udb_extra_f14_t, sue_FLIGHT_PLAN_TYPE) }, \
+        } \
+    }
 #else
-#define MAVLINK_MESSAGE_INFO_SERIAL_UDB_EXTRA_F14 { \
-    "SERIAL_UDB_EXTRA_F14", \
-    11, \
-    {  { "sue_WIND_ESTIMATION", NULL, MAVLINK_TYPE_UINT8_T, 0, 10, offsetof(mavlink_serial_udb_extra_f14_t, sue_WIND_ESTIMATION) }, \
-         { "sue_GPS_TYPE", NULL, MAVLINK_TYPE_UINT8_T, 0, 11, offsetof(mavlink_serial_udb_extra_f14_t, sue_GPS_TYPE) }, \
-         { "sue_DR", NULL, MAVLINK_TYPE_UINT8_T, 0, 12, offsetof(mavlink_serial_udb_extra_f14_t, sue_DR) }, \
-         { "sue_BOARD_TYPE", NULL, MAVLINK_TYPE_UINT8_T, 0, 13, offsetof(mavlink_serial_udb_extra_f14_t, sue_BOARD_TYPE) }, \
-         { "sue_AIRFRAME", NULL, MAVLINK_TYPE_UINT8_T, 0, 14, offsetof(mavlink_serial_udb_extra_f14_t, sue_AIRFRAME) }, \
-         { "sue_RCON", NULL, MAVLINK_TYPE_INT16_T, 0, 4, offsetof(mavlink_serial_udb_extra_f14_t, sue_RCON) }, \
-         { "sue_TRAP_FLAGS", NULL, MAVLINK_TYPE_INT16_T, 0, 6, offsetof(mavlink_serial_udb_extra_f14_t, sue_TRAP_FLAGS) }, \
-         { "sue_TRAP_SOURCE", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_serial_udb_extra_f14_t, sue_TRAP_SOURCE) }, \
-         { "sue_osc_fail_count", NULL, MAVLINK_TYPE_INT16_T, 0, 8, offsetof(mavlink_serial_udb_extra_f14_t, sue_osc_fail_count) }, \
-         { "sue_CLOCK_CONFIG", NULL, MAVLINK_TYPE_UINT8_T, 0, 15, offsetof(mavlink_serial_udb_extra_f14_t, sue_CLOCK_CONFIG) }, \
-         { "sue_FLIGHT_PLAN_TYPE", NULL, MAVLINK_TYPE_UINT8_T, 0, 16, offsetof(mavlink_serial_udb_extra_f14_t, sue_FLIGHT_PLAN_TYPE) }, \
-         } \
-}
-#endif
+#define MAVLINK_MESSAGE_INFO_SERIAL_UDB_EXTRA_F14 \
+    { \
+        "SERIAL_UDB_EXTRA_F14", \
+        11, \
+        { \
+            { "sue_WIND_ESTIMATION", NULL, MAVLINK_TYPE_UINT8_T, 0, 10, offsetof(mavlink_serial_udb_extra_f14_t, sue_WIND_ESTIMATION) }, \
+            { "sue_GPS_TYPE", NULL, MAVLINK_TYPE_UINT8_T, 0, 11, offsetof(mavlink_serial_udb_extra_f14_t, sue_GPS_TYPE) }, \
+            { "sue_DR", NULL, MAVLINK_TYPE_UINT8_T, 0, 12, offsetof(mavlink_serial_udb_extra_f14_t, sue_DR) }, \
+            { "sue_BOARD_TYPE", NULL, MAVLINK_TYPE_UINT8_T, 0, 13, offsetof(mavlink_serial_udb_extra_f14_t, sue_BOARD_TYPE) }, \
+            { "sue_AIRFRAME", NULL, MAVLINK_TYPE_UINT8_T, 0, 14, offsetof(mavlink_serial_udb_extra_f14_t, sue_AIRFRAME) }, \
+            { "sue_RCON", NULL, MAVLINK_TYPE_INT16_T, 0, 4, offsetof(mavlink_serial_udb_extra_f14_t, sue_RCON) }, \
+            { "sue_TRAP_FLAGS", NULL, MAVLINK_TYPE_INT16_T, 0, 6, offsetof(mavlink_serial_udb_extra_f14_t, sue_TRAP_FLAGS) }, \
+            { "sue_TRAP_SOURCE", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_serial_udb_extra_f14_t, sue_TRAP_SOURCE) }, \
+            { "sue_osc_fail_count", NULL, MAVLINK_TYPE_INT16_T, 0, 8, offsetof(mavlink_serial_udb_extra_f14_t, sue_osc_fail_count) }, \
+            { "sue_CLOCK_CONFIG", NULL, MAVLINK_TYPE_UINT8_T, 0, 15, offsetof(mavlink_serial_udb_extra_f14_t, sue_CLOCK_CONFIG) }, \
+            { "sue_FLIGHT_PLAN_TYPE", NULL, MAVLINK_TYPE_UINT8_T, 0, 16, offsetof(mavlink_serial_udb_extra_f14_t, sue_FLIGHT_PLAN_TYPE) }, \
+        } \
+    }
+#endif // if MAVLINK_COMMAND_24BIT
 
 /**
  * @brief Pack a serial_udb_extra_f14 message
@@ -84,8 +87,8 @@ typedef struct __mavlink_serial_udb_extra_f14_t {
  * @param sue_FLIGHT_PLAN_TYPE  Serial UDB Extra Type of Flight Plan
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_serial_udb_extra_f14_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-                               uint8_t sue_WIND_ESTIMATION, uint8_t sue_GPS_TYPE, uint8_t sue_DR, uint8_t sue_BOARD_TYPE, uint8_t sue_AIRFRAME, int16_t sue_RCON, int16_t sue_TRAP_FLAGS, uint32_t sue_TRAP_SOURCE, int16_t sue_osc_fail_count, uint8_t sue_CLOCK_CONFIG, uint8_t sue_FLIGHT_PLAN_TYPE)
+static inline uint16_t mavlink_msg_serial_udb_extra_f14_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t *msg,
+                                                             uint8_t sue_WIND_ESTIMATION, uint8_t sue_GPS_TYPE, uint8_t sue_DR, uint8_t sue_BOARD_TYPE, uint8_t sue_AIRFRAME, int16_t sue_RCON, int16_t sue_TRAP_FLAGS, uint32_t sue_TRAP_SOURCE, int16_t sue_osc_fail_count, uint8_t sue_CLOCK_CONFIG, uint8_t sue_FLIGHT_PLAN_TYPE)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN];
@@ -101,23 +104,23 @@ static inline uint16_t mavlink_msg_serial_udb_extra_f14_pack(uint8_t system_id, 
     _mav_put_uint8_t(buf, 15, sue_CLOCK_CONFIG);
     _mav_put_uint8_t(buf, 16, sue_FLIGHT_PLAN_TYPE);
 
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN);
 #else
     mavlink_serial_udb_extra_f14_t packet;
-    packet.sue_TRAP_SOURCE = sue_TRAP_SOURCE;
+    packet.sue_TRAP_SOURCE      = sue_TRAP_SOURCE;
     packet.sue_RCON = sue_RCON;
-    packet.sue_TRAP_FLAGS = sue_TRAP_FLAGS;
-    packet.sue_osc_fail_count = sue_osc_fail_count;
-    packet.sue_WIND_ESTIMATION = sue_WIND_ESTIMATION;
+    packet.sue_TRAP_FLAGS       = sue_TRAP_FLAGS;
+    packet.sue_osc_fail_count   = sue_osc_fail_count;
+    packet.sue_WIND_ESTIMATION  = sue_WIND_ESTIMATION;
     packet.sue_GPS_TYPE = sue_GPS_TYPE;
     packet.sue_DR = sue_DR;
-    packet.sue_BOARD_TYPE = sue_BOARD_TYPE;
+    packet.sue_BOARD_TYPE       = sue_BOARD_TYPE;
     packet.sue_AIRFRAME = sue_AIRFRAME;
-    packet.sue_CLOCK_CONFIG = sue_CLOCK_CONFIG;
+    packet.sue_CLOCK_CONFIG     = sue_CLOCK_CONFIG;
     packet.sue_FLIGHT_PLAN_TYPE = sue_FLIGHT_PLAN_TYPE;
 
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN);
-#endif
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN);
+#endif // if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
 
     msg->msgid = MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14;
     return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_MIN_LEN, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_CRC);
@@ -143,8 +146,8 @@ static inline uint16_t mavlink_msg_serial_udb_extra_f14_pack(uint8_t system_id, 
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_serial_udb_extra_f14_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
-                               mavlink_message_t* msg,
-                                   uint8_t sue_WIND_ESTIMATION,uint8_t sue_GPS_TYPE,uint8_t sue_DR,uint8_t sue_BOARD_TYPE,uint8_t sue_AIRFRAME,int16_t sue_RCON,int16_t sue_TRAP_FLAGS,uint32_t sue_TRAP_SOURCE,int16_t sue_osc_fail_count,uint8_t sue_CLOCK_CONFIG,uint8_t sue_FLIGHT_PLAN_TYPE)
+                                                                  mavlink_message_t *msg,
+                                                                  uint8_t sue_WIND_ESTIMATION, uint8_t sue_GPS_TYPE, uint8_t sue_DR, uint8_t sue_BOARD_TYPE, uint8_t sue_AIRFRAME, int16_t sue_RCON, int16_t sue_TRAP_FLAGS, uint32_t sue_TRAP_SOURCE, int16_t sue_osc_fail_count, uint8_t sue_CLOCK_CONFIG, uint8_t sue_FLIGHT_PLAN_TYPE)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN];
@@ -160,23 +163,23 @@ static inline uint16_t mavlink_msg_serial_udb_extra_f14_pack_chan(uint8_t system
     _mav_put_uint8_t(buf, 15, sue_CLOCK_CONFIG);
     _mav_put_uint8_t(buf, 16, sue_FLIGHT_PLAN_TYPE);
 
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN);
 #else
     mavlink_serial_udb_extra_f14_t packet;
-    packet.sue_TRAP_SOURCE = sue_TRAP_SOURCE;
+    packet.sue_TRAP_SOURCE      = sue_TRAP_SOURCE;
     packet.sue_RCON = sue_RCON;
-    packet.sue_TRAP_FLAGS = sue_TRAP_FLAGS;
-    packet.sue_osc_fail_count = sue_osc_fail_count;
-    packet.sue_WIND_ESTIMATION = sue_WIND_ESTIMATION;
+    packet.sue_TRAP_FLAGS       = sue_TRAP_FLAGS;
+    packet.sue_osc_fail_count   = sue_osc_fail_count;
+    packet.sue_WIND_ESTIMATION  = sue_WIND_ESTIMATION;
     packet.sue_GPS_TYPE = sue_GPS_TYPE;
     packet.sue_DR = sue_DR;
-    packet.sue_BOARD_TYPE = sue_BOARD_TYPE;
+    packet.sue_BOARD_TYPE       = sue_BOARD_TYPE;
     packet.sue_AIRFRAME = sue_AIRFRAME;
-    packet.sue_CLOCK_CONFIG = sue_CLOCK_CONFIG;
+    packet.sue_CLOCK_CONFIG     = sue_CLOCK_CONFIG;
     packet.sue_FLIGHT_PLAN_TYPE = sue_FLIGHT_PLAN_TYPE;
 
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN);
-#endif
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN);
+#endif // if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
 
     msg->msgid = MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14;
     return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_MIN_LEN, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_CRC);
@@ -190,7 +193,7 @@ static inline uint16_t mavlink_msg_serial_udb_extra_f14_pack_chan(uint8_t system
  * @param msg The MAVLink message to compress the data into
  * @param serial_udb_extra_f14 C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_serial_udb_extra_f14_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_serial_udb_extra_f14_t* serial_udb_extra_f14)
+static inline uint16_t mavlink_msg_serial_udb_extra_f14_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t *msg, const mavlink_serial_udb_extra_f14_t *serial_udb_extra_f14)
 {
     return mavlink_msg_serial_udb_extra_f14_pack(system_id, component_id, msg, serial_udb_extra_f14->sue_WIND_ESTIMATION, serial_udb_extra_f14->sue_GPS_TYPE, serial_udb_extra_f14->sue_DR, serial_udb_extra_f14->sue_BOARD_TYPE, serial_udb_extra_f14->sue_AIRFRAME, serial_udb_extra_f14->sue_RCON, serial_udb_extra_f14->sue_TRAP_FLAGS, serial_udb_extra_f14->sue_TRAP_SOURCE, serial_udb_extra_f14->sue_osc_fail_count, serial_udb_extra_f14->sue_CLOCK_CONFIG, serial_udb_extra_f14->sue_FLIGHT_PLAN_TYPE);
 }
@@ -204,7 +207,7 @@ static inline uint16_t mavlink_msg_serial_udb_extra_f14_encode(uint8_t system_id
  * @param msg The MAVLink message to compress the data into
  * @param serial_udb_extra_f14 C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_serial_udb_extra_f14_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_serial_udb_extra_f14_t* serial_udb_extra_f14)
+static inline uint16_t mavlink_msg_serial_udb_extra_f14_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t *msg, const mavlink_serial_udb_extra_f14_t *serial_udb_extra_f14)
 {
     return mavlink_msg_serial_udb_extra_f14_pack_chan(system_id, component_id, chan, msg, serial_udb_extra_f14->sue_WIND_ESTIMATION, serial_udb_extra_f14->sue_GPS_TYPE, serial_udb_extra_f14->sue_DR, serial_udb_extra_f14->sue_BOARD_TYPE, serial_udb_extra_f14->sue_AIRFRAME, serial_udb_extra_f14->sue_RCON, serial_udb_extra_f14->sue_TRAP_FLAGS, serial_udb_extra_f14->sue_TRAP_SOURCE, serial_udb_extra_f14->sue_osc_fail_count, serial_udb_extra_f14->sue_CLOCK_CONFIG, serial_udb_extra_f14->sue_FLIGHT_PLAN_TYPE);
 }
@@ -246,20 +249,20 @@ static inline void mavlink_msg_serial_udb_extra_f14_send(mavlink_channel_t chan,
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14, buf, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_MIN_LEN, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_CRC);
 #else
     mavlink_serial_udb_extra_f14_t packet;
-    packet.sue_TRAP_SOURCE = sue_TRAP_SOURCE;
+    packet.sue_TRAP_SOURCE      = sue_TRAP_SOURCE;
     packet.sue_RCON = sue_RCON;
-    packet.sue_TRAP_FLAGS = sue_TRAP_FLAGS;
-    packet.sue_osc_fail_count = sue_osc_fail_count;
-    packet.sue_WIND_ESTIMATION = sue_WIND_ESTIMATION;
+    packet.sue_TRAP_FLAGS       = sue_TRAP_FLAGS;
+    packet.sue_osc_fail_count   = sue_osc_fail_count;
+    packet.sue_WIND_ESTIMATION  = sue_WIND_ESTIMATION;
     packet.sue_GPS_TYPE = sue_GPS_TYPE;
     packet.sue_DR = sue_DR;
-    packet.sue_BOARD_TYPE = sue_BOARD_TYPE;
+    packet.sue_BOARD_TYPE       = sue_BOARD_TYPE;
     packet.sue_AIRFRAME = sue_AIRFRAME;
-    packet.sue_CLOCK_CONFIG = sue_CLOCK_CONFIG;
+    packet.sue_CLOCK_CONFIG     = sue_CLOCK_CONFIG;
     packet.sue_FLIGHT_PLAN_TYPE = sue_FLIGHT_PLAN_TYPE;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14, (const char *)&packet, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_MIN_LEN, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_CRC);
-#endif
+#endif // if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
 }
 
 /**
@@ -267,7 +270,7 @@ static inline void mavlink_msg_serial_udb_extra_f14_send(mavlink_channel_t chan,
  * @param chan MAVLink channel to send the message
  * @param struct The MAVLink struct to serialize
  */
-static inline void mavlink_msg_serial_udb_extra_f14_send_struct(mavlink_channel_t chan, const mavlink_serial_udb_extra_f14_t* serial_udb_extra_f14)
+static inline void mavlink_msg_serial_udb_extra_f14_send_struct(mavlink_channel_t chan, const mavlink_serial_udb_extra_f14_t *serial_udb_extra_f14)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mavlink_msg_serial_udb_extra_f14_send(chan, serial_udb_extra_f14->sue_WIND_ESTIMATION, serial_udb_extra_f14->sue_GPS_TYPE, serial_udb_extra_f14->sue_DR, serial_udb_extra_f14->sue_BOARD_TYPE, serial_udb_extra_f14->sue_AIRFRAME, serial_udb_extra_f14->sue_RCON, serial_udb_extra_f14->sue_TRAP_FLAGS, serial_udb_extra_f14->sue_TRAP_SOURCE, serial_udb_extra_f14->sue_osc_fail_count, serial_udb_extra_f14->sue_CLOCK_CONFIG, serial_udb_extra_f14->sue_FLIGHT_PLAN_TYPE);
@@ -278,13 +281,13 @@ static inline void mavlink_msg_serial_udb_extra_f14_send_struct(mavlink_channel_
 
 #if MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
-  memory from the receive buffer.  The caller provides a
-  mavlink_message_t which is the size of a full mavlink message. This
-  is usually the receive buffer for the channel, and allows a reply to an
-  incoming message with minimum stack space usage.
+   This variant of _send() can be used to save stack space by re-using
+   memory from the receive buffer.  The caller provides a
+   mavlink_message_t which is the size of a full mavlink message. This
+   is usually the receive buffer for the channel, and allows a reply to an
+   incoming message with minimum stack space usage.
  */
-static inline void mavlink_msg_serial_udb_extra_f14_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint8_t sue_WIND_ESTIMATION, uint8_t sue_GPS_TYPE, uint8_t sue_DR, uint8_t sue_BOARD_TYPE, uint8_t sue_AIRFRAME, int16_t sue_RCON, int16_t sue_TRAP_FLAGS, uint32_t sue_TRAP_SOURCE, int16_t sue_osc_fail_count, uint8_t sue_CLOCK_CONFIG, uint8_t sue_FLIGHT_PLAN_TYPE)
+static inline void mavlink_msg_serial_udb_extra_f14_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan, uint8_t sue_WIND_ESTIMATION, uint8_t sue_GPS_TYPE, uint8_t sue_DR, uint8_t sue_BOARD_TYPE, uint8_t sue_AIRFRAME, int16_t sue_RCON, int16_t sue_TRAP_FLAGS, uint32_t sue_TRAP_SOURCE, int16_t sue_osc_fail_count, uint8_t sue_CLOCK_CONFIG, uint8_t sue_FLIGHT_PLAN_TYPE)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char *buf = (char *)msgbuf;
@@ -303,24 +306,24 @@ static inline void mavlink_msg_serial_udb_extra_f14_send_buf(mavlink_message_t *
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14, buf, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_MIN_LEN, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_CRC);
 #else
     mavlink_serial_udb_extra_f14_t *packet = (mavlink_serial_udb_extra_f14_t *)msgbuf;
-    packet->sue_TRAP_SOURCE = sue_TRAP_SOURCE;
+    packet->sue_TRAP_SOURCE      = sue_TRAP_SOURCE;
     packet->sue_RCON = sue_RCON;
-    packet->sue_TRAP_FLAGS = sue_TRAP_FLAGS;
-    packet->sue_osc_fail_count = sue_osc_fail_count;
-    packet->sue_WIND_ESTIMATION = sue_WIND_ESTIMATION;
+    packet->sue_TRAP_FLAGS       = sue_TRAP_FLAGS;
+    packet->sue_osc_fail_count   = sue_osc_fail_count;
+    packet->sue_WIND_ESTIMATION  = sue_WIND_ESTIMATION;
     packet->sue_GPS_TYPE = sue_GPS_TYPE;
     packet->sue_DR = sue_DR;
-    packet->sue_BOARD_TYPE = sue_BOARD_TYPE;
+    packet->sue_BOARD_TYPE       = sue_BOARD_TYPE;
     packet->sue_AIRFRAME = sue_AIRFRAME;
-    packet->sue_CLOCK_CONFIG = sue_CLOCK_CONFIG;
+    packet->sue_CLOCK_CONFIG     = sue_CLOCK_CONFIG;
     packet->sue_FLIGHT_PLAN_TYPE = sue_FLIGHT_PLAN_TYPE;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14, (const char *)packet, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_MIN_LEN, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_CRC);
-#endif
+#endif // if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
 }
-#endif
+#endif // if MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 
-#endif
+#endif // ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
 // MESSAGE SERIAL_UDB_EXTRA_F14 UNPACKING
 
@@ -330,9 +333,9 @@ static inline void mavlink_msg_serial_udb_extra_f14_send_buf(mavlink_message_t *
  *
  * @return  Serial UDB Extra Wind Estimation Enabled
  */
-static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_WIND_ESTIMATION(const mavlink_message_t* msg)
+static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_WIND_ESTIMATION(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  10);
+    return _MAV_RETURN_uint8_t(msg, 10);
 }
 
 /**
@@ -340,9 +343,9 @@ static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_WIND_ESTIMATION(c
  *
  * @return  Serial UDB Extra Type of GPS Unit
  */
-static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_GPS_TYPE(const mavlink_message_t* msg)
+static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_GPS_TYPE(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  11);
+    return _MAV_RETURN_uint8_t(msg, 11);
 }
 
 /**
@@ -350,9 +353,9 @@ static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_GPS_TYPE(const ma
  *
  * @return  Serial UDB Extra Dead Reckoning Enabled
  */
-static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_DR(const mavlink_message_t* msg)
+static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_DR(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  12);
+    return _MAV_RETURN_uint8_t(msg, 12);
 }
 
 /**
@@ -360,9 +363,9 @@ static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_DR(const mavlink_
  *
  * @return  Serial UDB Extra Type of UDB Hardware
  */
-static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_BOARD_TYPE(const mavlink_message_t* msg)
+static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_BOARD_TYPE(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  13);
+    return _MAV_RETURN_uint8_t(msg, 13);
 }
 
 /**
@@ -370,9 +373,9 @@ static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_BOARD_TYPE(const 
  *
  * @return  Serial UDB Extra Type of Airframe
  */
-static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_AIRFRAME(const mavlink_message_t* msg)
+static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_AIRFRAME(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  14);
+    return _MAV_RETURN_uint8_t(msg, 14);
 }
 
 /**
@@ -380,9 +383,9 @@ static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_AIRFRAME(const ma
  *
  * @return  Serial UDB Extra Reboot Register of DSPIC
  */
-static inline int16_t mavlink_msg_serial_udb_extra_f14_get_sue_RCON(const mavlink_message_t* msg)
+static inline int16_t mavlink_msg_serial_udb_extra_f14_get_sue_RCON(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_int16_t(msg,  4);
+    return _MAV_RETURN_int16_t(msg, 4);
 }
 
 /**
@@ -390,9 +393,9 @@ static inline int16_t mavlink_msg_serial_udb_extra_f14_get_sue_RCON(const mavlin
  *
  * @return  Serial UDB Extra  Last dspic Trap Flags
  */
-static inline int16_t mavlink_msg_serial_udb_extra_f14_get_sue_TRAP_FLAGS(const mavlink_message_t* msg)
+static inline int16_t mavlink_msg_serial_udb_extra_f14_get_sue_TRAP_FLAGS(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_int16_t(msg,  6);
+    return _MAV_RETURN_int16_t(msg, 6);
 }
 
 /**
@@ -400,9 +403,9 @@ static inline int16_t mavlink_msg_serial_udb_extra_f14_get_sue_TRAP_FLAGS(const 
  *
  * @return  Serial UDB Extra Type Program Address of Last Trap
  */
-static inline uint32_t mavlink_msg_serial_udb_extra_f14_get_sue_TRAP_SOURCE(const mavlink_message_t* msg)
+static inline uint32_t mavlink_msg_serial_udb_extra_f14_get_sue_TRAP_SOURCE(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint32_t(msg,  0);
+    return _MAV_RETURN_uint32_t(msg, 0);
 }
 
 /**
@@ -410,9 +413,9 @@ static inline uint32_t mavlink_msg_serial_udb_extra_f14_get_sue_TRAP_SOURCE(cons
  *
  * @return  Serial UDB Extra Number of Ocillator Failures
  */
-static inline int16_t mavlink_msg_serial_udb_extra_f14_get_sue_osc_fail_count(const mavlink_message_t* msg)
+static inline int16_t mavlink_msg_serial_udb_extra_f14_get_sue_osc_fail_count(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_int16_t(msg,  8);
+    return _MAV_RETURN_int16_t(msg, 8);
 }
 
 /**
@@ -420,9 +423,9 @@ static inline int16_t mavlink_msg_serial_udb_extra_f14_get_sue_osc_fail_count(co
  *
  * @return  Serial UDB Extra UDB Internal Clock Configuration
  */
-static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_CLOCK_CONFIG(const mavlink_message_t* msg)
+static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_CLOCK_CONFIG(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  15);
+    return _MAV_RETURN_uint8_t(msg, 15);
 }
 
 /**
@@ -430,9 +433,9 @@ static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_CLOCK_CONFIG(cons
  *
  * @return  Serial UDB Extra Type of Flight Plan
  */
-static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_FLIGHT_PLAN_TYPE(const mavlink_message_t* msg)
+static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_FLIGHT_PLAN_TYPE(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  16);
+    return _MAV_RETURN_uint8_t(msg, 16);
 }
 
 /**
@@ -441,23 +444,23 @@ static inline uint8_t mavlink_msg_serial_udb_extra_f14_get_sue_FLIGHT_PLAN_TYPE(
  * @param msg The message to decode
  * @param serial_udb_extra_f14 C-struct to decode the message contents into
  */
-static inline void mavlink_msg_serial_udb_extra_f14_decode(const mavlink_message_t* msg, mavlink_serial_udb_extra_f14_t* serial_udb_extra_f14)
+static inline void mavlink_msg_serial_udb_extra_f14_decode(const mavlink_message_t *msg, mavlink_serial_udb_extra_f14_t *serial_udb_extra_f14)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    serial_udb_extra_f14->sue_TRAP_SOURCE = mavlink_msg_serial_udb_extra_f14_get_sue_TRAP_SOURCE(msg);
+    serial_udb_extra_f14->sue_TRAP_SOURCE      = mavlink_msg_serial_udb_extra_f14_get_sue_TRAP_SOURCE(msg);
     serial_udb_extra_f14->sue_RCON = mavlink_msg_serial_udb_extra_f14_get_sue_RCON(msg);
-    serial_udb_extra_f14->sue_TRAP_FLAGS = mavlink_msg_serial_udb_extra_f14_get_sue_TRAP_FLAGS(msg);
-    serial_udb_extra_f14->sue_osc_fail_count = mavlink_msg_serial_udb_extra_f14_get_sue_osc_fail_count(msg);
-    serial_udb_extra_f14->sue_WIND_ESTIMATION = mavlink_msg_serial_udb_extra_f14_get_sue_WIND_ESTIMATION(msg);
+    serial_udb_extra_f14->sue_TRAP_FLAGS       = mavlink_msg_serial_udb_extra_f14_get_sue_TRAP_FLAGS(msg);
+    serial_udb_extra_f14->sue_osc_fail_count   = mavlink_msg_serial_udb_extra_f14_get_sue_osc_fail_count(msg);
+    serial_udb_extra_f14->sue_WIND_ESTIMATION  = mavlink_msg_serial_udb_extra_f14_get_sue_WIND_ESTIMATION(msg);
     serial_udb_extra_f14->sue_GPS_TYPE = mavlink_msg_serial_udb_extra_f14_get_sue_GPS_TYPE(msg);
     serial_udb_extra_f14->sue_DR = mavlink_msg_serial_udb_extra_f14_get_sue_DR(msg);
-    serial_udb_extra_f14->sue_BOARD_TYPE = mavlink_msg_serial_udb_extra_f14_get_sue_BOARD_TYPE(msg);
+    serial_udb_extra_f14->sue_BOARD_TYPE       = mavlink_msg_serial_udb_extra_f14_get_sue_BOARD_TYPE(msg);
     serial_udb_extra_f14->sue_AIRFRAME = mavlink_msg_serial_udb_extra_f14_get_sue_AIRFRAME(msg);
-    serial_udb_extra_f14->sue_CLOCK_CONFIG = mavlink_msg_serial_udb_extra_f14_get_sue_CLOCK_CONFIG(msg);
+    serial_udb_extra_f14->sue_CLOCK_CONFIG     = mavlink_msg_serial_udb_extra_f14_get_sue_CLOCK_CONFIG(msg);
     serial_udb_extra_f14->sue_FLIGHT_PLAN_TYPE = mavlink_msg_serial_udb_extra_f14_get_sue_FLIGHT_PLAN_TYPE(msg);
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN? msg->len : MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN;
-        memset(serial_udb_extra_f14, 0, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN ? msg->len : MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN;
+    memset(serial_udb_extra_f14, 0, MAVLINK_MSG_ID_SERIAL_UDB_EXTRA_F14_LEN);
     memcpy(serial_udb_extra_f14, _MAV_PAYLOAD(msg), len);
 #endif
 }

@@ -5,41 +5,44 @@
 
 
 typedef struct __mavlink_power_status_t {
- uint16_t Vcc; /*< [mV] 5V rail voltage.*/
- uint16_t Vservo; /*< [mV] Servo rail voltage.*/
- uint16_t flags; /*<  Bitmap of power supply status flags.*/
+    uint16_t Vcc; /*< [mV] 5V rail voltage.*/
+    uint16_t Vservo; /*< [mV] Servo rail voltage.*/
+    uint16_t flags; /*<  Bitmap of power supply status flags.*/
 } mavlink_power_status_t;
 
-#define MAVLINK_MSG_ID_POWER_STATUS_LEN 6
+#define MAVLINK_MSG_ID_POWER_STATUS_LEN     6
 #define MAVLINK_MSG_ID_POWER_STATUS_MIN_LEN 6
-#define MAVLINK_MSG_ID_125_LEN 6
-#define MAVLINK_MSG_ID_125_MIN_LEN 6
+#define MAVLINK_MSG_ID_125_LEN              6
+#define MAVLINK_MSG_ID_125_MIN_LEN          6
 
-#define MAVLINK_MSG_ID_POWER_STATUS_CRC 203
-#define MAVLINK_MSG_ID_125_CRC 203
-
+#define MAVLINK_MSG_ID_POWER_STATUS_CRC     203
+#define MAVLINK_MSG_ID_125_CRC              203
 
 
 #if MAVLINK_COMMAND_24BIT
-#define MAVLINK_MESSAGE_INFO_POWER_STATUS { \
-    125, \
-    "POWER_STATUS", \
-    3, \
-    {  { "Vcc", NULL, MAVLINK_TYPE_UINT16_T, 0, 0, offsetof(mavlink_power_status_t, Vcc) }, \
-         { "Vservo", NULL, MAVLINK_TYPE_UINT16_T, 0, 2, offsetof(mavlink_power_status_t, Vservo) }, \
-         { "flags", NULL, MAVLINK_TYPE_UINT16_T, 0, 4, offsetof(mavlink_power_status_t, flags) }, \
-         } \
-}
+#define MAVLINK_MESSAGE_INFO_POWER_STATUS \
+    { \
+        125, \
+        "POWER_STATUS", \
+        3, \
+        { \
+            { "Vcc", NULL, MAVLINK_TYPE_UINT16_T, 0, 0, offsetof(mavlink_power_status_t, Vcc) }, \
+            { "Vservo", NULL, MAVLINK_TYPE_UINT16_T, 0, 2, offsetof(mavlink_power_status_t, Vservo) }, \
+            { "flags", NULL, MAVLINK_TYPE_UINT16_T, 0, 4, offsetof(mavlink_power_status_t, flags) }, \
+        } \
+    }
 #else
-#define MAVLINK_MESSAGE_INFO_POWER_STATUS { \
-    "POWER_STATUS", \
-    3, \
-    {  { "Vcc", NULL, MAVLINK_TYPE_UINT16_T, 0, 0, offsetof(mavlink_power_status_t, Vcc) }, \
-         { "Vservo", NULL, MAVLINK_TYPE_UINT16_T, 0, 2, offsetof(mavlink_power_status_t, Vservo) }, \
-         { "flags", NULL, MAVLINK_TYPE_UINT16_T, 0, 4, offsetof(mavlink_power_status_t, flags) }, \
-         } \
-}
-#endif
+#define MAVLINK_MESSAGE_INFO_POWER_STATUS \
+    { \
+        "POWER_STATUS", \
+        3, \
+        { \
+            { "Vcc", NULL, MAVLINK_TYPE_UINT16_T, 0, 0, offsetof(mavlink_power_status_t, Vcc) }, \
+            { "Vservo", NULL, MAVLINK_TYPE_UINT16_T, 0, 2, offsetof(mavlink_power_status_t, Vservo) }, \
+            { "flags", NULL, MAVLINK_TYPE_UINT16_T, 0, 4, offsetof(mavlink_power_status_t, flags) }, \
+        } \
+    }
+#endif // if MAVLINK_COMMAND_24BIT
 
 /**
  * @brief Pack a power_status message
@@ -52,8 +55,8 @@ typedef struct __mavlink_power_status_t {
  * @param flags  Bitmap of power supply status flags.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_power_status_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-                               uint16_t Vcc, uint16_t Vservo, uint16_t flags)
+static inline uint16_t mavlink_msg_power_status_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t *msg,
+                                                     uint16_t Vcc, uint16_t Vservo, uint16_t flags)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_POWER_STATUS_LEN];
@@ -61,14 +64,14 @@ static inline uint16_t mavlink_msg_power_status_pack(uint8_t system_id, uint8_t 
     _mav_put_uint16_t(buf, 2, Vservo);
     _mav_put_uint16_t(buf, 4, flags);
 
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_POWER_STATUS_LEN);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_POWER_STATUS_LEN);
 #else
     mavlink_power_status_t packet;
-    packet.Vcc = Vcc;
+    packet.Vcc    = Vcc;
     packet.Vservo = Vservo;
-    packet.flags = flags;
+    packet.flags  = flags;
 
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_POWER_STATUS_LEN);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_POWER_STATUS_LEN);
 #endif
 
     msg->msgid = MAVLINK_MSG_ID_POWER_STATUS;
@@ -87,8 +90,8 @@ static inline uint16_t mavlink_msg_power_status_pack(uint8_t system_id, uint8_t 
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_power_status_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
-                               mavlink_message_t* msg,
-                                   uint16_t Vcc,uint16_t Vservo,uint16_t flags)
+                                                          mavlink_message_t *msg,
+                                                          uint16_t Vcc, uint16_t Vservo, uint16_t flags)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_POWER_STATUS_LEN];
@@ -96,14 +99,14 @@ static inline uint16_t mavlink_msg_power_status_pack_chan(uint8_t system_id, uin
     _mav_put_uint16_t(buf, 2, Vservo);
     _mav_put_uint16_t(buf, 4, flags);
 
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_POWER_STATUS_LEN);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_POWER_STATUS_LEN);
 #else
     mavlink_power_status_t packet;
-    packet.Vcc = Vcc;
+    packet.Vcc    = Vcc;
     packet.Vservo = Vservo;
-    packet.flags = flags;
+    packet.flags  = flags;
 
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_POWER_STATUS_LEN);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_POWER_STATUS_LEN);
 #endif
 
     msg->msgid = MAVLINK_MSG_ID_POWER_STATUS;
@@ -118,7 +121,7 @@ static inline uint16_t mavlink_msg_power_status_pack_chan(uint8_t system_id, uin
  * @param msg The MAVLink message to compress the data into
  * @param power_status C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_power_status_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_power_status_t* power_status)
+static inline uint16_t mavlink_msg_power_status_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t *msg, const mavlink_power_status_t *power_status)
 {
     return mavlink_msg_power_status_pack(system_id, component_id, msg, power_status->Vcc, power_status->Vservo, power_status->flags);
 }
@@ -132,7 +135,7 @@ static inline uint16_t mavlink_msg_power_status_encode(uint8_t system_id, uint8_
  * @param msg The MAVLink message to compress the data into
  * @param power_status C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_power_status_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_power_status_t* power_status)
+static inline uint16_t mavlink_msg_power_status_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t *msg, const mavlink_power_status_t *power_status)
 {
     return mavlink_msg_power_status_pack_chan(system_id, component_id, chan, msg, power_status->Vcc, power_status->Vservo, power_status->flags);
 }
@@ -158,9 +161,9 @@ static inline void mavlink_msg_power_status_send(mavlink_channel_t chan, uint16_
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_POWER_STATUS, buf, MAVLINK_MSG_ID_POWER_STATUS_MIN_LEN, MAVLINK_MSG_ID_POWER_STATUS_LEN, MAVLINK_MSG_ID_POWER_STATUS_CRC);
 #else
     mavlink_power_status_t packet;
-    packet.Vcc = Vcc;
+    packet.Vcc    = Vcc;
     packet.Vservo = Vservo;
-    packet.flags = flags;
+    packet.flags  = flags;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_POWER_STATUS, (const char *)&packet, MAVLINK_MSG_ID_POWER_STATUS_MIN_LEN, MAVLINK_MSG_ID_POWER_STATUS_LEN, MAVLINK_MSG_ID_POWER_STATUS_CRC);
 #endif
@@ -171,7 +174,7 @@ static inline void mavlink_msg_power_status_send(mavlink_channel_t chan, uint16_
  * @param chan MAVLink channel to send the message
  * @param struct The MAVLink struct to serialize
  */
-static inline void mavlink_msg_power_status_send_struct(mavlink_channel_t chan, const mavlink_power_status_t* power_status)
+static inline void mavlink_msg_power_status_send_struct(mavlink_channel_t chan, const mavlink_power_status_t *power_status)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mavlink_msg_power_status_send(chan, power_status->Vcc, power_status->Vservo, power_status->flags);
@@ -182,13 +185,13 @@ static inline void mavlink_msg_power_status_send_struct(mavlink_channel_t chan, 
 
 #if MAVLINK_MSG_ID_POWER_STATUS_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
-  memory from the receive buffer.  The caller provides a
-  mavlink_message_t which is the size of a full mavlink message. This
-  is usually the receive buffer for the channel, and allows a reply to an
-  incoming message with minimum stack space usage.
+   This variant of _send() can be used to save stack space by re-using
+   memory from the receive buffer.  The caller provides a
+   mavlink_message_t which is the size of a full mavlink message. This
+   is usually the receive buffer for the channel, and allows a reply to an
+   incoming message with minimum stack space usage.
  */
-static inline void mavlink_msg_power_status_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint16_t Vcc, uint16_t Vservo, uint16_t flags)
+static inline void mavlink_msg_power_status_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan, uint16_t Vcc, uint16_t Vservo, uint16_t flags)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char *buf = (char *)msgbuf;
@@ -199,16 +202,16 @@ static inline void mavlink_msg_power_status_send_buf(mavlink_message_t *msgbuf, 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_POWER_STATUS, buf, MAVLINK_MSG_ID_POWER_STATUS_MIN_LEN, MAVLINK_MSG_ID_POWER_STATUS_LEN, MAVLINK_MSG_ID_POWER_STATUS_CRC);
 #else
     mavlink_power_status_t *packet = (mavlink_power_status_t *)msgbuf;
-    packet->Vcc = Vcc;
+    packet->Vcc    = Vcc;
     packet->Vservo = Vservo;
-    packet->flags = flags;
+    packet->flags  = flags;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_POWER_STATUS, (const char *)packet, MAVLINK_MSG_ID_POWER_STATUS_MIN_LEN, MAVLINK_MSG_ID_POWER_STATUS_LEN, MAVLINK_MSG_ID_POWER_STATUS_CRC);
 #endif
 }
 #endif
 
-#endif
+#endif // ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
 // MESSAGE POWER_STATUS UNPACKING
 
@@ -218,9 +221,9 @@ static inline void mavlink_msg_power_status_send_buf(mavlink_message_t *msgbuf, 
  *
  * @return [mV] 5V rail voltage.
  */
-static inline uint16_t mavlink_msg_power_status_get_Vcc(const mavlink_message_t* msg)
+static inline uint16_t mavlink_msg_power_status_get_Vcc(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint16_t(msg,  0);
+    return _MAV_RETURN_uint16_t(msg, 0);
 }
 
 /**
@@ -228,9 +231,9 @@ static inline uint16_t mavlink_msg_power_status_get_Vcc(const mavlink_message_t*
  *
  * @return [mV] Servo rail voltage.
  */
-static inline uint16_t mavlink_msg_power_status_get_Vservo(const mavlink_message_t* msg)
+static inline uint16_t mavlink_msg_power_status_get_Vservo(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint16_t(msg,  2);
+    return _MAV_RETURN_uint16_t(msg, 2);
 }
 
 /**
@@ -238,9 +241,9 @@ static inline uint16_t mavlink_msg_power_status_get_Vservo(const mavlink_message
  *
  * @return  Bitmap of power supply status flags.
  */
-static inline uint16_t mavlink_msg_power_status_get_flags(const mavlink_message_t* msg)
+static inline uint16_t mavlink_msg_power_status_get_flags(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint16_t(msg,  4);
+    return _MAV_RETURN_uint16_t(msg, 4);
 }
 
 /**
@@ -249,15 +252,15 @@ static inline uint16_t mavlink_msg_power_status_get_flags(const mavlink_message_
  * @param msg The message to decode
  * @param power_status C-struct to decode the message contents into
  */
-static inline void mavlink_msg_power_status_decode(const mavlink_message_t* msg, mavlink_power_status_t* power_status)
+static inline void mavlink_msg_power_status_decode(const mavlink_message_t *msg, mavlink_power_status_t *power_status)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    power_status->Vcc = mavlink_msg_power_status_get_Vcc(msg);
+    power_status->Vcc    = mavlink_msg_power_status_get_Vcc(msg);
     power_status->Vservo = mavlink_msg_power_status_get_Vservo(msg);
-    power_status->flags = mavlink_msg_power_status_get_flags(msg);
+    power_status->flags  = mavlink_msg_power_status_get_flags(msg);
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_POWER_STATUS_LEN? msg->len : MAVLINK_MSG_ID_POWER_STATUS_LEN;
-        memset(power_status, 0, MAVLINK_MSG_ID_POWER_STATUS_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_POWER_STATUS_LEN ? msg->len : MAVLINK_MSG_ID_POWER_STATUS_LEN;
+    memset(power_status, 0, MAVLINK_MSG_ID_POWER_STATUS_LEN);
     memcpy(power_status, _MAV_PAYLOAD(msg), len);
 #endif
 }

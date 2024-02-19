@@ -72,13 +72,14 @@ static inline void PIOS_Instrumentation_updateCounter(pios_counter_t counter_han
  */
 static inline int32_t PIOS_Instrumentation_GetCounterValue(pios_counter_t counter_handle)
 {
-	int32_t value = 0;
+    int32_t value = 0;
+
     PIOS_Assert(pios_instrumentation_perf_counters && counter_handle);
     vPortEnterCritical();
     pios_perf_counter_t *counter = (pios_perf_counter_t *)counter_handle;
     value = counter->value;
     vPortExitCritical();
-	return value;
+    return value;
 }
 
 /**
@@ -144,16 +145,16 @@ static inline void PIOS_Instrumentation_TrackPeriod(pios_counter_t counter_handl
 }
 
 /**
- * Used to determine the mean period between start to the end 
+ * Used to determine the mean period between start to the end
  * @param counter_handle handle of the counter @see PIOS_Instrumentation_SearchCounter @see PIOS_Instrumentation_CreateCounter
  */
 static inline void PIOS_Instrumentation_TrackBetween(pios_counter_t counter_handle, bool start)
 {
     PIOS_Assert(pios_instrumentation_perf_counters && counter_handle);
     pios_perf_counter_t *counter = (pios_perf_counter_t *)counter_handle;
-	if (start) {
+    if (start) {
         counter->lastUpdateTS = PIOS_DELAY_GetRaw();
-	} else if (counter->lastUpdateTS != 0) {
+    } else if (counter->lastUpdateTS != 0) {
         vPortEnterCritical();
         uint32_t period = PIOS_DELAY_DiffuS(counter->lastUpdateTS);
         counter->value = (counter->value * 15 + period) / 16;
@@ -167,8 +168,8 @@ static inline void PIOS_Instrumentation_TrackBetween(pios_counter_t counter_hand
         }
         vPortExitCritical();
     } else {
-	    // Invalid measurement
-	}
+        // Invalid measurement
+    }
 }
 
 /**

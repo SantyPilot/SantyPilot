@@ -1,6 +1,6 @@
 /**
  * @file: DemoTask.h
- * @brief: Simple Demo Task 
+ * @brief: Simple Demo Task
  * @author: zhangxin@santypilot
  * @date: 2024-1-26
  */
@@ -13,11 +13,12 @@ const std::string DEMO_TASK_NAME = "DEMO_TASK";
 REGISTER_STY_MODULE(DEMO_TASK_NAME, DemoTask);
 
 namespace sty_modules {
-class DemoTask: public TaskBase {
+class DemoTask : public TaskBase {
 public:
-    DemoTask(): TaskBase(DEMO_TASK_NAME) {}
+    DemoTask() : TaskBase(DEMO_TASK_NAME) {}
     virtual bool init() {}
-    virtual void run() {
+    virtual void run()
+    {
         while (!should_exit) {
             // TODO: wrap delay interface
         }

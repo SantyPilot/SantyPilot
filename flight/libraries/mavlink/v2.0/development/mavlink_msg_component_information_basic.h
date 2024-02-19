@@ -5,57 +5,61 @@
 
 
 typedef struct __mavlink_component_information_basic_t {
- uint64_t capabilities; /*<  Component capability flags*/
- uint32_t time_boot_ms; /*< [ms] Timestamp (time since system boot).*/
- char vendor_name[32]; /*<  Name of the component vendor. Needs to be zero terminated. The field is optional and can be empty/all zeros.*/
- char model_name[32]; /*<  Name of the component model. Needs to be zero terminated. The field is optional and can be empty/all zeros.*/
- char software_version[24]; /*<  Software version. The recommended format is SEMVER: 'major.minor.patch'  (any format may be used). The field must be zero terminated if it has a value. The field is optional and can be empty/all zeros.*/
- char hardware_version[24]; /*<  Hardware version. The recommended format is SEMVER: 'major.minor.patch'  (any format may be used). The field must be zero terminated if it has a value. The field is optional and can be empty/all zeros.*/
- char serial_number[32]; /*<  Hardware serial number. The field must be zero terminated if it has a value. The field is optional and can be empty/all zeros.*/
+    uint64_t capabilities; /*<  Component capability flags*/
+    uint32_t time_boot_ms; /*< [ms] Timestamp (time since system boot).*/
+    char     vendor_name[32]; /*<  Name of the component vendor. Needs to be zero terminated. The field is optional and can be empty/all zeros.*/
+    char     model_name[32]; /*<  Name of the component model. Needs to be zero terminated. The field is optional and can be empty/all zeros.*/
+    char     software_version[24]; /*<  Software version. The recommended format is SEMVER: 'major.minor.patch'  (any format may be used). The field must be zero terminated if it has a value. The field is optional and can be empty/all zeros.*/
+    char     hardware_version[24]; /*<  Hardware version. The recommended format is SEMVER: 'major.minor.patch'  (any format may be used). The field must be zero terminated if it has a value. The field is optional and can be empty/all zeros.*/
+    char     serial_number[32]; /*<  Hardware serial number. The field must be zero terminated if it has a value. The field is optional and can be empty/all zeros.*/
 } mavlink_component_information_basic_t;
 
-#define MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN 156
-#define MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_MIN_LEN 156
-#define MAVLINK_MSG_ID_396_LEN 156
-#define MAVLINK_MSG_ID_396_MIN_LEN 156
+#define MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN                     156
+#define MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_MIN_LEN                 156
+#define MAVLINK_MSG_ID_396_LEN                                             156
+#define MAVLINK_MSG_ID_396_MIN_LEN                                         156
 
-#define MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_CRC 129
-#define MAVLINK_MSG_ID_396_CRC 129
+#define MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_CRC                     129
+#define MAVLINK_MSG_ID_396_CRC                                             129
 
-#define MAVLINK_MSG_COMPONENT_INFORMATION_BASIC_FIELD_VENDOR_NAME_LEN 32
-#define MAVLINK_MSG_COMPONENT_INFORMATION_BASIC_FIELD_MODEL_NAME_LEN 32
+#define MAVLINK_MSG_COMPONENT_INFORMATION_BASIC_FIELD_VENDOR_NAME_LEN      32
+#define MAVLINK_MSG_COMPONENT_INFORMATION_BASIC_FIELD_MODEL_NAME_LEN       32
 #define MAVLINK_MSG_COMPONENT_INFORMATION_BASIC_FIELD_SOFTWARE_VERSION_LEN 24
 #define MAVLINK_MSG_COMPONENT_INFORMATION_BASIC_FIELD_HARDWARE_VERSION_LEN 24
-#define MAVLINK_MSG_COMPONENT_INFORMATION_BASIC_FIELD_SERIAL_NUMBER_LEN 32
+#define MAVLINK_MSG_COMPONENT_INFORMATION_BASIC_FIELD_SERIAL_NUMBER_LEN    32
 
 #if MAVLINK_COMMAND_24BIT
-#define MAVLINK_MESSAGE_INFO_COMPONENT_INFORMATION_BASIC { \
-    396, \
-    "COMPONENT_INFORMATION_BASIC", \
-    7, \
-    {  { "time_boot_ms", NULL, MAVLINK_TYPE_UINT32_T, 0, 8, offsetof(mavlink_component_information_basic_t, time_boot_ms) }, \
-         { "capabilities", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_component_information_basic_t, capabilities) }, \
-         { "vendor_name", NULL, MAVLINK_TYPE_CHAR, 32, 12, offsetof(mavlink_component_information_basic_t, vendor_name) }, \
-         { "model_name", NULL, MAVLINK_TYPE_CHAR, 32, 44, offsetof(mavlink_component_information_basic_t, model_name) }, \
-         { "software_version", NULL, MAVLINK_TYPE_CHAR, 24, 76, offsetof(mavlink_component_information_basic_t, software_version) }, \
-         { "hardware_version", NULL, MAVLINK_TYPE_CHAR, 24, 100, offsetof(mavlink_component_information_basic_t, hardware_version) }, \
-         { "serial_number", NULL, MAVLINK_TYPE_CHAR, 32, 124, offsetof(mavlink_component_information_basic_t, serial_number) }, \
-         } \
-}
+#define MAVLINK_MESSAGE_INFO_COMPONENT_INFORMATION_BASIC \
+    { \
+        396, \
+        "COMPONENT_INFORMATION_BASIC", \
+        7, \
+        { \
+            { "time_boot_ms", NULL, MAVLINK_TYPE_UINT32_T, 0, 8, offsetof(mavlink_component_information_basic_t, time_boot_ms) }, \
+            { "capabilities", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_component_information_basic_t, capabilities) }, \
+            { "vendor_name", NULL, MAVLINK_TYPE_CHAR, 32, 12, offsetof(mavlink_component_information_basic_t, vendor_name) }, \
+            { "model_name", NULL, MAVLINK_TYPE_CHAR, 32, 44, offsetof(mavlink_component_information_basic_t, model_name) }, \
+            { "software_version", NULL, MAVLINK_TYPE_CHAR, 24, 76, offsetof(mavlink_component_information_basic_t, software_version) }, \
+            { "hardware_version", NULL, MAVLINK_TYPE_CHAR, 24, 100, offsetof(mavlink_component_information_basic_t, hardware_version) }, \
+            { "serial_number", NULL, MAVLINK_TYPE_CHAR, 32, 124, offsetof(mavlink_component_information_basic_t, serial_number) }, \
+        } \
+    }
 #else
-#define MAVLINK_MESSAGE_INFO_COMPONENT_INFORMATION_BASIC { \
-    "COMPONENT_INFORMATION_BASIC", \
-    7, \
-    {  { "time_boot_ms", NULL, MAVLINK_TYPE_UINT32_T, 0, 8, offsetof(mavlink_component_information_basic_t, time_boot_ms) }, \
-         { "capabilities", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_component_information_basic_t, capabilities) }, \
-         { "vendor_name", NULL, MAVLINK_TYPE_CHAR, 32, 12, offsetof(mavlink_component_information_basic_t, vendor_name) }, \
-         { "model_name", NULL, MAVLINK_TYPE_CHAR, 32, 44, offsetof(mavlink_component_information_basic_t, model_name) }, \
-         { "software_version", NULL, MAVLINK_TYPE_CHAR, 24, 76, offsetof(mavlink_component_information_basic_t, software_version) }, \
-         { "hardware_version", NULL, MAVLINK_TYPE_CHAR, 24, 100, offsetof(mavlink_component_information_basic_t, hardware_version) }, \
-         { "serial_number", NULL, MAVLINK_TYPE_CHAR, 32, 124, offsetof(mavlink_component_information_basic_t, serial_number) }, \
-         } \
-}
-#endif
+#define MAVLINK_MESSAGE_INFO_COMPONENT_INFORMATION_BASIC \
+    { \
+        "COMPONENT_INFORMATION_BASIC", \
+        7, \
+        { \
+            { "time_boot_ms", NULL, MAVLINK_TYPE_UINT32_T, 0, 8, offsetof(mavlink_component_information_basic_t, time_boot_ms) }, \
+            { "capabilities", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_component_information_basic_t, capabilities) }, \
+            { "vendor_name", NULL, MAVLINK_TYPE_CHAR, 32, 12, offsetof(mavlink_component_information_basic_t, vendor_name) }, \
+            { "model_name", NULL, MAVLINK_TYPE_CHAR, 32, 44, offsetof(mavlink_component_information_basic_t, model_name) }, \
+            { "software_version", NULL, MAVLINK_TYPE_CHAR, 24, 76, offsetof(mavlink_component_information_basic_t, software_version) }, \
+            { "hardware_version", NULL, MAVLINK_TYPE_CHAR, 24, 100, offsetof(mavlink_component_information_basic_t, hardware_version) }, \
+            { "serial_number", NULL, MAVLINK_TYPE_CHAR, 32, 124, offsetof(mavlink_component_information_basic_t, serial_number) }, \
+        } \
+    }
+#endif // if MAVLINK_COMMAND_24BIT
 
 /**
  * @brief Pack a component_information_basic message
@@ -72,8 +76,8 @@ typedef struct __mavlink_component_information_basic_t {
  * @param serial_number  Hardware serial number. The field must be zero terminated if it has a value. The field is optional and can be empty/all zeros.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_component_information_basic_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-                               uint32_t time_boot_ms, uint64_t capabilities, const char *vendor_name, const char *model_name, const char *software_version, const char *hardware_version, const char *serial_number)
+static inline uint16_t mavlink_msg_component_information_basic_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t *msg,
+                                                                    uint32_t time_boot_ms, uint64_t capabilities, const char *vendor_name, const char *model_name, const char *software_version, const char *hardware_version, const char *serial_number)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN];
@@ -84,17 +88,17 @@ static inline uint16_t mavlink_msg_component_information_basic_pack(uint8_t syst
     _mav_put_char_array(buf, 76, software_version, 24);
     _mav_put_char_array(buf, 100, hardware_version, 24);
     _mav_put_char_array(buf, 124, serial_number, 32);
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN);
 #else
     mavlink_component_information_basic_t packet;
     packet.capabilities = capabilities;
     packet.time_boot_ms = time_boot_ms;
-    mav_array_memcpy(packet.vendor_name, vendor_name, sizeof(char)*32);
-    mav_array_memcpy(packet.model_name, model_name, sizeof(char)*32);
-    mav_array_memcpy(packet.software_version, software_version, sizeof(char)*24);
-    mav_array_memcpy(packet.hardware_version, hardware_version, sizeof(char)*24);
-    mav_array_memcpy(packet.serial_number, serial_number, sizeof(char)*32);
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN);
+    mav_array_memcpy(packet.vendor_name, vendor_name, sizeof(char) * 32);
+    mav_array_memcpy(packet.model_name, model_name, sizeof(char) * 32);
+    mav_array_memcpy(packet.software_version, software_version, sizeof(char) * 24);
+    mav_array_memcpy(packet.hardware_version, hardware_version, sizeof(char) * 24);
+    mav_array_memcpy(packet.serial_number, serial_number, sizeof(char) * 32);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN);
 #endif
 
     msg->msgid = MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC;
@@ -117,8 +121,8 @@ static inline uint16_t mavlink_msg_component_information_basic_pack(uint8_t syst
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_component_information_basic_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
-                               mavlink_message_t* msg,
-                                   uint32_t time_boot_ms,uint64_t capabilities,const char *vendor_name,const char *model_name,const char *software_version,const char *hardware_version,const char *serial_number)
+                                                                         mavlink_message_t *msg,
+                                                                         uint32_t time_boot_ms, uint64_t capabilities, const char *vendor_name, const char *model_name, const char *software_version, const char *hardware_version, const char *serial_number)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN];
@@ -129,17 +133,17 @@ static inline uint16_t mavlink_msg_component_information_basic_pack_chan(uint8_t
     _mav_put_char_array(buf, 76, software_version, 24);
     _mav_put_char_array(buf, 100, hardware_version, 24);
     _mav_put_char_array(buf, 124, serial_number, 32);
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN);
 #else
     mavlink_component_information_basic_t packet;
     packet.capabilities = capabilities;
     packet.time_boot_ms = time_boot_ms;
-    mav_array_memcpy(packet.vendor_name, vendor_name, sizeof(char)*32);
-    mav_array_memcpy(packet.model_name, model_name, sizeof(char)*32);
-    mav_array_memcpy(packet.software_version, software_version, sizeof(char)*24);
-    mav_array_memcpy(packet.hardware_version, hardware_version, sizeof(char)*24);
-    mav_array_memcpy(packet.serial_number, serial_number, sizeof(char)*32);
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN);
+    mav_array_memcpy(packet.vendor_name, vendor_name, sizeof(char) * 32);
+    mav_array_memcpy(packet.model_name, model_name, sizeof(char) * 32);
+    mav_array_memcpy(packet.software_version, software_version, sizeof(char) * 24);
+    mav_array_memcpy(packet.hardware_version, hardware_version, sizeof(char) * 24);
+    mav_array_memcpy(packet.serial_number, serial_number, sizeof(char) * 32);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN);
 #endif
 
     msg->msgid = MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC;
@@ -154,7 +158,7 @@ static inline uint16_t mavlink_msg_component_information_basic_pack_chan(uint8_t
  * @param msg The MAVLink message to compress the data into
  * @param component_information_basic C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_component_information_basic_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_component_information_basic_t* component_information_basic)
+static inline uint16_t mavlink_msg_component_information_basic_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t *msg, const mavlink_component_information_basic_t *component_information_basic)
 {
     return mavlink_msg_component_information_basic_pack(system_id, component_id, msg, component_information_basic->time_boot_ms, component_information_basic->capabilities, component_information_basic->vendor_name, component_information_basic->model_name, component_information_basic->software_version, component_information_basic->hardware_version, component_information_basic->serial_number);
 }
@@ -168,7 +172,7 @@ static inline uint16_t mavlink_msg_component_information_basic_encode(uint8_t sy
  * @param msg The MAVLink message to compress the data into
  * @param component_information_basic C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_component_information_basic_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_component_information_basic_t* component_information_basic)
+static inline uint16_t mavlink_msg_component_information_basic_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t *msg, const mavlink_component_information_basic_t *component_information_basic)
 {
     return mavlink_msg_component_information_basic_pack_chan(system_id, component_id, chan, msg, component_information_basic->time_boot_ms, component_information_basic->capabilities, component_information_basic->vendor_name, component_information_basic->model_name, component_information_basic->software_version, component_information_basic->hardware_version, component_information_basic->serial_number);
 }
@@ -203,11 +207,11 @@ static inline void mavlink_msg_component_information_basic_send(mavlink_channel_
     mavlink_component_information_basic_t packet;
     packet.capabilities = capabilities;
     packet.time_boot_ms = time_boot_ms;
-    mav_array_memcpy(packet.vendor_name, vendor_name, sizeof(char)*32);
-    mav_array_memcpy(packet.model_name, model_name, sizeof(char)*32);
-    mav_array_memcpy(packet.software_version, software_version, sizeof(char)*24);
-    mav_array_memcpy(packet.hardware_version, hardware_version, sizeof(char)*24);
-    mav_array_memcpy(packet.serial_number, serial_number, sizeof(char)*32);
+    mav_array_memcpy(packet.vendor_name, vendor_name, sizeof(char) * 32);
+    mav_array_memcpy(packet.model_name, model_name, sizeof(char) * 32);
+    mav_array_memcpy(packet.software_version, software_version, sizeof(char) * 24);
+    mav_array_memcpy(packet.hardware_version, hardware_version, sizeof(char) * 24);
+    mav_array_memcpy(packet.serial_number, serial_number, sizeof(char) * 32);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC, (const char *)&packet, MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_MIN_LEN, MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN, MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_CRC);
 #endif
 }
@@ -217,7 +221,7 @@ static inline void mavlink_msg_component_information_basic_send(mavlink_channel_
  * @param chan MAVLink channel to send the message
  * @param struct The MAVLink struct to serialize
  */
-static inline void mavlink_msg_component_information_basic_send_struct(mavlink_channel_t chan, const mavlink_component_information_basic_t* component_information_basic)
+static inline void mavlink_msg_component_information_basic_send_struct(mavlink_channel_t chan, const mavlink_component_information_basic_t *component_information_basic)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mavlink_msg_component_information_basic_send(chan, component_information_basic->time_boot_ms, component_information_basic->capabilities, component_information_basic->vendor_name, component_information_basic->model_name, component_information_basic->software_version, component_information_basic->hardware_version, component_information_basic->serial_number);
@@ -228,13 +232,13 @@ static inline void mavlink_msg_component_information_basic_send_struct(mavlink_c
 
 #if MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
-  memory from the receive buffer.  The caller provides a
-  mavlink_message_t which is the size of a full mavlink message. This
-  is usually the receive buffer for the channel, and allows a reply to an
-  incoming message with minimum stack space usage.
+   This variant of _send() can be used to save stack space by re-using
+   memory from the receive buffer.  The caller provides a
+   mavlink_message_t which is the size of a full mavlink message. This
+   is usually the receive buffer for the channel, and allows a reply to an
+   incoming message with minimum stack space usage.
  */
-static inline void mavlink_msg_component_information_basic_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint32_t time_boot_ms, uint64_t capabilities, const char *vendor_name, const char *model_name, const char *software_version, const char *hardware_version, const char *serial_number)
+static inline void mavlink_msg_component_information_basic_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan, uint32_t time_boot_ms, uint64_t capabilities, const char *vendor_name, const char *model_name, const char *software_version, const char *hardware_version, const char *serial_number)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char *buf = (char *)msgbuf;
@@ -250,17 +254,17 @@ static inline void mavlink_msg_component_information_basic_send_buf(mavlink_mess
     mavlink_component_information_basic_t *packet = (mavlink_component_information_basic_t *)msgbuf;
     packet->capabilities = capabilities;
     packet->time_boot_ms = time_boot_ms;
-    mav_array_memcpy(packet->vendor_name, vendor_name, sizeof(char)*32);
-    mav_array_memcpy(packet->model_name, model_name, sizeof(char)*32);
-    mav_array_memcpy(packet->software_version, software_version, sizeof(char)*24);
-    mav_array_memcpy(packet->hardware_version, hardware_version, sizeof(char)*24);
-    mav_array_memcpy(packet->serial_number, serial_number, sizeof(char)*32);
+    mav_array_memcpy(packet->vendor_name, vendor_name, sizeof(char) * 32);
+    mav_array_memcpy(packet->model_name, model_name, sizeof(char) * 32);
+    mav_array_memcpy(packet->software_version, software_version, sizeof(char) * 24);
+    mav_array_memcpy(packet->hardware_version, hardware_version, sizeof(char) * 24);
+    mav_array_memcpy(packet->serial_number, serial_number, sizeof(char) * 32);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC, (const char *)packet, MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_MIN_LEN, MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN, MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_CRC);
 #endif
 }
-#endif
+#endif // if MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 
-#endif
+#endif // ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
 // MESSAGE COMPONENT_INFORMATION_BASIC UNPACKING
 
@@ -270,9 +274,9 @@ static inline void mavlink_msg_component_information_basic_send_buf(mavlink_mess
  *
  * @return [ms] Timestamp (time since system boot).
  */
-static inline uint32_t mavlink_msg_component_information_basic_get_time_boot_ms(const mavlink_message_t* msg)
+static inline uint32_t mavlink_msg_component_information_basic_get_time_boot_ms(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint32_t(msg,  8);
+    return _MAV_RETURN_uint32_t(msg, 8);
 }
 
 /**
@@ -280,9 +284,9 @@ static inline uint32_t mavlink_msg_component_information_basic_get_time_boot_ms(
  *
  * @return  Component capability flags
  */
-static inline uint64_t mavlink_msg_component_information_basic_get_capabilities(const mavlink_message_t* msg)
+static inline uint64_t mavlink_msg_component_information_basic_get_capabilities(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint64_t(msg,  0);
+    return _MAV_RETURN_uint64_t(msg, 0);
 }
 
 /**
@@ -290,9 +294,9 @@ static inline uint64_t mavlink_msg_component_information_basic_get_capabilities(
  *
  * @return  Name of the component vendor. Needs to be zero terminated. The field is optional and can be empty/all zeros.
  */
-static inline uint16_t mavlink_msg_component_information_basic_get_vendor_name(const mavlink_message_t* msg, char *vendor_name)
+static inline uint16_t mavlink_msg_component_information_basic_get_vendor_name(const mavlink_message_t *msg, char *vendor_name)
 {
-    return _MAV_RETURN_char_array(msg, vendor_name, 32,  12);
+    return _MAV_RETURN_char_array(msg, vendor_name, 32, 12);
 }
 
 /**
@@ -300,9 +304,9 @@ static inline uint16_t mavlink_msg_component_information_basic_get_vendor_name(c
  *
  * @return  Name of the component model. Needs to be zero terminated. The field is optional and can be empty/all zeros.
  */
-static inline uint16_t mavlink_msg_component_information_basic_get_model_name(const mavlink_message_t* msg, char *model_name)
+static inline uint16_t mavlink_msg_component_information_basic_get_model_name(const mavlink_message_t *msg, char *model_name)
 {
-    return _MAV_RETURN_char_array(msg, model_name, 32,  44);
+    return _MAV_RETURN_char_array(msg, model_name, 32, 44);
 }
 
 /**
@@ -310,9 +314,9 @@ static inline uint16_t mavlink_msg_component_information_basic_get_model_name(co
  *
  * @return  Software version. The recommended format is SEMVER: 'major.minor.patch'  (any format may be used). The field must be zero terminated if it has a value. The field is optional and can be empty/all zeros.
  */
-static inline uint16_t mavlink_msg_component_information_basic_get_software_version(const mavlink_message_t* msg, char *software_version)
+static inline uint16_t mavlink_msg_component_information_basic_get_software_version(const mavlink_message_t *msg, char *software_version)
 {
-    return _MAV_RETURN_char_array(msg, software_version, 24,  76);
+    return _MAV_RETURN_char_array(msg, software_version, 24, 76);
 }
 
 /**
@@ -320,9 +324,9 @@ static inline uint16_t mavlink_msg_component_information_basic_get_software_vers
  *
  * @return  Hardware version. The recommended format is SEMVER: 'major.minor.patch'  (any format may be used). The field must be zero terminated if it has a value. The field is optional and can be empty/all zeros.
  */
-static inline uint16_t mavlink_msg_component_information_basic_get_hardware_version(const mavlink_message_t* msg, char *hardware_version)
+static inline uint16_t mavlink_msg_component_information_basic_get_hardware_version(const mavlink_message_t *msg, char *hardware_version)
 {
-    return _MAV_RETURN_char_array(msg, hardware_version, 24,  100);
+    return _MAV_RETURN_char_array(msg, hardware_version, 24, 100);
 }
 
 /**
@@ -330,9 +334,9 @@ static inline uint16_t mavlink_msg_component_information_basic_get_hardware_vers
  *
  * @return  Hardware serial number. The field must be zero terminated if it has a value. The field is optional and can be empty/all zeros.
  */
-static inline uint16_t mavlink_msg_component_information_basic_get_serial_number(const mavlink_message_t* msg, char *serial_number)
+static inline uint16_t mavlink_msg_component_information_basic_get_serial_number(const mavlink_message_t *msg, char *serial_number)
 {
-    return _MAV_RETURN_char_array(msg, serial_number, 32,  124);
+    return _MAV_RETURN_char_array(msg, serial_number, 32, 124);
 }
 
 /**
@@ -341,7 +345,7 @@ static inline uint16_t mavlink_msg_component_information_basic_get_serial_number
  * @param msg The message to decode
  * @param component_information_basic C-struct to decode the message contents into
  */
-static inline void mavlink_msg_component_information_basic_decode(const mavlink_message_t* msg, mavlink_component_information_basic_t* component_information_basic)
+static inline void mavlink_msg_component_information_basic_decode(const mavlink_message_t *msg, mavlink_component_information_basic_t *component_information_basic)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     component_information_basic->capabilities = mavlink_msg_component_information_basic_get_capabilities(msg);
@@ -352,8 +356,8 @@ static inline void mavlink_msg_component_information_basic_decode(const mavlink_
     mavlink_msg_component_information_basic_get_hardware_version(msg, component_information_basic->hardware_version);
     mavlink_msg_component_information_basic_get_serial_number(msg, component_information_basic->serial_number);
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN? msg->len : MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN;
-        memset(component_information_basic, 0, MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN ? msg->len : MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN;
+    memset(component_information_basic, 0, MAVLINK_MSG_ID_COMPONENT_INFORMATION_BASIC_LEN);
     memcpy(component_information_basic, _MAV_PAYLOAD(msg), len);
 #endif
 }

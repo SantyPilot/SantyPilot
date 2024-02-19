@@ -45,9 +45,9 @@ struct pios_usart_cfg {
     struct stm32_gpio tx;
     struct stm32_gpio dtr;
 
-	bool use_dma;
+    bool use_dma;
 #ifdef PIOS_USART_USE_DMA
-	struct stm32_dma dma;
+    struct stm32_dma dma;
 #endif // PIOS_USART_USE_DMA
 
     /* provide hook for board specific ioctls */

@@ -8,9 +8,7 @@
 #ifndef _UAVO_MAV_TRANS_BASE_H
 #define _UAVO_MAV_TRANS_BASE_H
 
-class UAVOMavTransBase {
-
-}
+class UAVOMavTransBase {}
 
 
 #endif // _UAVO_MAV_TRANS_BASE_H

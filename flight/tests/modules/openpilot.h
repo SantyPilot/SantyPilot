@@ -30,5 +30,4 @@
 #define _TEST_OPENPILOT_H
 
 
-
 #endif

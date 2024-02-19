@@ -5,41 +5,44 @@
 
 
 typedef struct __mavlink_aoa_ssa_t {
- uint64_t time_usec; /*< [us] Timestamp (since boot or Unix epoch).*/
- float AOA; /*< [deg] Angle of Attack.*/
- float SSA; /*< [deg] Side Slip Angle.*/
+    uint64_t time_usec; /*< [us] Timestamp (since boot or Unix epoch).*/
+    float    AOA; /*< [deg] Angle of Attack.*/
+    float    SSA; /*< [deg] Side Slip Angle.*/
 } mavlink_aoa_ssa_t;
 
-#define MAVLINK_MSG_ID_AOA_SSA_LEN 16
+#define MAVLINK_MSG_ID_AOA_SSA_LEN     16
 #define MAVLINK_MSG_ID_AOA_SSA_MIN_LEN 16
-#define MAVLINK_MSG_ID_11020_LEN 16
-#define MAVLINK_MSG_ID_11020_MIN_LEN 16
+#define MAVLINK_MSG_ID_11020_LEN       16
+#define MAVLINK_MSG_ID_11020_MIN_LEN   16
 
-#define MAVLINK_MSG_ID_AOA_SSA_CRC 205
-#define MAVLINK_MSG_ID_11020_CRC 205
-
+#define MAVLINK_MSG_ID_AOA_SSA_CRC     205
+#define MAVLINK_MSG_ID_11020_CRC       205
 
 
 #if MAVLINK_COMMAND_24BIT
-#define MAVLINK_MESSAGE_INFO_AOA_SSA { \
-    11020, \
-    "AOA_SSA", \
-    3, \
-    {  { "time_usec", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_aoa_ssa_t, time_usec) }, \
-         { "AOA", NULL, MAVLINK_TYPE_FLOAT, 0, 8, offsetof(mavlink_aoa_ssa_t, AOA) }, \
-         { "SSA", NULL, MAVLINK_TYPE_FLOAT, 0, 12, offsetof(mavlink_aoa_ssa_t, SSA) }, \
-         } \
-}
+#define MAVLINK_MESSAGE_INFO_AOA_SSA \
+    { \
+        11020, \
+        "AOA_SSA", \
+        3, \
+        { \
+            { "time_usec", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_aoa_ssa_t, time_usec) }, \
+            { "AOA", NULL, MAVLINK_TYPE_FLOAT, 0, 8, offsetof(mavlink_aoa_ssa_t, AOA) }, \
+            { "SSA", NULL, MAVLINK_TYPE_FLOAT, 0, 12, offsetof(mavlink_aoa_ssa_t, SSA) }, \
+        } \
+    }
 #else
-#define MAVLINK_MESSAGE_INFO_AOA_SSA { \
-    "AOA_SSA", \
-    3, \
-    {  { "time_usec", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_aoa_ssa_t, time_usec) }, \
-         { "AOA", NULL, MAVLINK_TYPE_FLOAT, 0, 8, offsetof(mavlink_aoa_ssa_t, AOA) }, \
-         { "SSA", NULL, MAVLINK_TYPE_FLOAT, 0, 12, offsetof(mavlink_aoa_ssa_t, SSA) }, \
-         } \
-}
-#endif
+#define MAVLINK_MESSAGE_INFO_AOA_SSA \
+    { \
+        "AOA_SSA", \
+        3, \
+        { \
+            { "time_usec", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_aoa_ssa_t, time_usec) }, \
+            { "AOA", NULL, MAVLINK_TYPE_FLOAT, 0, 8, offsetof(mavlink_aoa_ssa_t, AOA) }, \
+            { "SSA", NULL, MAVLINK_TYPE_FLOAT, 0, 12, offsetof(mavlink_aoa_ssa_t, SSA) }, \
+        } \
+    }
+#endif // if MAVLINK_COMMAND_24BIT
 
 /**
  * @brief Pack a aoa_ssa message
@@ -52,8 +55,8 @@ typedef struct __mavlink_aoa_ssa_t {
  * @param SSA [deg] Side Slip Angle.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_aoa_ssa_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-                               uint64_t time_usec, float AOA, float SSA)
+static inline uint16_t mavlink_msg_aoa_ssa_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t *msg,
+                                                uint64_t time_usec, float AOA, float SSA)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_AOA_SSA_LEN];
@@ -61,14 +64,14 @@ static inline uint16_t mavlink_msg_aoa_ssa_pack(uint8_t system_id, uint8_t compo
     _mav_put_float(buf, 8, AOA);
     _mav_put_float(buf, 12, SSA);
 
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_AOA_SSA_LEN);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_AOA_SSA_LEN);
 #else
     mavlink_aoa_ssa_t packet;
     packet.time_usec = time_usec;
     packet.AOA = AOA;
     packet.SSA = SSA;
 
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_AOA_SSA_LEN);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_AOA_SSA_LEN);
 #endif
 
     msg->msgid = MAVLINK_MSG_ID_AOA_SSA;
@@ -87,8 +90,8 @@ static inline uint16_t mavlink_msg_aoa_ssa_pack(uint8_t system_id, uint8_t compo
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_aoa_ssa_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
-                               mavlink_message_t* msg,
-                                   uint64_t time_usec,float AOA,float SSA)
+                                                     mavlink_message_t *msg,
+                                                     uint64_t time_usec, float AOA, float SSA)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_AOA_SSA_LEN];
@@ -96,14 +99,14 @@ static inline uint16_t mavlink_msg_aoa_ssa_pack_chan(uint8_t system_id, uint8_t 
     _mav_put_float(buf, 8, AOA);
     _mav_put_float(buf, 12, SSA);
 
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_AOA_SSA_LEN);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_AOA_SSA_LEN);
 #else
     mavlink_aoa_ssa_t packet;
     packet.time_usec = time_usec;
     packet.AOA = AOA;
     packet.SSA = SSA;
 
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_AOA_SSA_LEN);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_AOA_SSA_LEN);
 #endif
 
     msg->msgid = MAVLINK_MSG_ID_AOA_SSA;
@@ -118,7 +121,7 @@ static inline uint16_t mavlink_msg_aoa_ssa_pack_chan(uint8_t system_id, uint8_t 
  * @param msg The MAVLink message to compress the data into
  * @param aoa_ssa C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_aoa_ssa_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_aoa_ssa_t* aoa_ssa)
+static inline uint16_t mavlink_msg_aoa_ssa_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t *msg, const mavlink_aoa_ssa_t *aoa_ssa)
 {
     return mavlink_msg_aoa_ssa_pack(system_id, component_id, msg, aoa_ssa->time_usec, aoa_ssa->AOA, aoa_ssa->SSA);
 }
@@ -132,7 +135,7 @@ static inline uint16_t mavlink_msg_aoa_ssa_encode(uint8_t system_id, uint8_t com
  * @param msg The MAVLink message to compress the data into
  * @param aoa_ssa C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_aoa_ssa_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_aoa_ssa_t* aoa_ssa)
+static inline uint16_t mavlink_msg_aoa_ssa_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t *msg, const mavlink_aoa_ssa_t *aoa_ssa)
 {
     return mavlink_msg_aoa_ssa_pack_chan(system_id, component_id, chan, msg, aoa_ssa->time_usec, aoa_ssa->AOA, aoa_ssa->SSA);
 }
@@ -171,7 +174,7 @@ static inline void mavlink_msg_aoa_ssa_send(mavlink_channel_t chan, uint64_t tim
  * @param chan MAVLink channel to send the message
  * @param struct The MAVLink struct to serialize
  */
-static inline void mavlink_msg_aoa_ssa_send_struct(mavlink_channel_t chan, const mavlink_aoa_ssa_t* aoa_ssa)
+static inline void mavlink_msg_aoa_ssa_send_struct(mavlink_channel_t chan, const mavlink_aoa_ssa_t *aoa_ssa)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mavlink_msg_aoa_ssa_send(chan, aoa_ssa->time_usec, aoa_ssa->AOA, aoa_ssa->SSA);
@@ -182,13 +185,13 @@ static inline void mavlink_msg_aoa_ssa_send_struct(mavlink_channel_t chan, const
 
 #if MAVLINK_MSG_ID_AOA_SSA_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
-  memory from the receive buffer.  The caller provides a
-  mavlink_message_t which is the size of a full mavlink message. This
-  is usually the receive buffer for the channel, and allows a reply to an
-  incoming message with minimum stack space usage.
+   This variant of _send() can be used to save stack space by re-using
+   memory from the receive buffer.  The caller provides a
+   mavlink_message_t which is the size of a full mavlink message. This
+   is usually the receive buffer for the channel, and allows a reply to an
+   incoming message with minimum stack space usage.
  */
-static inline void mavlink_msg_aoa_ssa_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint64_t time_usec, float AOA, float SSA)
+static inline void mavlink_msg_aoa_ssa_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan, uint64_t time_usec, float AOA, float SSA)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char *buf = (char *)msgbuf;
@@ -208,7 +211,7 @@ static inline void mavlink_msg_aoa_ssa_send_buf(mavlink_message_t *msgbuf, mavli
 }
 #endif
 
-#endif
+#endif // ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
 // MESSAGE AOA_SSA UNPACKING
 
@@ -218,9 +221,9 @@ static inline void mavlink_msg_aoa_ssa_send_buf(mavlink_message_t *msgbuf, mavli
  *
  * @return [us] Timestamp (since boot or Unix epoch).
  */
-static inline uint64_t mavlink_msg_aoa_ssa_get_time_usec(const mavlink_message_t* msg)
+static inline uint64_t mavlink_msg_aoa_ssa_get_time_usec(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint64_t(msg,  0);
+    return _MAV_RETURN_uint64_t(msg, 0);
 }
 
 /**
@@ -228,9 +231,9 @@ static inline uint64_t mavlink_msg_aoa_ssa_get_time_usec(const mavlink_message_t
  *
  * @return [deg] Angle of Attack.
  */
-static inline float mavlink_msg_aoa_ssa_get_AOA(const mavlink_message_t* msg)
+static inline float mavlink_msg_aoa_ssa_get_AOA(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_float(msg,  8);
+    return _MAV_RETURN_float(msg, 8);
 }
 
 /**
@@ -238,9 +241,9 @@ static inline float mavlink_msg_aoa_ssa_get_AOA(const mavlink_message_t* msg)
  *
  * @return [deg] Side Slip Angle.
  */
-static inline float mavlink_msg_aoa_ssa_get_SSA(const mavlink_message_t* msg)
+static inline float mavlink_msg_aoa_ssa_get_SSA(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_float(msg,  12);
+    return _MAV_RETURN_float(msg, 12);
 }
 
 /**
@@ -249,15 +252,15 @@ static inline float mavlink_msg_aoa_ssa_get_SSA(const mavlink_message_t* msg)
  * @param msg The message to decode
  * @param aoa_ssa C-struct to decode the message contents into
  */
-static inline void mavlink_msg_aoa_ssa_decode(const mavlink_message_t* msg, mavlink_aoa_ssa_t* aoa_ssa)
+static inline void mavlink_msg_aoa_ssa_decode(const mavlink_message_t *msg, mavlink_aoa_ssa_t *aoa_ssa)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     aoa_ssa->time_usec = mavlink_msg_aoa_ssa_get_time_usec(msg);
     aoa_ssa->AOA = mavlink_msg_aoa_ssa_get_AOA(msg);
     aoa_ssa->SSA = mavlink_msg_aoa_ssa_get_SSA(msg);
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_AOA_SSA_LEN? msg->len : MAVLINK_MSG_ID_AOA_SSA_LEN;
-        memset(aoa_ssa, 0, MAVLINK_MSG_ID_AOA_SSA_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_AOA_SSA_LEN ? msg->len : MAVLINK_MSG_ID_AOA_SSA_LEN;
+    memset(aoa_ssa, 0, MAVLINK_MSG_ID_AOA_SSA_LEN);
     memcpy(aoa_ssa, _MAV_PAYLOAD(msg), len);
 #endif
 }

@@ -5,53 +5,56 @@
 
 
 typedef struct __mavlink_gsm_link_status_t {
- uint64_t timestamp; /*< [us] Timestamp (of OBC)*/
- uint8_t gsm_modem_type; /*<  GSM modem used*/
- uint8_t gsm_link_type; /*<  GSM link type*/
- uint8_t rssi; /*<  RSSI as reported by modem (unconverted)*/
- uint8_t rsrp_rscp; /*<  RSRP (LTE) or RSCP (WCDMA) as reported by modem (unconverted)*/
- uint8_t sinr_ecio; /*<  SINR (LTE) or ECIO (WCDMA) as reported by modem (unconverted)*/
- uint8_t rsrq; /*<  RSRQ (LTE only) as reported by modem (unconverted)*/
+    uint64_t timestamp; /*< [us] Timestamp (of OBC)*/
+    uint8_t  gsm_modem_type; /*<  GSM modem used*/
+    uint8_t  gsm_link_type; /*<  GSM link type*/
+    uint8_t  rssi; /*<  RSSI as reported by modem (unconverted)*/
+    uint8_t  rsrp_rscp; /*<  RSRP (LTE) or RSCP (WCDMA) as reported by modem (unconverted)*/
+    uint8_t  sinr_ecio; /*<  SINR (LTE) or ECIO (WCDMA) as reported by modem (unconverted)*/
+    uint8_t  rsrq; /*<  RSRQ (LTE only) as reported by modem (unconverted)*/
 } mavlink_gsm_link_status_t;
 
-#define MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN 14
+#define MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN     14
 #define MAVLINK_MSG_ID_GSM_LINK_STATUS_MIN_LEN 14
-#define MAVLINK_MSG_ID_8014_LEN 14
-#define MAVLINK_MSG_ID_8014_MIN_LEN 14
+#define MAVLINK_MSG_ID_8014_LEN                14
+#define MAVLINK_MSG_ID_8014_MIN_LEN            14
 
-#define MAVLINK_MSG_ID_GSM_LINK_STATUS_CRC 200
-#define MAVLINK_MSG_ID_8014_CRC 200
-
+#define MAVLINK_MSG_ID_GSM_LINK_STATUS_CRC     200
+#define MAVLINK_MSG_ID_8014_CRC                200
 
 
 #if MAVLINK_COMMAND_24BIT
-#define MAVLINK_MESSAGE_INFO_GSM_LINK_STATUS { \
-    8014, \
-    "GSM_LINK_STATUS", \
-    7, \
-    {  { "timestamp", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_gsm_link_status_t, timestamp) }, \
-         { "gsm_modem_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 8, offsetof(mavlink_gsm_link_status_t, gsm_modem_type) }, \
-         { "gsm_link_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 9, offsetof(mavlink_gsm_link_status_t, gsm_link_type) }, \
-         { "rssi", NULL, MAVLINK_TYPE_UINT8_T, 0, 10, offsetof(mavlink_gsm_link_status_t, rssi) }, \
-         { "rsrp_rscp", NULL, MAVLINK_TYPE_UINT8_T, 0, 11, offsetof(mavlink_gsm_link_status_t, rsrp_rscp) }, \
-         { "sinr_ecio", NULL, MAVLINK_TYPE_UINT8_T, 0, 12, offsetof(mavlink_gsm_link_status_t, sinr_ecio) }, \
-         { "rsrq", NULL, MAVLINK_TYPE_UINT8_T, 0, 13, offsetof(mavlink_gsm_link_status_t, rsrq) }, \
-         } \
-}
+#define MAVLINK_MESSAGE_INFO_GSM_LINK_STATUS \
+    { \
+        8014, \
+        "GSM_LINK_STATUS", \
+        7, \
+        { \
+            { "timestamp", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_gsm_link_status_t, timestamp) }, \
+            { "gsm_modem_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 8, offsetof(mavlink_gsm_link_status_t, gsm_modem_type) }, \
+            { "gsm_link_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 9, offsetof(mavlink_gsm_link_status_t, gsm_link_type) }, \
+            { "rssi", NULL, MAVLINK_TYPE_UINT8_T, 0, 10, offsetof(mavlink_gsm_link_status_t, rssi) }, \
+            { "rsrp_rscp", NULL, MAVLINK_TYPE_UINT8_T, 0, 11, offsetof(mavlink_gsm_link_status_t, rsrp_rscp) }, \
+            { "sinr_ecio", NULL, MAVLINK_TYPE_UINT8_T, 0, 12, offsetof(mavlink_gsm_link_status_t, sinr_ecio) }, \
+            { "rsrq", NULL, MAVLINK_TYPE_UINT8_T, 0, 13, offsetof(mavlink_gsm_link_status_t, rsrq) }, \
+        } \
+    }
 #else
-#define MAVLINK_MESSAGE_INFO_GSM_LINK_STATUS { \
-    "GSM_LINK_STATUS", \
-    7, \
-    {  { "timestamp", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_gsm_link_status_t, timestamp) }, \
-         { "gsm_modem_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 8, offsetof(mavlink_gsm_link_status_t, gsm_modem_type) }, \
-         { "gsm_link_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 9, offsetof(mavlink_gsm_link_status_t, gsm_link_type) }, \
-         { "rssi", NULL, MAVLINK_TYPE_UINT8_T, 0, 10, offsetof(mavlink_gsm_link_status_t, rssi) }, \
-         { "rsrp_rscp", NULL, MAVLINK_TYPE_UINT8_T, 0, 11, offsetof(mavlink_gsm_link_status_t, rsrp_rscp) }, \
-         { "sinr_ecio", NULL, MAVLINK_TYPE_UINT8_T, 0, 12, offsetof(mavlink_gsm_link_status_t, sinr_ecio) }, \
-         { "rsrq", NULL, MAVLINK_TYPE_UINT8_T, 0, 13, offsetof(mavlink_gsm_link_status_t, rsrq) }, \
-         } \
-}
-#endif
+#define MAVLINK_MESSAGE_INFO_GSM_LINK_STATUS \
+    { \
+        "GSM_LINK_STATUS", \
+        7, \
+        { \
+            { "timestamp", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_gsm_link_status_t, timestamp) }, \
+            { "gsm_modem_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 8, offsetof(mavlink_gsm_link_status_t, gsm_modem_type) }, \
+            { "gsm_link_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 9, offsetof(mavlink_gsm_link_status_t, gsm_link_type) }, \
+            { "rssi", NULL, MAVLINK_TYPE_UINT8_T, 0, 10, offsetof(mavlink_gsm_link_status_t, rssi) }, \
+            { "rsrp_rscp", NULL, MAVLINK_TYPE_UINT8_T, 0, 11, offsetof(mavlink_gsm_link_status_t, rsrp_rscp) }, \
+            { "sinr_ecio", NULL, MAVLINK_TYPE_UINT8_T, 0, 12, offsetof(mavlink_gsm_link_status_t, sinr_ecio) }, \
+            { "rsrq", NULL, MAVLINK_TYPE_UINT8_T, 0, 13, offsetof(mavlink_gsm_link_status_t, rsrq) }, \
+        } \
+    }
+#endif // if MAVLINK_COMMAND_24BIT
 
 /**
  * @brief Pack a gsm_link_status message
@@ -68,8 +71,8 @@ typedef struct __mavlink_gsm_link_status_t {
  * @param rsrq  RSRQ (LTE only) as reported by modem (unconverted)
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_gsm_link_status_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-                               uint64_t timestamp, uint8_t gsm_modem_type, uint8_t gsm_link_type, uint8_t rssi, uint8_t rsrp_rscp, uint8_t sinr_ecio, uint8_t rsrq)
+static inline uint16_t mavlink_msg_gsm_link_status_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t *msg,
+                                                        uint64_t timestamp, uint8_t gsm_modem_type, uint8_t gsm_link_type, uint8_t rssi, uint8_t rsrp_rscp, uint8_t sinr_ecio, uint8_t rsrq)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN];
@@ -81,19 +84,19 @@ static inline uint16_t mavlink_msg_gsm_link_status_pack(uint8_t system_id, uint8
     _mav_put_uint8_t(buf, 12, sinr_ecio);
     _mav_put_uint8_t(buf, 13, rsrq);
 
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN);
 #else
     mavlink_gsm_link_status_t packet;
-    packet.timestamp = timestamp;
+    packet.timestamp      = timestamp;
     packet.gsm_modem_type = gsm_modem_type;
-    packet.gsm_link_type = gsm_link_type;
+    packet.gsm_link_type  = gsm_link_type;
     packet.rssi = rssi;
-    packet.rsrp_rscp = rsrp_rscp;
-    packet.sinr_ecio = sinr_ecio;
+    packet.rsrp_rscp      = rsrp_rscp;
+    packet.sinr_ecio      = sinr_ecio;
     packet.rsrq = rsrq;
 
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN);
-#endif
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN);
+#endif // if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
 
     msg->msgid = MAVLINK_MSG_ID_GSM_LINK_STATUS;
     return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_GSM_LINK_STATUS_MIN_LEN, MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN, MAVLINK_MSG_ID_GSM_LINK_STATUS_CRC);
@@ -115,8 +118,8 @@ static inline uint16_t mavlink_msg_gsm_link_status_pack(uint8_t system_id, uint8
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_gsm_link_status_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
-                               mavlink_message_t* msg,
-                                   uint64_t timestamp,uint8_t gsm_modem_type,uint8_t gsm_link_type,uint8_t rssi,uint8_t rsrp_rscp,uint8_t sinr_ecio,uint8_t rsrq)
+                                                             mavlink_message_t *msg,
+                                                             uint64_t timestamp, uint8_t gsm_modem_type, uint8_t gsm_link_type, uint8_t rssi, uint8_t rsrp_rscp, uint8_t sinr_ecio, uint8_t rsrq)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN];
@@ -128,19 +131,19 @@ static inline uint16_t mavlink_msg_gsm_link_status_pack_chan(uint8_t system_id, 
     _mav_put_uint8_t(buf, 12, sinr_ecio);
     _mav_put_uint8_t(buf, 13, rsrq);
 
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN);
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN);
 #else
     mavlink_gsm_link_status_t packet;
-    packet.timestamp = timestamp;
+    packet.timestamp      = timestamp;
     packet.gsm_modem_type = gsm_modem_type;
-    packet.gsm_link_type = gsm_link_type;
+    packet.gsm_link_type  = gsm_link_type;
     packet.rssi = rssi;
-    packet.rsrp_rscp = rsrp_rscp;
-    packet.sinr_ecio = sinr_ecio;
+    packet.rsrp_rscp      = rsrp_rscp;
+    packet.sinr_ecio      = sinr_ecio;
     packet.rsrq = rsrq;
 
-        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN);
-#endif
+    memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN);
+#endif // if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
 
     msg->msgid = MAVLINK_MSG_ID_GSM_LINK_STATUS;
     return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_GSM_LINK_STATUS_MIN_LEN, MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN, MAVLINK_MSG_ID_GSM_LINK_STATUS_CRC);
@@ -154,7 +157,7 @@ static inline uint16_t mavlink_msg_gsm_link_status_pack_chan(uint8_t system_id, 
  * @param msg The MAVLink message to compress the data into
  * @param gsm_link_status C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_gsm_link_status_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_gsm_link_status_t* gsm_link_status)
+static inline uint16_t mavlink_msg_gsm_link_status_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t *msg, const mavlink_gsm_link_status_t *gsm_link_status)
 {
     return mavlink_msg_gsm_link_status_pack(system_id, component_id, msg, gsm_link_status->timestamp, gsm_link_status->gsm_modem_type, gsm_link_status->gsm_link_type, gsm_link_status->rssi, gsm_link_status->rsrp_rscp, gsm_link_status->sinr_ecio, gsm_link_status->rsrq);
 }
@@ -168,7 +171,7 @@ static inline uint16_t mavlink_msg_gsm_link_status_encode(uint8_t system_id, uin
  * @param msg The MAVLink message to compress the data into
  * @param gsm_link_status C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_gsm_link_status_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_gsm_link_status_t* gsm_link_status)
+static inline uint16_t mavlink_msg_gsm_link_status_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t *msg, const mavlink_gsm_link_status_t *gsm_link_status)
 {
     return mavlink_msg_gsm_link_status_pack_chan(system_id, component_id, chan, msg, gsm_link_status->timestamp, gsm_link_status->gsm_modem_type, gsm_link_status->gsm_link_type, gsm_link_status->rssi, gsm_link_status->rsrp_rscp, gsm_link_status->sinr_ecio, gsm_link_status->rsrq);
 }
@@ -202,16 +205,16 @@ static inline void mavlink_msg_gsm_link_status_send(mavlink_channel_t chan, uint
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_GSM_LINK_STATUS, buf, MAVLINK_MSG_ID_GSM_LINK_STATUS_MIN_LEN, MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN, MAVLINK_MSG_ID_GSM_LINK_STATUS_CRC);
 #else
     mavlink_gsm_link_status_t packet;
-    packet.timestamp = timestamp;
+    packet.timestamp      = timestamp;
     packet.gsm_modem_type = gsm_modem_type;
-    packet.gsm_link_type = gsm_link_type;
+    packet.gsm_link_type  = gsm_link_type;
     packet.rssi = rssi;
-    packet.rsrp_rscp = rsrp_rscp;
-    packet.sinr_ecio = sinr_ecio;
+    packet.rsrp_rscp      = rsrp_rscp;
+    packet.sinr_ecio      = sinr_ecio;
     packet.rsrq = rsrq;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_GSM_LINK_STATUS, (const char *)&packet, MAVLINK_MSG_ID_GSM_LINK_STATUS_MIN_LEN, MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN, MAVLINK_MSG_ID_GSM_LINK_STATUS_CRC);
-#endif
+#endif // if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
 }
 
 /**
@@ -219,7 +222,7 @@ static inline void mavlink_msg_gsm_link_status_send(mavlink_channel_t chan, uint
  * @param chan MAVLink channel to send the message
  * @param struct The MAVLink struct to serialize
  */
-static inline void mavlink_msg_gsm_link_status_send_struct(mavlink_channel_t chan, const mavlink_gsm_link_status_t* gsm_link_status)
+static inline void mavlink_msg_gsm_link_status_send_struct(mavlink_channel_t chan, const mavlink_gsm_link_status_t *gsm_link_status)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mavlink_msg_gsm_link_status_send(chan, gsm_link_status->timestamp, gsm_link_status->gsm_modem_type, gsm_link_status->gsm_link_type, gsm_link_status->rssi, gsm_link_status->rsrp_rscp, gsm_link_status->sinr_ecio, gsm_link_status->rsrq);
@@ -230,13 +233,13 @@ static inline void mavlink_msg_gsm_link_status_send_struct(mavlink_channel_t cha
 
 #if MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
-  memory from the receive buffer.  The caller provides a
-  mavlink_message_t which is the size of a full mavlink message. This
-  is usually the receive buffer for the channel, and allows a reply to an
-  incoming message with minimum stack space usage.
+   This variant of _send() can be used to save stack space by re-using
+   memory from the receive buffer.  The caller provides a
+   mavlink_message_t which is the size of a full mavlink message. This
+   is usually the receive buffer for the channel, and allows a reply to an
+   incoming message with minimum stack space usage.
  */
-static inline void mavlink_msg_gsm_link_status_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint64_t timestamp, uint8_t gsm_modem_type, uint8_t gsm_link_type, uint8_t rssi, uint8_t rsrp_rscp, uint8_t sinr_ecio, uint8_t rsrq)
+static inline void mavlink_msg_gsm_link_status_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan, uint64_t timestamp, uint8_t gsm_modem_type, uint8_t gsm_link_type, uint8_t rssi, uint8_t rsrp_rscp, uint8_t sinr_ecio, uint8_t rsrq)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char *buf = (char *)msgbuf;
@@ -251,20 +254,20 @@ static inline void mavlink_msg_gsm_link_status_send_buf(mavlink_message_t *msgbu
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_GSM_LINK_STATUS, buf, MAVLINK_MSG_ID_GSM_LINK_STATUS_MIN_LEN, MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN, MAVLINK_MSG_ID_GSM_LINK_STATUS_CRC);
 #else
     mavlink_gsm_link_status_t *packet = (mavlink_gsm_link_status_t *)msgbuf;
-    packet->timestamp = timestamp;
+    packet->timestamp      = timestamp;
     packet->gsm_modem_type = gsm_modem_type;
-    packet->gsm_link_type = gsm_link_type;
+    packet->gsm_link_type  = gsm_link_type;
     packet->rssi = rssi;
-    packet->rsrp_rscp = rsrp_rscp;
-    packet->sinr_ecio = sinr_ecio;
+    packet->rsrp_rscp      = rsrp_rscp;
+    packet->sinr_ecio      = sinr_ecio;
     packet->rsrq = rsrq;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_GSM_LINK_STATUS, (const char *)packet, MAVLINK_MSG_ID_GSM_LINK_STATUS_MIN_LEN, MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN, MAVLINK_MSG_ID_GSM_LINK_STATUS_CRC);
-#endif
+#endif // if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
 }
-#endif
+#endif // if MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 
-#endif
+#endif // ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
 // MESSAGE GSM_LINK_STATUS UNPACKING
 
@@ -274,9 +277,9 @@ static inline void mavlink_msg_gsm_link_status_send_buf(mavlink_message_t *msgbu
  *
  * @return [us] Timestamp (of OBC)
  */
-static inline uint64_t mavlink_msg_gsm_link_status_get_timestamp(const mavlink_message_t* msg)
+static inline uint64_t mavlink_msg_gsm_link_status_get_timestamp(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint64_t(msg,  0);
+    return _MAV_RETURN_uint64_t(msg, 0);
 }
 
 /**
@@ -284,9 +287,9 @@ static inline uint64_t mavlink_msg_gsm_link_status_get_timestamp(const mavlink_m
  *
  * @return  GSM modem used
  */
-static inline uint8_t mavlink_msg_gsm_link_status_get_gsm_modem_type(const mavlink_message_t* msg)
+static inline uint8_t mavlink_msg_gsm_link_status_get_gsm_modem_type(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  8);
+    return _MAV_RETURN_uint8_t(msg, 8);
 }
 
 /**
@@ -294,9 +297,9 @@ static inline uint8_t mavlink_msg_gsm_link_status_get_gsm_modem_type(const mavli
  *
  * @return  GSM link type
  */
-static inline uint8_t mavlink_msg_gsm_link_status_get_gsm_link_type(const mavlink_message_t* msg)
+static inline uint8_t mavlink_msg_gsm_link_status_get_gsm_link_type(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  9);
+    return _MAV_RETURN_uint8_t(msg, 9);
 }
 
 /**
@@ -304,9 +307,9 @@ static inline uint8_t mavlink_msg_gsm_link_status_get_gsm_link_type(const mavlin
  *
  * @return  RSSI as reported by modem (unconverted)
  */
-static inline uint8_t mavlink_msg_gsm_link_status_get_rssi(const mavlink_message_t* msg)
+static inline uint8_t mavlink_msg_gsm_link_status_get_rssi(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  10);
+    return _MAV_RETURN_uint8_t(msg, 10);
 }
 
 /**
@@ -314,9 +317,9 @@ static inline uint8_t mavlink_msg_gsm_link_status_get_rssi(const mavlink_message
  *
  * @return  RSRP (LTE) or RSCP (WCDMA) as reported by modem (unconverted)
  */
-static inline uint8_t mavlink_msg_gsm_link_status_get_rsrp_rscp(const mavlink_message_t* msg)
+static inline uint8_t mavlink_msg_gsm_link_status_get_rsrp_rscp(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  11);
+    return _MAV_RETURN_uint8_t(msg, 11);
 }
 
 /**
@@ -324,9 +327,9 @@ static inline uint8_t mavlink_msg_gsm_link_status_get_rsrp_rscp(const mavlink_me
  *
  * @return  SINR (LTE) or ECIO (WCDMA) as reported by modem (unconverted)
  */
-static inline uint8_t mavlink_msg_gsm_link_status_get_sinr_ecio(const mavlink_message_t* msg)
+static inline uint8_t mavlink_msg_gsm_link_status_get_sinr_ecio(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  12);
+    return _MAV_RETURN_uint8_t(msg, 12);
 }
 
 /**
@@ -334,9 +337,9 @@ static inline uint8_t mavlink_msg_gsm_link_status_get_sinr_ecio(const mavlink_me
  *
  * @return  RSRQ (LTE only) as reported by modem (unconverted)
  */
-static inline uint8_t mavlink_msg_gsm_link_status_get_rsrq(const mavlink_message_t* msg)
+static inline uint8_t mavlink_msg_gsm_link_status_get_rsrq(const mavlink_message_t *msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  13);
+    return _MAV_RETURN_uint8_t(msg, 13);
 }
 
 /**
@@ -345,19 +348,19 @@ static inline uint8_t mavlink_msg_gsm_link_status_get_rsrq(const mavlink_message
  * @param msg The message to decode
  * @param gsm_link_status C-struct to decode the message contents into
  */
-static inline void mavlink_msg_gsm_link_status_decode(const mavlink_message_t* msg, mavlink_gsm_link_status_t* gsm_link_status)
+static inline void mavlink_msg_gsm_link_status_decode(const mavlink_message_t *msg, mavlink_gsm_link_status_t *gsm_link_status)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    gsm_link_status->timestamp = mavlink_msg_gsm_link_status_get_timestamp(msg);
+    gsm_link_status->timestamp      = mavlink_msg_gsm_link_status_get_timestamp(msg);
     gsm_link_status->gsm_modem_type = mavlink_msg_gsm_link_status_get_gsm_modem_type(msg);
-    gsm_link_status->gsm_link_type = mavlink_msg_gsm_link_status_get_gsm_link_type(msg);
+    gsm_link_status->gsm_link_type  = mavlink_msg_gsm_link_status_get_gsm_link_type(msg);
     gsm_link_status->rssi = mavlink_msg_gsm_link_status_get_rssi(msg);
-    gsm_link_status->rsrp_rscp = mavlink_msg_gsm_link_status_get_rsrp_rscp(msg);
-    gsm_link_status->sinr_ecio = mavlink_msg_gsm_link_status_get_sinr_ecio(msg);
+    gsm_link_status->rsrp_rscp      = mavlink_msg_gsm_link_status_get_rsrp_rscp(msg);
+    gsm_link_status->sinr_ecio      = mavlink_msg_gsm_link_status_get_sinr_ecio(msg);
     gsm_link_status->rsrq = mavlink_msg_gsm_link_status_get_rsrq(msg);
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN? msg->len : MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN;
-        memset(gsm_link_status, 0, MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN ? msg->len : MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN;
+    memset(gsm_link_status, 0, MAVLINK_MSG_ID_GSM_LINK_STATUS_LEN);
     memcpy(gsm_link_status, _MAV_PAYLOAD(msg), len);
 #endif
 }

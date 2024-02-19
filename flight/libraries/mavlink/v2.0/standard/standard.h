@@ -23,7 +23,10 @@ extern "C" {
 #endif
 
 #ifndef MAVLINK_MESSAGE_CRCS
-#define MAVLINK_MESSAGE_CRCS {{0, 50, 9, 9, 0, 0, 0}, {300, 217, 22, 22, 0, 0, 0}}
+#define MAVLINK_MESSAGE_CRCS \
+    { \
+        { 0, 50, 9, 9, 0, 0, 0 }, { 300, 217, 22, 22, 0, 0, 0 } \
+    }
 #endif
 
 #include "../protocol.h"
@@ -31,7 +34,6 @@ extern "C" {
 #define MAVLINK_ENABLED_STANDARD
 
 // ENUM DEFINITIONS
-
 
 
 // MAVLINK VERSION
@@ -53,8 +55,11 @@ extern "C" {
 
 
 #if MAVLINK_STANDARD_XML_HASH == MAVLINK_PRIMARY_XML_HASH
-# define MAVLINK_MESSAGE_INFO {MAVLINK_MESSAGE_INFO_HEARTBEAT, MAVLINK_MESSAGE_INFO_PROTOCOL_VERSION}
-# define MAVLINK_MESSAGE_NAMES {{ "HEARTBEAT", 0 }, { "PROTOCOL_VERSION", 300 }}
+# define MAVLINK_MESSAGE_INFO { MAVLINK_MESSAGE_INFO_HEARTBEAT, MAVLINK_MESSAGE_INFO_PROTOCOL_VERSION }
+# define MAVLINK_MESSAGE_NAMES \
+    { \
+        { "HEARTBEAT", 0 }, { "PROTOCOL_VERSION", 300 } \
+    }
 # if MAVLINK_COMMAND_24BIT
 #  include "../mavlink_get_info.h"
 # endif

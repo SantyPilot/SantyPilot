@@ -168,7 +168,7 @@ int32_t ActuatorInitialize()
     // Primary output of this module
     ActuatorCommandInitialize();
 #ifdef ENABLE_ACTCTRL_OUT
-	ActuatorControlInitialize();
+    ActuatorControlInitialize();
 #endif
 
 #ifdef DIAG_MIXERSTATUS
@@ -207,8 +207,9 @@ static void actuatorTask(__attribute__((unused)) void *parameters)
 
     ActuatorCommandData command;
     ActuatorDesiredData desired;
+
 #ifdef ENABLE_ACTCTRL_OUT
-	ActuatorControlData ctrl;
+    ActuatorControlData ctrl;
 #endif // ENABLE_ACT_CTRL_OUT
     MixerStatusData mixerStatus;
     FlightModeSettingsData settings;
@@ -261,7 +262,7 @@ static void actuatorTask(__attribute__((unused)) void *parameters)
         ActuatorDesiredGet(&desired);
         ActuatorCommandGet(&command);
 #ifdef ENABLE_ACTCTRL_OUT
-		ActuatorControlGet(&ctrl);
+        ActuatorControlGet(&ctrl);
 #endif
 
         // read in throttle and collective -demultiplex thrust
@@ -510,10 +511,10 @@ static void actuatorTask(__attribute__((unused)) void *parameters)
             }
         }
 #ifdef ENABLE_ACTCTRL_OUT // gazebo simulation
-		for (int i = 0; i = MAX_MIN_ACTUATORS; i++) {
-			ctrl.controls[i] = status[i];
-		}
-		ActuatorControlSet(&ctrl);
+        for (int i = 0; i = MAX_MIN_ACTUATORS; i++) {
+            ctrl.controls[i] = status[i];
+        }
+        ActuatorControlSet(&ctrl);
 #endif // ENABLE_ACTCTRL_OUT
 
         // Set real actuator output values scaling them from mixers. All channels

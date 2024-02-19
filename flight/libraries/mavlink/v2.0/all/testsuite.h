@@ -12,22 +12,22 @@ extern "C" {
 
 #ifndef MAVLINK_TEST_ALL
 #define MAVLINK_TEST_ALL
-static void mavlink_test_ardupilotmega(uint8_t, uint8_t, mavlink_message_t *last_msg);
-static void mavlink_test_ASLUAV(uint8_t, uint8_t, mavlink_message_t *last_msg);
-static void mavlink_test_common(uint8_t, uint8_t, mavlink_message_t *last_msg);
-static void mavlink_test_development(uint8_t, uint8_t, mavlink_message_t *last_msg);
-static void mavlink_test_icarous(uint8_t, uint8_t, mavlink_message_t *last_msg);
-static void mavlink_test_minimal(uint8_t, uint8_t, mavlink_message_t *last_msg);
-static void mavlink_test_python_array_test(uint8_t, uint8_t, mavlink_message_t *last_msg);
-static void mavlink_test_standard(uint8_t, uint8_t, mavlink_message_t *last_msg);
-static void mavlink_test_test(uint8_t, uint8_t, mavlink_message_t *last_msg);
-static void mavlink_test_ualberta(uint8_t, uint8_t, mavlink_message_t *last_msg);
-static void mavlink_test_uAvionix(uint8_t, uint8_t, mavlink_message_t *last_msg);
-static void mavlink_test_storm32(uint8_t, uint8_t, mavlink_message_t *last_msg);
-static void mavlink_test_AVSSUAS(uint8_t, uint8_t, mavlink_message_t *last_msg);
-static void mavlink_test_cubepilot(uint8_t, uint8_t, mavlink_message_t *last_msg);
-static void mavlink_test_csAirLink(uint8_t, uint8_t, mavlink_message_t *last_msg);
-static void mavlink_test_all(uint8_t, uint8_t, mavlink_message_t *last_msg);
+static void mavlink_test_ardupilotmega(uint8_t, uint8_t, mavlink_message_t * last_msg);
+static void mavlink_test_ASLUAV(uint8_t, uint8_t, mavlink_message_t * last_msg);
+static void mavlink_test_common(uint8_t, uint8_t, mavlink_message_t * last_msg);
+static void mavlink_test_development(uint8_t, uint8_t, mavlink_message_t * last_msg);
+static void mavlink_test_icarous(uint8_t, uint8_t, mavlink_message_t * last_msg);
+static void mavlink_test_minimal(uint8_t, uint8_t, mavlink_message_t * last_msg);
+static void mavlink_test_python_array_test(uint8_t, uint8_t, mavlink_message_t * last_msg);
+static void mavlink_test_standard(uint8_t, uint8_t, mavlink_message_t * last_msg);
+static void mavlink_test_test(uint8_t, uint8_t, mavlink_message_t * last_msg);
+static void mavlink_test_ualberta(uint8_t, uint8_t, mavlink_message_t * last_msg);
+static void mavlink_test_uAvionix(uint8_t, uint8_t, mavlink_message_t * last_msg);
+static void mavlink_test_storm32(uint8_t, uint8_t, mavlink_message_t * last_msg);
+static void mavlink_test_AVSSUAS(uint8_t, uint8_t, mavlink_message_t * last_msg);
+static void mavlink_test_cubepilot(uint8_t, uint8_t, mavlink_message_t * last_msg);
+static void mavlink_test_csAirLink(uint8_t, uint8_t, mavlink_message_t * last_msg);
+static void mavlink_test_all(uint8_t, uint8_t, mavlink_message_t * last_msg);
 
 static void mavlink_test_all(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
 {
@@ -48,7 +48,7 @@ static void mavlink_test_all(uint8_t system_id, uint8_t component_id, mavlink_me
     mavlink_test_csAirLink(system_id, component_id, last_msg);
     mavlink_test_all(system_id, component_id, last_msg);
 }
-#endif
+#endif // ifndef MAVLINK_TEST_ALL
 
 #include "../ardupilotmega/testsuite.h"
 #include "../ASLUAV/testsuite.h"
@@ -67,11 +67,8 @@ static void mavlink_test_all(uint8_t system_id, uint8_t component_id, mavlink_me
 #include "../csAirLink/testsuite.h"
 
 
-
 static void mavlink_test_all(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
-{
-
-}
+{}
 
 #ifdef __cplusplus
 }

@@ -478,19 +478,21 @@ void UrlFactory::GetSecGoogleWords(const Point &pos, QString &sec1, QString &sec
     }
 }
 /*
-// TODO: Currently only support google geocoder
-// which is not accessable in China
-QString UrlFactory::MakeGeocoderUrl(QString keywords)
-{
+   // TODO: Currently only support google geocoder
+   // which is not accessable in China
+   QString UrlFactory::MakeGeocoderUrl(QString keywords)
+   {
     QString key = keywords.replace(' ', '+');
 
     // CSV output has been depreciated. API key is no longer needed.
     return QString("http://maps.googleapis.com/maps/api/geocode/xml?sensor=false&address=%1").arg(key);
-}
-*/
+   }
+ */
 // refer:
-QString UrlFactory::MakeGeocoderUrl(QString keywords) {
+QString UrlFactory::MakeGeocoderUrl(QString keywords)
+{
     QString add = keywords.replace(' ', '+');
+
     return QString("https//atlas.microsoft.com/search/adress/xml?api-version=1.0&query={%1}&lanuage=zh-HanS-CN").arg(add);
 }
 // TODO: FIX!!
