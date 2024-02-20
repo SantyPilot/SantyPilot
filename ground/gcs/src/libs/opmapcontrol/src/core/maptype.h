@@ -52,6 +52,10 @@ public:
         OpenStreetMapSurfer  = 34,
         OpenStreetMapSurferTerrain = 35,
 
+        BaiduStatic          = 100,
+        BaiduSatellite       = 101,
+        BaiduStreet          = 102,
+
         BingMap              = 444,
         BingSatellite        = 555,
         BingHybrid           = 666,

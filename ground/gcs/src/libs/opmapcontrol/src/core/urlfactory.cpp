@@ -394,6 +394,11 @@ QString UrlFactory::MakeImageUrl(const MapType::Types &type, const Point &pos, c
         return QString("http://korona.geog.uni-heidelberg.de/tiles/asterh/x=%1&y=%2&z=%3").arg(pos.X()).arg(pos.Y()).arg(zoom);
     }
     break;
+    case MapType::BaiduStatic:
+    {
+        QString key = "iINgxHE1u6m5MiIy0eCxSBx2blYqSvA4";
+        return QString("https://api.map.baidu.com/staticimage/v2?ak='%1'&center=%2,%3&zoom=%4").arg(key).arg(pos.X()).arg(pos.Y()).arg(zoom);
+    }
     case MapType::BingMap:
     {
         QString key = TileXYToQuadKey(pos.X(), pos.Y(), zoom);
