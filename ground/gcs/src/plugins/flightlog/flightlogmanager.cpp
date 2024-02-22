@@ -229,8 +229,8 @@ void FlightLogManager::retrieveLogs(int flightToRetrieve)
                         // cycle until there is space for another object
                         while (start + header_len + 1 < data_len) {
                             memset(&fields, 0xFF, total_len);
-							auto tmp = logEntry->getData().Data[start];
-	                        memcpy(&fields, &tmp, header_len);
+                            auto tmp = logEntry->getData().Data[start];
+                            memcpy(&fields, &tmp, header_len);
                             // check wether a packed object is found
                             // note that empty data blocks are set as 0xFF in flight side to minimize flash wearing
                             // thus as soon as this read outside of used area, the test will fail as lenght would be 0xFFFF
@@ -601,20 +601,20 @@ void FlightLogManager::setupLogStatuses()
 
 void FlightLogManager::connectionStatusChanged()
 {
-	/*
-    if (m_telemtryManager->isConnected()) {
-        ExtensionSystem::PluginManager *pm = ExtensionSystem::PluginManager::instance();
-        UAVObjectUtilManager *utilMngr     = pm->getObject<UAVObjectUtilManager>();
-		setBoardConnected(true);
-        setBoardConnected(utilMngr->getBoardModel() == 0x0903 || utilMngr->getBoardModel() == 0x0904 || utilMngr->getBoardModel() == 0x0905 || utilMngr->getBoardModel() == 0x9201 || utilMngr->getBoardModel() == 0x1001);
-    } else {
-        setBoardConnected(false);
-    }
-    if (boardConnected()) {
-        resetSettings(false);
-    }
-	*/
-	setBoardConnected(true);
+    /*
+       if (m_telemtryManager->isConnected()) {
+       ExtensionSystem::PluginManager *pm = ExtensionSystem::PluginManager::instance();
+       UAVObjectUtilManager *utilMngr     = pm->getObject<UAVObjectUtilManager>();
+            setBoardConnected(true);
+       setBoardConnected(utilMngr->getBoardModel() == 0x0903 || utilMngr->getBoardModel() == 0x0904 || utilMngr->getBoardModel() == 0x0905 || utilMngr->getBoardModel() == 0x9201 || utilMngr->getBoardModel() == 0x1001);
+       } else {
+       setBoardConnected(false);
+       }
+       if (boardConnected()) {
+       resetSettings(false);
+       }
+     */
+    setBoardConnected(true);
 }
 
 bool FlightLogManager::updateLogWrapper(QString name, int level, int period)

@@ -7,6 +7,9 @@ export OPUAVOBJ        := $(FLIGHT_ROOT_DIR)/uavobjects
 export OPUAVTALK       := $(FLIGHT_ROOT_DIR)/uavtalk
 export FLIGHT_OUT_DIR  ?= $(CURDIR)
 
+export STYMODULESDIR      := $(FLIGHT_ROOT_DIR)/sty_modules
+export STYMIDWAREDIR      := $(FLIGHT_ROOT_DIR)/sty_midware
+
 # Define supported board lists
 ALL_BOARDS := mist
 # ALL_BOARDS := coptercontrol revolution revonano sparky mist

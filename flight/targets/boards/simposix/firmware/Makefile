@@ -49,6 +49,10 @@ MODULES += Sensors/simulated/Sensors
 #MODULES += Airspeed
 #MODULES += AltitudeHold # now integrated in Stabilization
 #MODULES += OveroSync
+#MODULES += UAVOMavlinkBridge
+
+# STYMODULES
+STYMODULES = DemoTask
 
 SRC += $(FLIGHTLIB)/notification.c
 
@@ -66,6 +70,7 @@ PIOSINC = $(PIOS)/inc
 OPMODULEDIR = ../../../../modules
 FLIGHTLIB = ../../../../libraries
 FLIGHTLIBINC = $(FLIGHTLIB)/inc
+MAVLINKLIBINC = $(FLIGHTLIB)/mavlink/v2.0/common
 MATHLIB = $(FLIGHTLIB)/math
 MATHLIBINC = $(FLIGHTLIB)/math
 PIDLIB = $(FLIGHTLIB)/pid
@@ -74,6 +79,10 @@ PIOSPOSIX = $(PIOS)/posix
 PIOSCOMMON = $(PIOS)/posix
 PIOSCORECOMMON = $(PIOS)/common
 PIOSCOMMONLIB = $(PIOS)/common/libraries
+
+STYMIDWAREDIR = ../../../../sty_midware
+STYMODULESDIR = ../../../../sty_modules
+
 BOOT = 
 BOOTINC = 
 
@@ -134,9 +143,12 @@ SRC += $(PIOSCORECOMMON)/pios_notify.c
 SRC += $(PIOSCORECOMMON)/pios_mem.c
 SRC += $(PIOSCORECOMMON)/pios_instrumentation.c
 
+#SANTY MIDWARE & SANTY MODULES
+#CPPSRC += $(STYMIDWAREDIR)/*.cpp
+CPPSRC += ${foreach STYMOD, ${STYMODULES}, ${wildcard ${STYMODULESDIR}/${STYMOD}/*.cpp}}
+
 ## PIOS Hardware
 include $(PIOS)/posix/library.mk
-
 
 include ./UAVObjects.inc
 SRC += $(UAVOBJSRC)
@@ -153,12 +165,15 @@ EXTRAINCDIRS  += $(OPUAVOBJ)
 EXTRAINCDIRS  += $(OPUAVOBJINC)
 EXTRAINCDIRS  += $(FLIGHT_UAVOBJ_DIR)
 EXTRAINCDIRS  += $(FLIGHTLIBINC)
+EXTRAINCDIRS  += $(MAVLINKLIBINC)
 EXTRAINCDIRS  += $(MATHLIBINC)
 EXTRAINCDIRS  += $(PIDLIBINC)
 EXTRAINCDIRS  += $(PIOSCOMMON)
 EXTRAINCDIRS  += $(CMSISDIR)
 EXTRAINCDIRS  += $(FLIGHT_UAVOBJ_DIR)
 EXTRAINCDIRS  += $(BOOTINC)
+
+# SANTYPILOT
 
 EXTRAINCDIRS += ${foreach MOD, ${MODULES}, $(OPMODULEDIR)/${MOD}/inc} ${OPMODULEDIR}/System/inc
 

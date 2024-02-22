@@ -34,7 +34,7 @@
 
 #ifdef PIOS_INCLUDE_QMC5883
 
-#define PIOS_QMC5883_MAGIC 0x248C6563 //MD5 QMC5883
+#define PIOS_QMC5883_MAGIC 0x248C6563 // MD5 QMC5883
 /* Global Variables */
 
 /* Local Types */
@@ -125,24 +125,24 @@ pios_qmc5883_dev_t PIOS_QMC5883_Init(const struct pios_qmc5883_cfg *cfg, uint32_
         // to return false, before returning true
         uint16_t rate100;
         switch (cfg->CTL_ODR) {
-			case PIOS_QMC5883_ODR_10:
-				rate100 = 1000;
-				break;
-			case PIOS_QMC5883_ODR_50:
-				rate100 = 5000;
-				break;
-			case PIOS_QMC5883_ODR_100:
-				rate100 = 10000;
-				break;
-			case PIOS_QMC5883_ODR_200:
-				rate100 = 20000;
-				break;
-			default:
-				rate100 = 20000;
-				break;
+        case PIOS_QMC5883_ODR_10:
+            rate100 = 1000;
+            break;
+        case PIOS_QMC5883_ODR_50:
+            rate100 = 5000;
+            break;
+        case PIOS_QMC5883_ODR_100:
+            rate100 = 10000;
+            break;
+        case PIOS_QMC5883_ODR_200:
+            rate100 = 20000;
+            break;
+        default:
+            rate100 = 20000;
+            break;
         }
         // if the application sensor rate is fast enough to warrant skipping some slow hardware sensor reads
-        if ((PIOS_SENSOR_RATE * 100.0f / 3.0f/*3-AXIS*/) > rate100) {
+        if ((PIOS_SENSOR_RATE * 100.0f / 3.0f /*3-AXIS*/) > rate100) {
             // count the number of "return false" up to this number
             dev->magCountMax = ((uint16_t)PIOS_SENSOR_RATE * 100 / rate100) + 1;
         } else {
@@ -180,8 +180,8 @@ void PIOS_QMC5883_Register(pios_qmc5883_dev_t handler, PIOS_SENSORS_TYPE sensort
  *
  * CONFIG_REGA: Control Register A
  * Read Write
- * Default value: 
- *            |  7  |  6  |  5  |  4  |  3  |  2  |  1  |  0   | 
+ * Default value:
+ *            |  7  |  6  |  5  |  4  |  3  |  2  |  1  |  0   |
  *            |  OSR[1:0] |  RNG[1:0] |  ORD[1:0] |  MODE[1:0] |
  *
  * CONFIG_REGB: Control Register B
@@ -189,8 +189,8 @@ void PIOS_QMC5883_Register(pios_qmc5883_dev_t handler, PIOS_SENSORS_TYPE sensort
  * SS: Soft Set/Reset
  * PR: Pointer Roll Enable/Disable
  * IP: Interrupt Pin Enable/Disable
- * 
- *            |  7  |  6  |  5  |  4  |  3  |  2  |  1  |  0   | 
+ *
+ *            |  7  |  6  |  5  |  4  |  3  |  2  |  1  |  0   |
  *            | SS  |  PR |         RESERVED            |  IP  |
  *
  * DATAOUT_STATUS_REG: Status Register
@@ -198,9 +198,9 @@ void PIOS_QMC5883_Register(pios_qmc5883_dev_t handler, PIOS_SENSORS_TYPE sensort
  * DRY: Data Ready
  * OVL: Over Flow
  * DOR: Drop Data
- * 
- *            |  7  |  6  |  5  |  4  |  3  |  2  |  1  |  0  | 
- *            |         RESERVED            | DOR | OVL | DRY | 
+ *
+ *            |  7  |  6  |  5  |  4  |  3  |  2  |  1  |  0  |
+ *            |         RESERVED            | DOR | OVL | DRY |
  *
  */
 static int32_t PIOS_QMC5883_Config(pios_qmc5883_dev_data_t *dev)
@@ -211,12 +211,12 @@ static int32_t PIOS_QMC5883_Config(pios_qmc5883_dev_data_t *dev)
     const struct pios_qmc5883_cfg *cfg = dev->cfg;
 
     dev->CTRLA |= (uint8_t)(PIOS_QMC5883_MODE_CONTINUOUS |
-			           PIOS_QMC5883_ODR_200 << 2 | 
-			           PIOS_QMC5883_RANGE_2G << 4 |
-					   PIOS_QMC5883_OSR_512 << 6);
+                            PIOS_QMC5883_ODR_200 << 2 |
+                            PIOS_QMC5883_RANGE_2G << 4 |
+                            PIOS_QMC5883_OSR_512 << 6);
     CTRLB |= (uint8_t)(cfg->soft_rst << 7 |
-			                cfg->ptr_en << 6 |
-							cfg->irt_en); // user configurable
+                       cfg->ptr_en << 6 |
+                       cfg->irt_en); // user configurable
 
     // CRTL_REGA
     if (cfg->Driver->Write((pios_qmc5883_dev_t)dev, PIOS_QMC5883_CONFIG_REG_A, dev->CTRLA) != 0) {
@@ -228,7 +228,7 @@ static int32_t PIOS_QMC5883_Config(pios_qmc5883_dev_data_t *dev)
         return -1;
     }
 
-    // PERD_REG 
+    // PERD_REG
     if (cfg->Driver->Write((pios_qmc5883_dev_t)dev, PIOS_QMC5883_CONFIG_PERD_REG, 0x01) != 0) {
         return -1;
     }
@@ -302,7 +302,7 @@ int32_t PIOS_QMC5883_ReadMag(pios_qmc5883_dev_t handler, int16_t out[3])
 
     dev->data_ready = false;
     uint8_t buffer[9];
-	// int16_t temp;
+    // int16_t temp;
     int16_t mag[3];
     // int8_t range;
 
@@ -310,24 +310,24 @@ int32_t PIOS_QMC5883_ReadMag(pios_qmc5883_dev_t handler, int16_t out[3])
         return -1;
     }
 
-	/*
-    switch (dev->CTRLA & 0x30) {
-    case 0x00:
-        range = 2; // range: -2G ~ 2G
-        break;
-    case 0x10:
-        range = 8;
-        break;
-    default:
-		range = 2;
-    }
-	*/
+    /*
+       switch (dev->CTRLA & 0x30) {
+       case 0x00:
+       range = 2; // range: -2G ~ 2G
+       break;
+       case 0x10:
+       range = 8;
+       break;
+       default:
+            range = 2;
+       }
+     */
     for (int i = 0; i < 3; i++) {
         int16_t v = ((int16_t)((uint16_t)buffer[2 * i + 1] << 8)
-                     + buffer[2 * i]);// ->Gauss float / 65536 * 2 * range;
+                     + buffer[2 * i]); // ->Gauss float / 65536 * 2 * range;
         mag[i] = v;
     }
-	// temp = (int16_t)((uint16_t)(buffer[1] << 8) + buffer[0]); // temperature if needed
+    // temp = (int16_t)((uint16_t)(buffer[1] << 8) + buffer[0]); // temperature if needed
 
     PIOS_QMC5883_Orient(dev->cfg->Orientation, mag, out);
 
@@ -338,12 +338,12 @@ int32_t PIOS_QMC5883_ReadMag(pios_qmc5883_dev_t handler, int16_t out[3])
     // To conserve current between measurements, the device is placed in a state similar to idle mode, but the
     // Mode Register is not changed to Idle Mode.  That is, MD[n] bits are unchanged.
     /*
-	dev->cfg->Driver->Write(handler, PIOS_QMC5883_CONFIG_REG_A,  
-			  (uint8_t)(PIOS_QMC5883_MODE_CONTINUOUS |
-			           PIOS_QMC5883_ODR_200 << 2 | 
-			           PIOS_QMC5883_RANGE_2G << 4 |
-					   PIOS_QMC5883_OSR_512 << 6));
-					   */
+        dev->cfg->Driver->Write(handler, PIOS_QMC5883_CONFIG_REG_A,
+                          (uint8_t)(PIOS_QMC5883_MODE_CONTINUOUS |
+                                   PIOS_QMC5883_ODR_200 << 2 |
+                                   PIOS_QMC5883_RANGE_2G << 4 |
+                                           PIOS_QMC5883_OSR_512 << 6));
+     */
 
     return 0;
 }
@@ -373,20 +373,20 @@ bool PIOS_QMC5883_NewDataAvailable(__attribute__((unused)) pios_qmc5883_dev_t ha
 
 #ifdef PIOS_QMC5883_HAS_GPIOS
     if (dev->cfg->exti_cfg) { // if this device has an interrupt line attached, then wait for interrupt to say data is ready
-		if (dev->data_ready) { // set in irq_handler
-		    return true;
-		}
-		uint8_t tmp[1];
-		dev->cfg->Driver->Read(handler, PIOS_QMC5883_DATAOUT_STATUS_REG, tmp, 1); 
-		if (tmp != NULL && tmp[0] & 0x01) { // avoid irq stuck by ready data
-			return true;
-		}
+        if (dev->data_ready) { // set in irq_handler
+            return true;
+        }
+        uint8_t tmp[1];
+        dev->cfg->Driver->Read(handler, PIOS_QMC5883_DATAOUT_STATUS_REG, tmp, 1);
+        if (tmp != NULL && tmp[0] & 0x01) { // avoid irq stuck by ready data
+            return true;
+        }
         return false;
     } else
 #endif /* PIOS_QMC5883_HAS_GPIOS */
     { // else poll to see if data is ready or just say "true" and set polling interval elsewhere
-		// pre-calculated cache to speedup, should query status flag
-        if (++(dev->magCount) >= dev->magCountMax) { 
+      // pre-calculated cache to speedup, should query status flag
+        if (++(dev->magCount) >= dev->magCountMax) {
             dev->magCount = 0;
             return true;
         } else {
@@ -411,11 +411,11 @@ int32_t PIOS_QMC5883_Test(pios_qmc5883_dev_t handler)
     char id[1];
 
     PIOS_QMC5883_ReadID(handler, (uint8_t *)id);
-	if (id[0] != 0xFF) {
-	    return -1;
-	}
+    if (id[0] != 0xFF) {
+        return -1;
+    }
 
-	// QMC5883L has no self-test mode
+    // QMC5883L has no self-test mode
     return 0; // success
 }
 
@@ -570,11 +570,11 @@ bool PIOS_QMC5883_driver_poll(uintptr_t context)
         return false;
     }
 
-	/* Test Read */
-	//int16_t buffer[3] = {0,0,0};
-    //if (PIOS_QMC5883_ReadMag((pios_qmc5883_dev_t)context, buffer) != 0) {
-    //    return false;
-    //}
+    /* Test Read */
+    // int16_t buffer[3] = {0,0,0};
+    // if (PIOS_QMC5883_ReadMag((pios_qmc5883_dev_t)context, buffer) != 0) {
+    // return false;
+    // }
 
     if (!PIOS_QMC5883_NewDataAvailable((pios_qmc5883_dev_t)context)) {
         return false;

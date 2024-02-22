@@ -77,6 +77,7 @@ static pios_udp_dev *find_udp_dev_by_id(uint8_t udp)
 void *PIOS_UDP_RxThread(void *udp_dev_n)
 {
     pios_udp_dev *udp_dev = (pios_udp_dev *)udp_dev_n;
+
 #ifdef __MINGW32__
     /* use nonblocking IO */
     u_long argp = 1;
@@ -133,7 +134,7 @@ int32_t PIOS_UDP_Init(uint32_t *udp_id, const struct pios_udp_cfg *cfg)
     /* initialize */
     udp_dev->rx_in_cb  = NULL;
     udp_dev->tx_out_cb = NULL;
-    udp_dev->cfg    = cfg;
+    udp_dev->cfg = cfg;
 
 #ifdef __MINGW32__
     WSADATA wsaData;
@@ -149,7 +150,7 @@ int32_t PIOS_UDP_Init(uint32_t *udp_id, const struct pios_udp_cfg *cfg)
     udp_dev->server.sin_port   = htons(udp_dev->cfg->port);
 
 #ifdef __MINGW32__
-    BOOL tmp    = TRUE;
+    BOOL tmp = TRUE;
     setsockopt(udp_dev->socket, SOL_SOCKET, SO_BROADCAST, (char *)&tmp, sizeof(tmp));
 #endif // __MINGW32__
 
@@ -207,9 +208,9 @@ static void PIOS_UDP_TxStart(uint32_t udp_id, uint16_t tx_bytes_avail)
     u_long argp = 1;
     ioctlsocket(udp_dev->socket, FIONBIO, &argp);
 #endif // __MINGW32__
-    /**
-     * we send everything directly whenever notified of data to send (lazy!)
-     */
+       /**
+        * we send everything directly whenever notified of data to send (lazy!)
+        */
     if (udp_dev->tx_out_cb) {
         while (tx_bytes_avail > 0) {
             bool tx_need_yield = false;

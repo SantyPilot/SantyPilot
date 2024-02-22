@@ -1,0 +1,10 @@
+<xml>
+    <object name="ActuatorControl" singleinstance="true" settings="false" category="Control">
+        <description>Contains the ctrl quantity of each channel [-1,1].  Set by @ref ActuatorModule</description>
+        <field name="controls" units="" type="float" elements="12"/>
+        <access gcs="readwrite" flight="readwrite"/>
+        <telemetrygcs acked="false" updatemode="manual" period="0"/>
+        <telemetryflight acked="false" updatemode="periodic" period="1000"/>
+        <logging updatemode="manual" period="0"/>
+    </object>
+</xml>

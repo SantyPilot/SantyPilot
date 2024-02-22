@@ -3,7 +3,7 @@
  * @addtogroup PIOS PIOS Core hardware abstraction layer
  * @{
  * @addtogroup   PIOS_DMA DMA Functions
- * @brief PIOS interface for DMA peripheral 
+ * @brief PIOS interface for DMA peripheral
  * @{
  *
  * @file       pios_dma.h
@@ -37,7 +37,7 @@
 /* Global Types */
 // already defined in pios_stm32.h
 /* Public Functions */
-void PIOS_DMA_SetRxBuffer(struct stm32_dma* dma, char* buffer, uint8_t len);
+void PIOS_DMA_SetRxBuffer(struct stm32_dma *dma, char *buffer, uint8_t len);
 
 #endif /* PIOS_DMA_H */
 

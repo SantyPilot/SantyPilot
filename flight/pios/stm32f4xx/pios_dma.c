@@ -3,7 +3,7 @@
  * @addtogroup PIOS PIOS Core hardware abstraction layer
  * @{
  * @addtogroup   PIOS_DMA DMA Functions
- * @brief PIOS interface for DMA peripheral 
+ * @brief PIOS interface for DMA peripheral
  * @{
  *
  * @file       pios_dma.c
@@ -34,8 +34,8 @@
 #include <pios_dma.h>
 #include <pios_stm32.h>
 
-void PIOS_DMA_SetRxBuffer(struct stm32_dma* dma, char* buffer, uint8_t len) {
-	dma->rx.init.DMA_Memory0BaseAddr = (uint32_t)buffer;
-	dma->rx.init.DMA_BufferSize = len;
-	return;
+void PIOS_DMA_SetRxBuffer(struct stm32_dma *dma, char *buffer, uint8_t len)
+{
+    dma->rx.init.DMA_Memory0BaseAddr = (uint32_t)buffer;
+    dma->rx.init.DMA_BufferSize = len;
 }

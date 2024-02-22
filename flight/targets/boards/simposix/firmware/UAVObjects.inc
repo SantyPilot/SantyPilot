@@ -32,6 +32,7 @@ UAVOBJSRCFILENAMES += statusvtolland
 UAVOBJSRCFILENAMES += vtolselftuningstats
 UAVOBJSRCFILENAMES += accessorydesired
 UAVOBJSRCFILENAMES += actuatorcommand
+UAVOBJSRCFILENAMES += actuatorcontrol
 UAVOBJSRCFILENAMES += actuatordesired
 UAVOBJSRCFILENAMES += actuatorsettings
 UAVOBJSRCFILENAMES += attitudesettings

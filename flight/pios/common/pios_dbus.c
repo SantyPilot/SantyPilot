@@ -32,14 +32,14 @@
 
 #ifdef PIOS_INCLUDE_DBUS
 
-#define DBUS_RX_BUF_NUM   36u // avoid overflow
-#define DBUS_FRAME_LENGTH    18u
-#define DBUS_CH_VALUE_OFFSET ((uint16_t)1024) 
+#define DBUS_RX_BUF_NUM          36u // avoid overflow
+#define DBUS_FRAME_LENGTH        18u
+#define DBUS_CH_VALUE_OFFSET     ((uint16_t)1024)
 #define DBUS_CHANNEL_ERROR_VALUE 700
-#define DBUS_SW_DOWN       2
+#define DBUS_SW_DOWN             2
 
 #ifndef PIOS_DBUS_BAUD_RATE
-#define PIOS_DBUS_BAUD_RATE 100000
+#define PIOS_DBUS_BAUD_RATE      100000
 #endif // PIOS_DBUS_BAUD_RATE
 
 #include <uavobjectmanager.h>
@@ -132,7 +132,8 @@ static void PIOS_DBus_ResetState(struct pios_dbus_state *state)
 /* Initialise DBus receiver interface */
 int32_t PIOS_DBus_Init(uint32_t *dbus_id,
                        const struct pios_com_driver *driver,
-                       uint32_t lower_id) {
+                       uint32_t lower_id)
+{
     PIOS_DEBUG_Assert(dbus_id);
     PIOS_DEBUG_Assert(driver);
 
@@ -140,7 +141,7 @@ int32_t PIOS_DBus_Init(uint32_t *dbus_id,
 
     dbus_dev = (struct pios_dbus_dev *)PIOS_DBus_Alloc();
     if (!dbus_dev) {
-		return -1;
+        return -1;
     }
 
     PIOS_DBus_ResetState(&(dbus_dev->state));
@@ -148,26 +149,26 @@ int32_t PIOS_DBus_Init(uint32_t *dbus_id,
     *dbus_id = (uint32_t)dbus_dev;
 
     /* Set rest of the parameters and enable */
-	// there is one USART_Init before
+    // there is one USART_Init before
     if (driver->set_config) {
         driver->set_config(lower_id, PIOS_COM_Word_length_8b, PIOS_COM_Parity_Even, PIOS_COM_StopBits_1, PIOS_DBUS_BAUD_RATE);
     }
 
     /* Set inverted UART and IRQ priority */
-    //if (driver->ioctl) {
-    //    enum PIOS_USART_Inverted param = cfg->non_inverted ? 0 : PIOS_USART_Inverted_Rx;
-    //    driver->ioctl(lower_id, PIOS_IOCTL_USART_SET_INVERTED, &param);
+    // if (driver->ioctl) {
+    // enum PIOS_USART_Inverted param = cfg->non_inverted ? 0 : PIOS_USART_Inverted_Rx;
+    // driver->ioctl(lower_id, PIOS_IOCTL_USART_SET_INVERTED, &param);
 
-    //    uint8_t irq_prio = PIOS_IRQ_PRIO_HIGH;
-    //    driver->ioctl(lower_id, PIOS_IOCTL_USART_SET_IRQ_PRIO, &irq_prio);
-    //}
+    // uint8_t irq_prio = PIOS_IRQ_PRIO_HIGH;
+    // driver->ioctl(lower_id, PIOS_IOCTL_USART_SET_IRQ_PRIO, &irq_prio);
+    // }
 
     /* Set comm driver callback */
     driver->bind_rx_cb(lower_id, PIOS_DBus_RxInCallback, *dbus_id);
 
-    //if (!PIOS_RTC_RegisterTickCallback(PIOS_DBus_Supervisor, *dbus_id)) {
-    //    PIOS_DEBUG_Assert(0);
-    //}
+    // if (!PIOS_RTC_RegisterTickCallback(PIOS_DBus_Supervisor, *dbus_id)) {
+    // PIOS_DEBUG_Assert(0);
+    // }
 
     return 0;
 }
@@ -208,20 +209,20 @@ static void PIOS_DBus_UnrollChannels(struct pios_dbus_state *state)
 #define F(v, s) (((v) >> (s)) & 0x7ff)
 
     /* unroll channels 1-8 */
-    d[0] = F(s[0] | s[1] << 8, 0);                        // Channel0
-    d[1] = F(s[1] | s[2] << 8, 3);                        // Channel1
-    d[2] = F(s[2] | s[3] << 8 | s[4] << 16, 6);           // Channel2
-    d[3] = F(s[4] | s[5] << 8, 1);                        // Channel3
-    d[4] = s[16] | (s[17] << 8);            //NULL
+    d[0]  = F(s[0] | s[1] << 8, 0);                        // Channel0
+    d[1]  = F(s[1] | s[2] << 8, 3);                        // Channel1
+    d[2]  = F(s[2] | s[3] << 8 | s[4] << 16, 6);           // Channel2
+    d[3]  = F(s[4] | s[5] << 8, 1);                        // Channel3
+    d[4]  = s[16] | (s[17] << 8);            // NULL
 
-    d[5] = ((s[5] >> 4) & 0x0003);          //!< Switch left
-    d[6] = ((s[5] >> 4) & 0x000C) >> 2;     //!< Switch right
-    d[7] = s[6] | (s[7] << 8);              //!< Mouse X axis
-    d[8] = s[8] | (s[9] << 8);              //!< Mouse Y axis
-    d[9] = s[10] | (s[11] << 8);            //!< Mouse Z axis
-    d[10] = s[12];                          //!< Mouse Left Is Press ?
-    d[11] = s[13];                          //!< Mouse Right Is Press ?
-    d[12] = s[14] | (s[15] << 8);           //!< KeyBoard value
+    d[5]  = ((s[5] >> 4) & 0x0003);          // !< Switch left
+    d[6]  = ((s[5] >> 4) & 0x000C) >> 2;     // !< Switch right
+    d[7]  = s[6] | (s[7] << 8);              // !< Mouse X axis
+    d[8]  = s[8] | (s[9] << 8);              // !< Mouse Y axis
+    d[9]  = s[10] | (s[11] << 8);            // !< Mouse Z axis
+    d[10] = s[12]; // !< Mouse Left Is Press ?
+    d[11] = s[13]; // !< Mouse Right Is Press ?
+    d[12] = s[14] | (s[15] << 8); // !< KeyBoard value
 
     d[0] -= DBUS_CH_VALUE_OFFSET;
     d[1] -= DBUS_CH_VALUE_OFFSET;
@@ -230,24 +231,26 @@ static void PIOS_DBus_UnrollChannels(struct pios_dbus_state *state)
     d[4] -= DBUS_CH_VALUE_OFFSET;
 }
 
-static uint8_t PIOS_DBus_ChannelDataValid(struct pios_dbus_state *state) {
+static uint8_t PIOS_DBus_ChannelDataValid(struct pios_dbus_state *state)
+{
     uint16_t *ch = state->channel_data;
+
 #define ABS(x) (x > 0 ? x : -x)
-	if (ABS(ch[0]) > DBUS_CHANNEL_ERROR_VALUE ||
-		ABS(ch[1]) > DBUS_CHANNEL_ERROR_VALUE ||
-		ABS(ch[2]) > DBUS_CHANNEL_ERROR_VALUE ||
-		ABS(ch[3]) > DBUS_CHANNEL_ERROR_VALUE ||
-		ch[5] == 0 || ch[6] == 0) {
-		for (uint8_t i = 0; i < 5; i++) { //ch0~4
-		    ch[i] = 0;
-		}
-		ch[5] = DBUS_SW_DOWN; //sw
-		ch[6] = DBUS_SW_DOWN;
-		for (uint8_t i = 7; i < 13; i++) { // mouse * 5 + key * 1
-		    ch[i] = 0;
-		}
-	    return 0; // invalid
-	}
+    if (ABS(ch[0]) > DBUS_CHANNEL_ERROR_VALUE ||
+        ABS(ch[1]) > DBUS_CHANNEL_ERROR_VALUE ||
+        ABS(ch[2]) > DBUS_CHANNEL_ERROR_VALUE ||
+        ABS(ch[3]) > DBUS_CHANNEL_ERROR_VALUE ||
+        ch[5] == 0 || ch[6] == 0) {
+        for (uint8_t i = 0; i < 5; i++) { // ch0~4
+            ch[i] = 0;
+        }
+        ch[5] = DBUS_SW_DOWN; // sw
+        ch[6] = DBUS_SW_DOWN;
+        for (uint8_t i = 7; i < 13; i++) { // mouse * 5 + key * 1
+            ch[i] = 0;
+        }
+        return 0; // invalid
+    }
 }
 
 /* Comm byte received callback */
@@ -257,25 +260,25 @@ static uint16_t PIOS_DBus_RxInCallback(uint32_t context,
                                        uint16_t *headroom,
                                        bool *need_yield)
 {
-	if (buf_len != DBUS_FRAME_LENGTH) {
-	    return 0;
-	}
+    if (buf_len != DBUS_FRAME_LENGTH) {
+        return 0;
+    }
     struct pios_dbus_dev *dbus_dev = (struct pios_dbus_dev *)context;
     bool valid = PIOS_DBus_Validate(dbus_dev);
     PIOS_Assert(valid);
-    struct pios_dbus_state *state = &(dbus_dev->state);
-	for (auto i = 0; i < buf_len; i++) {
-		state->received_data[i] = buf[i];
-	}
+    struct pios_dbus_state *state  = &(dbus_dev->state);
+    for (auto i = 0; i < buf_len; i++) {
+        state->received_data[i] = buf[i];
+    }
     PIOS_DBus_UnrollChannels(state);
-	volatile uint16_t ch[16];
-	for (auto i = 0; i < 13; i++) {
-	    ch[i] = state->channel_data[i];
-	}
-	if (!PIOS_DBus_ChannelDataValid(state)) {
-		//PIOS_USART_DMA_Reinit(context);
-	    return 0;
-	}
+    volatile uint16_t ch[16];
+    for (auto i = 0; i < 13; i++) {
+        ch[i] = state->channel_data[i];
+    }
+    if (!PIOS_DBus_ChannelDataValid(state)) {
+        // PIOS_USART_DMA_Reinit(context);
+        return 0;
+    }
     /* We never need a yield */
     *need_yield = false;
     return buf_len;
@@ -283,8 +286,8 @@ static uint16_t PIOS_DBus_RxInCallback(uint32_t context,
 
 static uint8_t PIOS_DBus_Quality_Get(uint32_t dbus_id)
 {
-	//TBD
-	return 255;
+    // TBD
+    return 255;
 }
 
 #endif /* PIOS_INCLUDE_DBUS */

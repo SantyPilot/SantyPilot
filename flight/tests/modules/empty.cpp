@@ -33,15 +33,13 @@
 #include <stdlib.h> /* abort */
 #include <string.h> /* memset */
 
-extern "C" {
-
-} // extern "C"
+extern "C" {} // extern "C"
 
 
-class EmptyTest: public testing::Test {
+class EmptyTest : public testing::Test {
 protected:
-	virtual void SetUp() {}
-	virtual void TearDown() {}
+    virtual void SetUp() {}
+    virtual void TearDown() {}
 };
 
 // EMPTY TEST
@@ -49,5 +47,4 @@ TEST(EmptyTest, Expect) {
     EXPECT_EQ(1, 1);
 }
 
-TEST(EmptyTest, SensorsGenerator) {
-}
+TEST(EmptyTest, SensorsGenerator) {}

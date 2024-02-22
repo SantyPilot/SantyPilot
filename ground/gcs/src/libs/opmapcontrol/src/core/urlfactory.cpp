@@ -394,6 +394,11 @@ QString UrlFactory::MakeImageUrl(const MapType::Types &type, const Point &pos, c
         return QString("http://korona.geog.uni-heidelberg.de/tiles/asterh/x=%1&y=%2&z=%3").arg(pos.X()).arg(pos.Y()).arg(zoom);
     }
     break;
+    case MapType::BaiduStatic:
+    {
+        // QString key = "iINgxHE1u6m5MiIy0eCxSBx2blYqSvA4";
+        // return QString("https://api.map.baidu.com/staticimage/v2?ak='%1'&center=%2,%3&zoom=%4").arg(key).arg(pos.X()).arg(pos.Y()).arg(zoom);
+    }
     case MapType::BingMap:
     {
         QString key = TileXYToQuadKey(pos.X(), pos.Y(), zoom);
@@ -478,19 +483,21 @@ void UrlFactory::GetSecGoogleWords(const Point &pos, QString &sec1, QString &sec
     }
 }
 /*
-// TODO: Currently only support google geocoder
-// which is not accessable in China
-QString UrlFactory::MakeGeocoderUrl(QString keywords)
-{
+   // TODO: Currently only support google geocoder
+   // which is not accessable in China
+   QString UrlFactory::MakeGeocoderUrl(QString keywords)
+   {
     QString key = keywords.replace(' ', '+');
 
     // CSV output has been depreciated. API key is no longer needed.
     return QString("http://maps.googleapis.com/maps/api/geocode/xml?sensor=false&address=%1").arg(key);
-}
-*/
+   }
+ */
 // refer:
-QString UrlFactory::MakeGeocoderUrl(QString keywords) {
+QString UrlFactory::MakeGeocoderUrl(QString keywords)
+{
     QString add = keywords.replace(' ', '+');
+
     return QString("https//atlas.microsoft.com/search/adress/xml?api-version=1.0&query={%1}&lanuage=zh-HanS-CN").arg(add);
 }
 // TODO: FIX!!

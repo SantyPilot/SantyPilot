@@ -271,7 +271,7 @@ static void SensorsTask(__attribute__((unused)) void *parameters)
     PERF_INIT_COUNTER(counterBaroPeriod, 0x53000004);
     PERF_INIT_COUNTER(counterSensorPeriod, 0x53000005);
     PERF_INIT_COUNTER(counterSensorResets, 0x53000006);
-	PERF_INIT_COUNTER(counterSensorBetween, 0x53000007);
+    PERF_INIT_COUNTER(counterSensorBetween, 0x53000007);
 
     // Test sensors
     bool sensors_test = true;
@@ -297,7 +297,7 @@ static void SensorsTask(__attribute__((unused)) void *parameters)
 
     while (1) {
         // TODO: add timeouts to the sensor reads and set an error if the fail
-		PERF_MEASURE_BETWEEN(counterSensorBetween, true);
+        PERF_MEASURE_BETWEEN(counterSensorBetween, true);
         if (error) {
             RELOAD_WDG();
             lastSysTime = xTaskGetTickCount();
@@ -347,12 +347,12 @@ static void SensorsTask(__attribute__((unused)) void *parameters)
         PERF_MEASURE_PERIOD(counterSensorPeriod);
         RELOAD_WDG();
 
-		PERF_MEASURE_BETWEEN(counterSensorBetween, false);
-		// char* buffer = ((char*)pios_malloc(500));
-		
+        PERF_MEASURE_BETWEEN(counterSensorBetween, false);
+        // char* buffer = ((char*)pios_malloc(500));
+
         // PIOS_TASK_MONITOR_GetRunTimeStats(buffer);
-		// free(buffer);
-		// volatile int32_t debug_value = PIOS_Instrumentation_GetCounterValue(counterSensorBetween); // about 500us
+        // free(buffer);
+        // volatile int32_t debug_value = PIOS_Instrumentation_GetCounterValue(counterSensorBetween); // about 500us
         vTaskDelayUntil(&lastSysTime, sensor_period_ticks);
     }
 }
@@ -506,15 +506,15 @@ static void handleMag(float *samples, float temperature)
 
     rot_mult(mag_transform, mags, samples);
 
-	// Debug
-	static uint32_t debug_ticks_pre = 0;
-	static uint32_t debug_ticks_now = 0;
-	debug_ticks_now++;
-	if (debug_ticks_now >= debug_ticks_pre + 2500) {
-	    debug_ticks_pre = 0;
-		debug_ticks_now = 0;
-        DEBUG_PRINTF(0, "handle mag: %f,%f,%f\r\n", mags[0],mags[1],mags[2]);
-	}
+    // Debug
+    static uint32_t debug_ticks_pre = 0;
+    static uint32_t debug_ticks_now = 0;
+    debug_ticks_now++;
+    if (debug_ticks_now >= debug_ticks_pre + 2500) {
+        debug_ticks_pre = 0;
+        debug_ticks_now = 0;
+        DEBUG_PRINTF(0,                               "handle mag: %f,%f,%f\r\n", mags[0], mags[1], mags[2]);
+    }
 
     mag.x = samples[0];
     mag.y = samples[1];
