@@ -396,8 +396,8 @@ QString UrlFactory::MakeImageUrl(const MapType::Types &type, const Point &pos, c
     break;
     case MapType::BaiduStatic:
     {
-        QString key = "iINgxHE1u6m5MiIy0eCxSBx2blYqSvA4";
-        return QString("https://api.map.baidu.com/staticimage/v2?ak='%1'&center=%2,%3&zoom=%4").arg(key).arg(pos.X()).arg(pos.Y()).arg(zoom);
+        // QString key = "iINgxHE1u6m5MiIy0eCxSBx2blYqSvA4";
+        // return QString("https://api.map.baidu.com/staticimage/v2?ak='%1'&center=%2,%3&zoom=%4").arg(key).arg(pos.X()).arg(pos.Y()).arg(zoom);
     }
     case MapType::BingMap:
     {
