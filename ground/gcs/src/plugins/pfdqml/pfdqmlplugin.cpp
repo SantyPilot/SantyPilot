@@ -30,7 +30,6 @@
 #include "pfdqmlgadgetfactory.h"
 #include <extensionsystem/pluginmanager.h>
 
-#undef USE_OSG
 #ifdef USE_OSG
 #include <osgearth/osgearth.h>
 #endif

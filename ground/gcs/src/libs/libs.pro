@@ -13,4 +13,4 @@ SUBDIRS = \
 
 gstreamer:SUBDIRS += gstreamer
 
-#osg:SUBDIRS += osgearth
+osg:SUBDIRS += osgearth
