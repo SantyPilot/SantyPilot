@@ -30,13 +30,18 @@
 #include <pios.h>
 #include <stdio.h>
 #include <pthread.h>
-#include <sys/socket.h>
-#include <arpa/inet.h>
+#ifdef __MINGW32__
+    #include <Winsock2.h>
+    #include <WS2tcpip.h>
+#else
+    #include <sys/socket.h>
+    #include <netinet/in.h>
+    #include <arpa/inet.h>
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include <netinet/in.h>
 
 struct pios_udp_cfg {
     const char *ip;

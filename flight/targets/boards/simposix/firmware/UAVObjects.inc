@@ -32,6 +32,7 @@ UAVOBJSRCFILENAMES += statusvtolland
 UAVOBJSRCFILENAMES += vtolselftuningstats
 UAVOBJSRCFILENAMES += accessorydesired
 UAVOBJSRCFILENAMES += actuatorcommand
+UAVOBJSRCFILENAMES += actuatorcontrol
 UAVOBJSRCFILENAMES += actuatordesired
 UAVOBJSRCFILENAMES += actuatorsettings
 UAVOBJSRCFILENAMES += attitudesettings
@@ -119,7 +120,7 @@ UAVOBJSRCFILENAMES += altitudeholdstatus
 UAVOBJSRCFILENAMES += ekfconfiguration
 UAVOBJSRCFILENAMES += ekfstatevariance
 UAVOBJSRCFILENAMES += takeofflocation
-# UAVOBJSRCFILENAMES += perfcounter
+UAVOBJSRCFILENAMES += perfcounter
 UAVOBJSRCFILENAMES += systemidentsettings
 UAVOBJSRCFILENAMES += systemidentstate
 

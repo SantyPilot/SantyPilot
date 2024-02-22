@@ -67,11 +67,20 @@ EXTRAINCDIRS		+=	$(PIOS_DEVLIB)/inc
 # the device-specific pieces of the code.
 #
 ifneq ($(FREERTOS_DIR),)
-FREERTOS_PORTDIR	:=	$(FREERTOS_DIR)
-SRC					+=	$(sort $(wildcard $(FREERTOS_PORTDIR)/portable/GCC/Posix/*.c))
+#FREERTOS_PORTDIR	:=	$(FREERTOS_DIR)
+
+OS := $(shell uname)
+ifeq ($(OS), MINGW32_NT-10.0-19045)
+	SRC					+=	$(sort $(wildcard $(FREERTOS_PORTDIR)/portable/MSVC-MingW/*.c))
+    EXTRAINCDIRS		+=	$(FREERTOS_PORTDIR)/portable/MSVC-MingW/
+else ifeq ($(OS), Linux)
+    SRC					+=	$(sort $(wildcard $(FREERTOS_PORTDIR)/portable/GCC/Posix/*.c))
+    EXTRAINCDIRS		+=	$(FREERTOS_PORTDIR)/portable/GCC/Posix/
+endif
 SRC					+=	$(sort $(wildcard $(FREERTOS_PORTDIR)/portable/MemMang/heap_3.c))
 
-EXTRAINCDIRS		+=	$(FREERTOS_PORTDIR)/portable/GCC/Posix
+# EXTRAINCDIRS		+=	$(FREERTOS_PORTDIR)/portable/GCC/Posix/
+FREERTOS_PORTDIR	:=	$(FREERTOS_DIR)
 
 endif
 

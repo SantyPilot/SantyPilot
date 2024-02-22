@@ -95,13 +95,13 @@ win32 {
     }
 
     # copy OpenSSL DLLs
-    OPENSSL_DLLS = \
-        ssleay32.dll \
-        libeay32.dll
+#    OPENSSL_DLLS = \
+#        ssleay32.dll \
+#        libeay32.dll
 
-    for(dll, OPENSSL_DLLS) {
-        addCopyFileTarget($${dll},$$[QT_INSTALL_BINS],$${GCS_APP_PATH})
-    }
+#    for(dll, OPENSSL_DLLS) {
+#        addCopyFileTarget($${dll},$$[QT_INSTALL_BINS],$${GCS_APP_PATH})
+#    }
 
     QT_PLUGINS = \
         iconengines/qsvgicon$${DS}.dll \

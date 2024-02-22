@@ -55,7 +55,7 @@ export GCS_SYNTH_DIR := $(BUILD_DIR)/gcs-synthetics
 DIRS := $(DL_DIR) $(TOOLS_DIR) $(BUILD_DIR) $(PACKAGE_DIR) $(DIST_DIR) $(GCS_SYNTH_DIR)
 
 # Naming for binaries and packaging etc,.
-export ORG_BIG_NAME := LibrePilot
+export ORG_BIG_NAME := SantyPilot
 GCS_LABEL := GCS
 GCS_BIG_NAME := $(ORG_BIG_NAME) $(GCS_LABEL)
 # These should be lowercase with no spaces
@@ -108,6 +108,7 @@ $(foreach var, $(SANITIZE_DEPRECATED_VARS), $(eval $(call SANITIZE_VAR,$(var),de
 
 # Decide on a verbosity level based on the V= parameter
 export AT := @
+# V := 1
 ifndef V
     export V0    :=
     export V1    := $(AT)
@@ -153,6 +154,7 @@ export UAVOBJGENERATOR
 
 # Set up default build configurations (debug | release)
 GCS_BUILD_CONF := release
+# GCS_BUILD_CONF := debug
 
 # Set extra configuration
 ifeq ($(GCS_WITH_OSG), 1)
@@ -348,12 +350,13 @@ uploader_clean:
 #
 ##############################
 # Firmware files to package
-PACKAGE_FW_TARGETS := fw_coptercontrol fw_revolution fw_revonano fw_sparky2
+PACKAGE_FW_TARGETS := fw_mist
+# PACKAGE_FW_TARGETS := fw_coptercontrol fw_revolution fw_revonano fw_sparky2
 PACKAGE_FW_TARGETS += fw_oplinkmini
-PACKAGE_FW_TARGETS += fw_gpsplatinum
+# PACKAGE_FW_TARGETS += fw_gpsplatinum
 # PACKAGE_FW_TARGETS += fw_osd
-PACKAGE_FW_TARGETS += fw_revoproto
-PACKAGE_FW_TARGETS += fw_spracingf3evo fw_spracingf3 fw_nucleof303re fw_pikoblx fw_tinyfish
+# PACKAGE_FW_TARGETS += fw_revoproto
+# PACKAGE_FW_TARGETS += fw_spracingf3evo fw_spracingf3 fw_nucleof303re fw_pikoblx fw_tinyfish
 
 # Rules to generate GCS resources used to embed firmware binaries into the GCS.
 # They are used later by the vehicle setup wizard to update board firmware.

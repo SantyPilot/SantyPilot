@@ -32,6 +32,9 @@ AllLayersOfType::AllLayersOfType()
 QVector<MapType::Types> AllLayersOfType::GetAllLayersOfType(const MapType::Types &type)
 {
     QVector<MapType::Types> types;
+	// santypilot 2024-2-21 google not accessible
+	types.append(MapType::BingMap);
+	/*
     {
         switch (type) {
         case MapType::GoogleHybrid:
@@ -69,6 +72,7 @@ QVector<MapType::Types> AllLayersOfType::GetAllLayersOfType(const MapType::Types
         break;
         }
     }
+	*/
 
     return types;
 }
