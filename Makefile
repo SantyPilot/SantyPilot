@@ -152,6 +152,32 @@ endif
 
 export UAVOBJGENERATOR
 
+# local flightlog parser
+ifeq ($(UNAME), Linux)
+    FLIGHTLOGPARSER := $(BUILD_DIR)/flightlogparser/flightlogparser
+    GCS_WITH_OSG      := 1
+    GCS_WITH_OSGEARTH := 1
+    GCS_COPY_OSG      := 0
+    GCS_WITH_GSTREAMER := 0
+    GCS_COPY_GSTREAMER := 0
+else ifeq ($(UNAME), Darwin)
+    FLIGHTLOGPARSER := $(BUILD_DIR)/flightlogparser/flightlogparser
+    GCS_WITH_OSG      := 1
+    GCS_WITH_OSGEARTH := 0
+    GCS_COPY_OSG      := 1
+    GCS_WITH_GSTREAMER := 0
+    GCS_COPY_GSTREAMER := 0
+else ifeq ($(UNAME), Windows)
+    FLIGHTLOGPARSER := $(BUILD_DIR)/flightlogparser/flightlogparser.exe
+    GCS_WITH_OSG      := 1
+    GCS_WITH_OSGEARTH := 1
+    GCS_COPY_OSG      := 1
+    GCS_WITH_GSTREAMER := 1
+    GCS_COPY_GSTREAMER := 1
+endif
+
+export FLIGHTLOGPARSER 
+
 # Set up default build configurations (debug | release)
 GCS_BUILD_CONF := release
 # GCS_BUILD_CONF := debug
@@ -209,6 +235,20 @@ $(UAVOBJGENERATOR): | $(UAVOBJGENERATOR_DIR)
 	    ( [ -f Makefile ] || $(QMAKE) $(ROOT_DIR)/ground/uavobjgenerator/uavobjgenerator.pro \
 	    CONFIG+='$(GCS_BUILD_CONF) $(GCS_EXTRA_CONF)' ) && \
 	    $(MAKE) --no-print-directory -w
+
+# offline flightlog parser
+FLIGHTLOGPARSER_DIR := $(BUILD_DIR)/flightlogparser
+DIRS += $(FLIGHTLOGPARSER_DIR)
+
+.PHONY: flightlogparser
+flightlogparser: $(FLIGHTLOGPARSER)
+
+$(FLIGHTLOGPARSER): | $(FLIGHTLOGPARSER_DIR)
+	$(V1) cd $(FLIGHTLOGPARSER_DIR) && \
+	    ( [ -f Makefile ] || $(QMAKE) $(ROOT_DIR)/ground/flightlogparser/flightlogparser.pro \
+	    CONFIG+='$(GCS_BUILD_CONF) $(GCS_EXTRA_CONF)' ) && \
+	    $(MAKE) --no-print-directory -w
+
 
 UAVOBJ_TARGETS := gcs flight arduino python matlab java wireshark
 

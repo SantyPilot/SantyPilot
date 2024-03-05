@@ -85,3 +85,6 @@ RemoteSystemsTempFiles
 
 # ignore ccache storage
 .ccache
+
+# ignore vim cache
+*.swp

@@ -676,7 +676,7 @@ void ExtendedDebugLogEntry::toCSV(QTextStream *csvStream, quint32 baseTime)
     if (getType() == DebugLogEntry::TYPE_TEXT) {
         data = QString((const char *)getData().Data);
     } else if (getType() == DebugLogEntry::TYPE_UAVOBJECT || getType() == DebugLogEntry::TYPE_MULTIPLEUAVOBJECTS) {
-        data = m_object->toString().replace("\n", "").replace("\t", "");
+        data = m_object->toString().replace("\n", " ").replace("\t", " ");
     }
     *csvStream << QString::number(getFlight() + 1) << '\t' << QString::number(getFlightTime() - baseTime) << '\t' << QString::number(getEntry()) << '\t' << data << '\n';
 }
