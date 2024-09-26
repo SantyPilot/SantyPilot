@@ -21,19 +21,15 @@ Item {
 
     ListModel {
         id: sitesModel
-        ListElement { link: "http://www.librepilot.org" }
-        ListElement { link: "https://librepilot.atlassian.net/wiki/display/LPDOC/Welcome" }
-        ListElement { link: "http://forum.librepilot.org" }
-        ListElement { link: "http://github.com/librepilot/LibrePilot/pulls" }
-        ListElement { link: "http://github.com/librepilot/LibrePilot/issues" }
+        ListElement { link: "" }
+        ListElement { link: "https://github.com/SantyPilot/SantyPilot" }
+        ListElement { link: "https://github.com/SantyPilot/SantyPilot-doc" }
         function title(index){
             if (title["text"] === undefined) {
             title.text = [
                 qsTr("Home"),
-                qsTr("Wiki"),
-                qsTr("Forums"),
-                qsTr("Pull Requests"),
-                qsTr("Progress")
+                qsTr("Code"),
+                qsTr("Doc")
                ]
              }
               return title.text[index]

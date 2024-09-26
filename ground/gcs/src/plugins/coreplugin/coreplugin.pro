@@ -128,7 +128,7 @@ RESOURCES += \
     core.qrc
 
 unix:!macx { 
-    images.files = images/librepilot_logo_*.png
+    images.files = images/santypilot_logo_*.png
     images.path = /share/pixmaps
     INSTALLS += images
 }

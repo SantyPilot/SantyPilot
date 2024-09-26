@@ -35,18 +35,24 @@ include $(FLIGHT_ROOT_DIR)/make/firmware-defs.mk
 DEBUG ?= YES
 
 # List of modules to include
-MODULES = ManualControl Stabilization GPS
+MODULES = ManualControl 
+MODULES += Stabilization 
+# MODULES += GPS # ENABLE when realflight!
 MODULES += PathPlanner
 MODULES += PathFollower
-MODULES += CameraStab
+# MODULES += CameraStab
 MODULES += Telemetry
 MODULES += Logging
-MODULES += FirmwareIAP
+MODULES += FirmwareIAP # Board Identification
 MODULES += StateEstimation
-#MODULES += Sensors/simulated/Sensors
-MODULES += Airspeed
+MODULES += Sensors/simulated/Sensors
+#MODULES += Airspeed
 #MODULES += AltitudeHold # now integrated in Stabilization
 #MODULES += OveroSync
+#MODULES += UAVOMavlinkBridge
+
+# STYMODULES
+STYMODULES = DemoTask
 
 SRC += $(FLIGHTLIB)/notification.c
 
@@ -64,6 +70,7 @@ PIOSINC = $(PIOS)/inc
 OPMODULEDIR = ../../../../modules
 FLIGHTLIB = ../../../../libraries
 FLIGHTLIBINC = $(FLIGHTLIB)/inc
+MAVLINKLIBINC = $(FLIGHTLIB)/mavlink/v2.0/common
 MATHLIB = $(FLIGHTLIB)/math
 MATHLIBINC = $(FLIGHTLIB)/math
 PIDLIB = $(FLIGHTLIB)/pid
@@ -72,6 +79,10 @@ PIOSPOSIX = $(PIOS)/posix
 PIOSCOMMON = $(PIOS)/posix
 PIOSCORECOMMON = $(PIOS)/common
 PIOSCOMMONLIB = $(PIOS)/common/libraries
+
+STYMIDWAREDIR = ../../../../sty_midware
+STYMODULESDIR = ../../../../sty_modules
+
 BOOT = 
 BOOTINC = 
 
@@ -110,6 +121,7 @@ SRC += $(FLIGHTLIB)/insgps13state.c
 SRC += $(FLIGHTLIB)/paths.c
 SRC += $(FLIGHTLIB)/plans.c
 SRC += $(FLIGHTLIB)/sanitycheck.c
+SRC += $(FLIGHTLIB)/instrumentation.c
 
 SRC += $(MATHLIB)/sin_lookup.c
 SRC += $(MATHLIB)/pid.c
@@ -129,10 +141,14 @@ SRC += $(PIOSCORECOMMON)/pios_callbackscheduler.c
 SRC += $(PIOSCORECOMMON)/pios_deltatime.c
 SRC += $(PIOSCORECOMMON)/pios_notify.c
 SRC += $(PIOSCORECOMMON)/pios_mem.c
+SRC += $(PIOSCORECOMMON)/pios_instrumentation.c
+
+#SANTY MIDWARE & SANTY MODULES
+#CPPSRC += $(STYMIDWAREDIR)/*.cpp
+CPPSRC += ${foreach STYMOD, ${STYMODULES}, ${wildcard ${STYMODULESDIR}/${STYMOD}/*.cpp}}
 
 ## PIOS Hardware
 include $(PIOS)/posix/library.mk
-
 
 include ./UAVObjects.inc
 SRC += $(UAVOBJSRC)
@@ -149,12 +165,15 @@ EXTRAINCDIRS  += $(OPUAVOBJ)
 EXTRAINCDIRS  += $(OPUAVOBJINC)
 EXTRAINCDIRS  += $(FLIGHT_UAVOBJ_DIR)
 EXTRAINCDIRS  += $(FLIGHTLIBINC)
+EXTRAINCDIRS  += $(MAVLINKLIBINC)
 EXTRAINCDIRS  += $(MATHLIBINC)
 EXTRAINCDIRS  += $(PIDLIBINC)
 EXTRAINCDIRS  += $(PIOSCOMMON)
 EXTRAINCDIRS  += $(CMSISDIR)
 EXTRAINCDIRS  += $(FLIGHT_UAVOBJ_DIR)
 EXTRAINCDIRS  += $(BOOTINC)
+
+# SANTYPILOT
 
 EXTRAINCDIRS += ${foreach MOD, ${MODULES}, $(OPMODULEDIR)/${MOD}/inc} ${OPMODULEDIR}/System/inc
 
@@ -171,7 +190,7 @@ BLONLY_CDEFS += -DFW_DESC_SIZE=$(FW_DESC_SIZE)
 CFLAGS += $(BLONLY_CDEFS)
 
 ifeq ($(DEBUG),YES)
-CFLAGS += -O0
+CFLAGS += -Os
 CFLAGS += -DGENERAL_COV
 CFLAGS += -finstrument-functions -ffixed-r10
 else
@@ -282,14 +301,18 @@ MATH_LIB = -lm
 #LDFLAGS = -nostartfiles -Wl,-Map=$(OUTDIR)/$(TARGET).map,--cref,--gc-sections
 LDFLAGS = -Wl,-Map=$(OUTDIR)/$(TARGET).map,--cref,--gc-sections
 LDFLAGS += $(patsubst %,-L%,$(EXTRA_LIBDIRS))
-LDFLAGS += -lc
+#LDFLAGS += -lc -lrt # linux only
 LDFLAGS += $(patsubst %,-l%,$(EXTRA_LIBS))
 LDFLAGS += $(MATH_LIB)
-LDFLAGS += -lc -lgcc -lpthread -lrt
+LDFLAGS += -lgcc -lpthread
 
 #Linker scripts
 LDFLAGS += $(addprefix -T,$(LINKER_SCRIPTS_APP))
 
+OS := $(shell uname)
+ifeq ($(OS), MINGW32_NT-10.0-19045)
+    LDFLAGS += -lWs2_32 -lWinmm
+endif
 
 # Define programs and commands.
 REMOVE  = rm -f
@@ -361,7 +384,7 @@ $(eval $(call OPFW_TEMPLATE,$(OUTDIR)/uavobjectsinit.o,$(BOARD_TYPE),$(BOARD_REV
 # Add jtag targets (program and wipe)
 $(eval $(call JTAG_TEMPLATE,$(OUTDIR)/$(TARGET).bin,$(FW_BANK_BASE),$(FW_BANK_SIZE),$(OPENOCD_JTAG_CONFIG),$(OPENOCD_CONFIG)))
 
-.PHONY: elf lss sym hex bin bino opfw
+.PHONY: elf lss sym hex bin bino opfw exe
 elf: $(OUTDIR)/$(TARGET).elf
 lss: $(OUTDIR)/$(TARGET).lss
 sym: $(OUTDIR)/$(TARGET).sym
@@ -369,6 +392,7 @@ hex: $(OUTDIR)/$(TARGET).hex
 bin: $(OUTDIR)/$(TARGET).bin
 bino: $(OUTDIR)/$(TARGET).bin.o
 opfw: $(OUTDIR)/$(TARGET).opfw
+exe: $(OUTDIR)/$(TARGET).exe
 
 # Display sizes of sections.
 $(eval $(call SIZE_TEMPLATE, $(OUTDIR)/$(TARGET).elf))

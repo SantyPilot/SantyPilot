@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    cout << "- LibrePilot UAVObject Generator -" << endl;
+    cout << "- SantyPilot UAVObject Generator -" << endl;
 
     QString inputpath;
     QString templatepath;

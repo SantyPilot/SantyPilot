@@ -167,7 +167,7 @@ static void PIOS_USART_3_irq_handler(void)
 /**
  * Initialise a single USART device
  */
-int32_t PIOS_USART_Init(uint32_t *usart_id, const struct pios_usart_cfg *cfg)
+int32_t PIOS_USART_Init(uint32_t *usart_id, /*const*/ struct pios_usart_cfg *cfg)
 {
     PIOS_DEBUG_Assert(usart_id);
     PIOS_DEBUG_Assert(cfg);

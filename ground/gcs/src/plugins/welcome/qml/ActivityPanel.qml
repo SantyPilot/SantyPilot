@@ -54,19 +54,11 @@ Item {
 
     XmlListModel {
         id: xmlModel
-        source: "https://github.com/librepilot/LibrePilot/commits/next.atom"
-        query: "/feed/entry"
-        namespaceDeclarations: "declare default element namespace 'http://www.w3.org/2005/Atom';
-                                declare namespace media='http://search.yahoo.com/mrss/';"
+        source: ""
+        query: ""
+        namespaceDeclarations: ""
 
-        XmlRole { name: "author"; query: "author/name/string()" }
-        XmlRole { name: "authorEmail"; query: "author/email/string()" }
-        XmlRole { name: "authorLink"; query: "author/uri/string()" }
-        XmlRole { name: "authorPhoto"; query: "media:thumbnail/@url/string()" }
-
-        XmlRole { name: "action"; query: "substring-before(substring-after(id/string(),'::'),'/')" }
-        XmlRole { name: "actionLink"; query: "link[@rel = 'alternate']/@href/string()" }
-        XmlRole { name: "actionTitle"; query: "title/string()" }
+        XmlRole { }
     }
 
     Component {

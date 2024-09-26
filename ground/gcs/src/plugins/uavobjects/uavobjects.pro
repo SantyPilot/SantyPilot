@@ -44,6 +44,7 @@ UAVOBJS = \
     $${UAVOBJ_XML_DIR}/accelstate.xml \
     $${UAVOBJ_XML_DIR}/accessorydesired.xml \
     $${UAVOBJ_XML_DIR}/actuatorcommand.xml \
+	$${UAVOBJ_XML_DIR}/actuatorcontrol.xml \
     $${UAVOBJ_XML_DIR}/actuatordesired.xml \
     $${UAVOBJ_XML_DIR}/actuatorsettings.xml \
     $${UAVOBJ_XML_DIR}/airspeedsensor.xml \
@@ -70,6 +71,7 @@ UAVOBJS = \
     $${UAVOBJ_XML_DIR}/ekfconfiguration.xml \
     $${UAVOBJ_XML_DIR}/ekfstatevariance.xml \
     $${UAVOBJ_XML_DIR}/faultsettings.xml \
+    $${UAVOBJ_XML_DIR}/filterstates.xml \
     $${UAVOBJ_XML_DIR}/firmwareiapobj.xml \
     $${UAVOBJ_XML_DIR}/fixedwingpathfollowersettings.xml \
     $${UAVOBJ_XML_DIR}/fixedwingpathfollowerstatus.xml \

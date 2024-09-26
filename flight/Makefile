@@ -7,18 +7,20 @@ export OPUAVOBJ        := $(FLIGHT_ROOT_DIR)/uavobjects
 export OPUAVTALK       := $(FLIGHT_ROOT_DIR)/uavtalk
 export FLIGHT_OUT_DIR  ?= $(CURDIR)
 
+export STYMODULESDIR      := $(FLIGHT_ROOT_DIR)/sty_modules
+export STYMIDWAREDIR      := $(FLIGHT_ROOT_DIR)/sty_midware
+
 # Define supported board lists
-ALL_BOARDS := coptercontrol revolution revonano sparky2
-ALL_BOARDS += revoproto
+ALL_BOARDS := mist
+# ALL_BOARDS := coptercontrol revolution revonano sparky mist
+# ALL_BOARDS += revoproto
 ALL_BOARDS += oplinkmini
-ALL_BOARDS += gpsplatinum
-#ALL_BOARDS += osd
-ALL_BOARDS += discoveryf4bare
-ALL_BOARDS += ccf3d spracingf3 spracingf3evo nucleof303re pikoblx tinyfish
+# ALL_BOARDS += gpsplatinum
+# ALL_BOARDS += osd
+# ALL_BOARDS += discoveryf4bare
+# ALL_BOARDS += ccf3d spracingf3 spracingf3evo nucleof303re pikoblx tinyfish
 # SimPosix only builds on Linux
-ifeq ($(UNAME), Linux)
-    ALL_BOARDS += simposix
-endif
+ALL_BOARDS += simposix
 
 # Short names of each board (used to display board name in parallel builds)
 spracingf3_short       := 'srf3'
@@ -27,11 +29,13 @@ ccf3d_short            := 'cf3d'
 coptercontrol_short    := 'cc  '
 oplinkmini_short       := 'oplm'
 revolution_short       := 'revo'
+mist_short             := 'mist'
 osd_short              := 'osd '
 revoproto_short        := 'revp'
 revonano_short         := 'revn'
 sparky2_short          := 'spk2'
 simposix_short         := 'posx'
+simwin_short           := 'wism'
 discoveryf4bare_short  := 'df4b'
 gpsplatinum_short      := 'gps9'
 nucleof303re_short     := 'nf3r'
@@ -49,6 +53,12 @@ EF_BOARDS  := $(ALL_BOARDS)
 BL_BOARDS  := $(filter-out simposix, $(BL_BOARDS))
 BU_BOARDS  := $(filter-out simposix gpsplatinum, $(BU_BOARDS))
 EF_BOARDS  := $(filter-out simposix, $(EF_BOARDS))
+
+# SimWin doesn't hava a BL, BU or EF target so we need to
+# filter them out to prevent errors on the all_flight target.
+BL_BOARDS  := $(filter-out simwin, $(BL_BOARDS))
+BU_BOARDS  := $(filter-out simwin gpsplatinum, $(BU_BOARD))
+EF_BOARDS  := $(filter-out simwin, $(EF_BOARDS))
 
 # Generate the targets for whatever boards are left in each list
 FW_TARGETS := $(addprefix fw_, $(FW_BOARDS))
@@ -272,7 +282,7 @@ flight_uavobjects: $(UAVOBJGENERATOR)
 #
 ##############################
 
-ALL_UNITTESTS := logfs math lednotification
+ALL_UNITTESTS := logfs math lednotification modules
 
 # Build the directory for the unit tests
 UT_OUT_DIR := $(BUILD_DIR)/unit_tests

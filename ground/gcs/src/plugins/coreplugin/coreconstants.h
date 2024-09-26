@@ -213,7 +213,7 @@ const char *const ICON_PLUGIN         = ":/core/images/pluginicon.png";
 const char *const ICON_EXIT           = ":/core/images/exiticon.png";
 const char *const ICON_OPTIONS        = ":/core/images/optionsicon.png";
 const char *const ICON_HELP           = ":/core/images/helpicon.png";
-const char *const ICON_LIBREPILOT     = ":/core/images/librepiloticon.png";
+const char *const ICON_LIBREPILOT     = ":/core/images/santypiloticon.png";
 
 
 // wizard kind

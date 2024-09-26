@@ -56,8 +56,8 @@
   VIProductVersion ${VERSION_FOUR_NUM}
   VIAddVersionKey "ProductName" "${GCS_BIG_NAME}"
   VIAddVersionKey "ProductVersion" "${VERSION_FOUR_NUM}"
-  VIAddVersionKey "CompanyName" "The LibrePilot Team, http://www.librepilot.org"
-  VIAddVersionKey "LegalCopyright" "© 2015-2016 The LibrePilot Team"
+  VIAddVersionKey "CompanyName" "The SantyPilot Team"
+  VIAddVersionKey "LegalCopyright" "© 2024-2034 The SantyPilot Team"
   VIAddVersionKey "FileDescription" "${GCS_BIG_NAME} Installer"
 
 ;--------------------------------
@@ -78,7 +78,7 @@
 ;--------------------------------
 ; Branding
 
-  BrandingText "© 2015-2016 The LibrePilot Team, http://www.librepilot.org"
+  BrandingText "© 2024-2034 The SantyPilot Team"
 
   !define MUI_ICON "${NSIS_DATA_TREE}\resources\installer_icon.ico"
   !define MUI_HEADERIMAGE
@@ -177,13 +177,13 @@ Section "-Plugins" InSecPlugins
 SectionEnd
 
 ; Copy GCS third party libs
-Section "-Libs" InSecLibs
-  SectionIn RO
-  SetOutPath "$INSTDIR\lib\${GCS_SMALL_NAME}\osg"
-  File /r "${GCS_BUILD_TREE}\lib\${GCS_SMALL_NAME}\osg\*.dll"
-  SetOutPath "$INSTDIR\lib\${GCS_SMALL_NAME}\gstreamer-1.0"
-  File /r "${GCS_BUILD_TREE}\lib\${GCS_SMALL_NAME}\gstreamer-1.0\*.dll"
-SectionEnd
+; Section "-Libs" InSecLibs
+;  SectionIn RO
+;  SetOutPath "$INSTDIR\lib\${GCS_SMALL_NAME}\osg"
+;  File /r "${GCS_BUILD_TREE}\lib\${GCS_SMALL_NAME}\osg\*.dll"
+;  SetOutPath "$INSTDIR\lib\${GCS_SMALL_NAME}\gstreamer-1.0"
+;  File /r "${GCS_BUILD_TREE}\lib\${GCS_SMALL_NAME}\gstreamer-1.0\*.dll"
+;SectionEnd
 
 ; Copy GCS resources
 Section "-Resources" InSecResources
@@ -279,7 +279,7 @@ SectionEnd
   !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
     !insertmacro MUI_DESCRIPTION_TEXT ${InSecCore} $(DESC_InSecCore)
     !insertmacro MUI_DESCRIPTION_TEXT ${InSecPlugins} $(DESC_InSecPlugins)
-    !insertmacro MUI_DESCRIPTION_TEXT ${InSecLibs} $(DESC_InSecLibs)
+    ;!insertmacro MUI_DESCRIPTION_TEXT ${InSecLibs} $(DESC_InSecLibs)
     !insertmacro MUI_DESCRIPTION_TEXT ${InSecResources} $(DESC_InSecResources)
     !insertmacro MUI_DESCRIPTION_TEXT ${InSecUtilities} $(DESC_InSecUtilities)
     !insertmacro MUI_DESCRIPTION_TEXT ${InSecDrivers} $(DESC_InSecDrivers)

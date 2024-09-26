@@ -150,6 +150,12 @@ QByteArray OPMaps::GetImageFrom(const MapType::Types &type, const Point &pos, co
                 qheader.setRawHeader("Referrer", "http://maps.google.co.kr/");
             }
             break;
+            case MapType::BaiduSatellite:
+            case MapType::BaiduStreet:
+            case MapType::BaiduStatic:
+            {
+                qheader.setRawHeader("Referrer", "https://api.map.baidu.com/");
+            }
 
             case MapType::BingHybrid:
             case MapType::BingMap:

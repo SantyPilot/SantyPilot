@@ -37,6 +37,7 @@
 #include <attitudestate.h>
 #include <systemalarms.h>
 #include <homelocation.h>
+#include <filterstates.h>
 
 #include <insgps.h>
 #include <CoordinateConversions.h>
@@ -56,6 +57,11 @@
             this->work.shortname[t] = state->shortname[t]; \
         } \
     }
+
+#define RECORD_SENSOR_IF_UPDATED(shortname, index, field) \
+    if (IS_SET(state->updated, SENSORUPDATES_##shortname)) { \
+		s.field = state->shortname[index]; \
+	}
 
 // Private types
 struct data {
@@ -123,7 +129,8 @@ int32_t filterEKF13NavOnlyInitialize(stateFilter *handle)
 // XXX
 int32_t filterEKF16iInitialize(stateFilter *handle)
 {
-    return filterEKFi13Initialize(handle);
+    // return filterEKFi13Initialize(handle);
+    return filterEKF13Initialize(handle);
 }
 int32_t filterEKF16Initialize(stateFilter *handle)
 {
@@ -213,6 +220,32 @@ static filterResult filter(stateFilter *self, stateEstimation *state)
     IMPORT_SENSOR_IF_UPDATED(vel, 3);
     IMPORT_SENSOR_IF_UPDATED(airspeed, 2);
 
+	// record data
+	FilterStatesData s;
+	FilterStatesGet(&s);
+	RECORD_SENSOR_IF_UPDATED(gyro, 0, gx);
+	RECORD_SENSOR_IF_UPDATED(gyro, 1, gy);
+	RECORD_SENSOR_IF_UPDATED(gyro, 2, gz);
+
+	RECORD_SENSOR_IF_UPDATED(accel, 0, ax);
+	RECORD_SENSOR_IF_UPDATED(accel, 1, ay);
+	RECORD_SENSOR_IF_UPDATED(accel, 2, az);
+
+	RECORD_SENSOR_IF_UPDATED(mag, 0, mx);
+	RECORD_SENSOR_IF_UPDATED(mag, 1, my);
+	RECORD_SENSOR_IF_UPDATED(mag, 2, mz);
+
+	RECORD_SENSOR_IF_UPDATED(baro, 0, Altitude);
+
+	RECORD_SENSOR_IF_UPDATED(pos, 0, GPSNorth);
+	RECORD_SENSOR_IF_UPDATED(pos, 1, GPSEast);
+	RECORD_SENSOR_IF_UPDATED(pos, 2, GPSDown);
+
+	RECORD_SENSOR_IF_UPDATED(vel, 0, GPSVelNorth);
+	RECORD_SENSOR_IF_UPDATED(vel, 1, GPSVelEast);
+	RECORD_SENSOR_IF_UPDATED(vel, 2, GPSVelDown);
+
+
     // check whether mandatory updates are present accels must have been supplied already,
     // and gyros must be supplied just now for a prediction step to take place
     // ("gyros last" rule for multi object synchronization)
@@ -225,6 +258,8 @@ static filterResult filter(stateFilter *self, stateEstimation *state)
     }
 
     dT = PIOS_DELTATIME_GetAverageSeconds(&this->dtconfig);
+	// record
+	s.dT = dT;
 
     if (!this->inited && IS_SET(this->work.updated, SENSORUPDATES_mag) && IS_SET(this->work.updated, SENSORUPDATES_baro) && IS_SET(this->work.updated, SENSORUPDATES_pos)) {
         // Don't initialize until all sensors are read
@@ -470,6 +505,21 @@ static filterResult filter(stateFilter *self, stateEstimation *state)
 
     // all sensor data has been used, reset!
     this->work.updated = 0;
+	// record filtered states
+	s.North = state->pos[0];
+	s.East = state->pos[1];
+	s.Down = state->pos[2];
+	s.NorthVel = state->vel[0];
+	s.EastVel = state->vel[1];
+	s.DownVel = state->vel[2];
+	s.q1 = state->attitude[0];
+	s.q2 = state->attitude[1];
+	s.q3 = state->attitude[2];
+	s.q4 = state->attitude[3];
+    s.gyro_biasx = Nav.gyro_bias[0];
+    s.gyro_biasy = Nav.gyro_bias[1];
+    s.gyro_biasz = Nav.gyro_bias[2];
+	FilterStatesSet(&s);
 
     if (this->init_stage < 0) {
         return this->navOnly ? FILTERRESULT_OK : FILTERRESULT_WARNING;

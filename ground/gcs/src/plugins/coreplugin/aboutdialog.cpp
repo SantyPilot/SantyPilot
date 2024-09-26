@@ -44,7 +44,7 @@ using namespace Core::Constants;
 AboutDialog::AboutDialog(QWidget *parent) :
     QDialog(parent)
 {
-    setWindowIcon(QIcon(":/core/images/librepilot_logo_32.png"));
+    setWindowIcon(QIcon(":/core/images/santypilot_logo_32.png"));
     setWindowTitle(tr("About %1").arg(ORG_BIG_NAME));
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setMinimumSize(600, 400);
@@ -58,7 +58,8 @@ AboutDialog::AboutDialog(QWidget *parent) :
         "Built on %4 at %5<br/>"
         "Based on Qt %6 (%7 bit)<br/>"
         "<br/>"
-        "\u00A9 The %8 Project, 2015-%9. All rights reserved.<br/>"
+        "\u00A9 The %8 Project, 2024-2034. All rights reserved.<br/>"
+        "\u00A9 The LibrePilot Project, 2015-2024. All rights reserved.<br/>"
         "\u00A9 The OpenPilot Project, 2010-2015. All rights reserved.<br/>"
         ).arg(
         VersionInfo::revision().left(60), // %1

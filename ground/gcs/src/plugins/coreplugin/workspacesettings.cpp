@@ -116,7 +116,7 @@ void WorkspaceSettings::readSettings(QSettings &settings)
         QString defaultName     = "Workspace" + numberString;
         QString defaultIconName = "Icon" + numberString;
         QString name     = settings.value(defaultName, defaultName).toString();
-        QString iconName = settings.value(defaultIconName, ":/core/images/librepilot_logo_64.png").toString();
+        QString iconName = settings.value(defaultIconName, ":/core/images/santypilot_logo_64.png").toString();
         m_names.append(name);
         m_iconNames.append(iconName);
         m_modeNames.append(QString("Mode") + QString::number(i));

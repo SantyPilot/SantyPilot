@@ -1,0 +1,44 @@
+<xml>
+	<object name="FilterStates" singleinstance="true" settings="false" category="State">
+		<description>Filtered States Data for Debug</description>
+        <field name="GPSNorth" units="m" type="float" elements="1"/>
+        <field name="GPSEast" units="m" type="float" elements="1"/>
+        <field name="GPSDown" units="m" type="float" elements="1"/>
+        <field name="GPSVelNorth" units="m/s" type="float" elements="1"/>
+        <field name="GPSVelEast" units="m/s" type="float" elements="1"/>
+        <field name="GPSVelDown" units="m/s" type="float" elements="1"/>
+		<field name="dT" units="s" type="float" elements="1"/>
+        <field name="gx" units="deg/s" type="float" elements="1"/>
+        <field name="gy" units="deg/s" type="float" elements="1"/>
+        <field name="gz" units="deg/s" type="float" elements="1"/>
+		<field name="ax" units="m/s^2" type="float" elements="1"/>
+		<field name="ay" units="m/s^2" type="float" elements="1"/>
+		<field name="az" units="m/s^2" type="float" elements="1"/>
+        <field name="mx" units="mGa" type="float" elements="1"/>
+        <field name="my" units="mGa" type="float" elements="1"/>
+        <field name="mz" units="mGa" type="float" elements="1"/>
+        <field name="q1" units="" type="float" elements="1"/>
+        <field name="q2" units="" type="float" elements="1"/>
+        <field name="q3" units="" type="float" elements="1"/>
+        <field name="q4" units="" type="float" elements="1"/>
+        <field name="gyro_biasx" units="deg/s" type="float" elements="1"/>
+        <field name="gyro_biasy" units="deg/s" type="float" elements="1"/>
+        <field name="gyro_biasz" units="deg/s" type="float" elements="1"/>
+        <field name="Roll" units="degrees" type="float" elements="1"/>
+        <field name="Pitch" units="degrees" type="float" elements="1"/>
+        <field name="Yaw" units="degrees" type="float" elements="1"/>
+        <field name="North" units="m" type="float" elements="1"/>
+        <field name="East" units="m" type="float" elements="1"/>
+        <field name="Down" units="m" type="float" elements="1"/>
+        <field name="NorthVel" units="m/s" type="float" elements="1"/>
+        <field name="EastVel" units="m/s" type="float" elements="1"/>
+        <field name="DownVel" units="m/s" type="float" elements="1"/>
+        <field name="CalibratedAirspeed" units="m/s" type="float" elements="1"/>
+        <field name="TrueAirspeed" units="m/s" type="float" elements="1"/>
+        <field name="Altitude" units="m" type="float" elements="1"/>
+        <access gcs="readonly" flight="readwrite"/>
+        <telemetrygcs acked="false" updatemode="manual" period="0"/>
+        <telemetryflight acked="false" updatemode="periodic" period="1000"/>
+        <logging updatemode="manual" period="0"/>
+    </object>
+</xml>

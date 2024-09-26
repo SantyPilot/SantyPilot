@@ -35,7 +35,6 @@
 #include <homelocation.h>
 #include <gpssettings.h>
 #include <gpspositionsensor.h>
-
 // Private constants
 
 #define STACK_REQUIRED 256
@@ -97,9 +96,8 @@ static filterResult filter(__attribute__((unused)) stateFilter *self, stateEstim
     if (IS_SET(state->updated, SENSORUPDATES_lla)) {
         // LLA information is not part of the state blob, due to its non standard layout (fixed point representation, quality of signal, ...)
         // this filter deals with the gory details of interpreting it and storing it in a standard Cartesian position state
-        GPSPositionSensorData gpsdata;
-        GPSPositionSensorGet(&gpsdata);
-
+		GPSPositionSensorData gpsdata;
+		GPSPositionSensorGet(&gpsdata);
         // check if we have a valid GPS signal (not checked by StateEstimation istelf)
         if ((gpsdata.PDOP < this->settings.MaxPDOP) && (gpsdata.Satellites >= this->settings.MinSatellites) &&
             ((gpsdata.Status == GPSPOSITIONSENSOR_STATUS_FIX3D) || (gpsdata.Status == GPSPOSITIONSENSOR_STATUS_FIX3DDGNSS)) &&

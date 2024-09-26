@@ -31,11 +31,16 @@ TEMPLATE  = subdirs
 
 SUBDIRS = \
         sub_gcs \
-        sub_uavobjgenerator
+        sub_uavobjgenerator \
+		sub_flightlogparser
 
 # uavobjgenerator
 sub_uavobjgenerator.subdir = uavobjgenerator
 
+# flightlogparser
+sub_flightlogparser.subdir = flightlogparser
+sub_flightlogparser.depends = sub_uavobjgenerator
+
 # GCS
 sub_gcs.subdir  = gcs
-sub_gcs.depends = sub_uavobjgenerator
+sub_gcs.depends = sub_uavobjgenerator 

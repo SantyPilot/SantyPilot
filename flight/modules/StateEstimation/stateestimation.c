@@ -51,6 +51,7 @@
 #include <attitudestate.h>
 #include <positionstate.h>
 #include <velocitystate.h>
+#include <filterstates.h>
 
 #include "revosettings.h"
 #include "flightstatus.h"
@@ -340,6 +341,7 @@ int32_t StateEstimationInitialize(void)
     AirspeedStateInitialize();
     PositionStateInitialize();
     VelocityStateInitialize();
+	FilterStatesInitialize();
 
     RevoSettingsConnectCallback(&settingsUpdatedCb);
 
@@ -515,6 +517,12 @@ static void StateEstimationCb(void)
     current = filterChain;
 
     // we are not done, re-dispatch self execution
+	FilterStatesData fs;
+	FilterStatesGet(&fs);
+	fs.North = states.pos[0];
+	fs.East = states.pos[1];
+	fs.Down = states.pos[2];
+	FilterStatesSet(&fs);
 
     while (current) {
         filterResult result = current->filter->filter((stateFilter *)current->filter, &states);

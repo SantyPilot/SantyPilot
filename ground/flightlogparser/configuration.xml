@@ -1,0 +1,47 @@
+<Configuration>
+  <InputDirectory>
+    <LogDir>/home/santy/source/SantyPilot/logs</LogDir>
+    <XMLDir>/home/santy/source/SantyPilot/shared/uavobjectdefinition</XMLDir>
+  </InputDirectory>
+  <Output>
+    <Enable>true</Enable>
+    <Format>csv</Format>
+  </Output>
+  <Analyze>
+    <Enable>false</Enable>
+	<Target>ekf</Target>
+	<InputType>TOPK</InputType>
+	<InputNum>1000</InputNum>
+	<InputObject>
+		<Name>FILTERSTATES</Name>
+		<Field0>GPSNorth</Field0>
+		<Field1>GPSEast</Field1>
+		<Field2>GPSDown</Field2>
+		<Field3>GPSVelNorth</Field3>
+		<Field4>GPSVelEast</Field4>
+		<Field5>GPSVelDown</Field5>
+		<Field6>dT</Field6>
+		<Field7>gx</Field7>
+		<Field8>gy</Field8>
+		<Field9>gz</Field9>
+		<Field10>ax</Field10>
+		<Field11>ay</Field11>
+		<Field12>az</Field12>
+		<Field13>mx</Field13>
+		<Field14>my</Field14>
+		<Field15>mz</Field15>
+		<Field16>North</Field16>
+		<Field17>East</Field17>
+		<Field18>Down</Field18>
+		<Field19>NorthVel</Field19>
+		<Field20>EastVel</Field20>
+		<Field21>DownVel</Field21>
+		<Field22>Altitude</Field22>
+		<Field23>q1</Field23>
+		<Field24>q2</Field24>
+		<Field25>q3</Field25>
+		<Field26>q4</Field26>
+	</InputObject>
+  </Analyze>
+</Configuration>
+
